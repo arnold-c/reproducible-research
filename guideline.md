@@ -47,17 +47,21 @@ Think of it as tracked changes for your code. When working on a project by yours
     - Has a system to allow other statistical and programming languages to run via kernels
         - Other systems don’t allow this level of integration, so will not be explored in much detail
 
-## Jupyter Notebooks
+## Jupyter notebooks
 
-- Run on `python`
-    - Download the full [anaconda](https://www.anaconda.com/download/) distribution i.e. not miniconda
-        - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is fowards-compatible.
-        - Be sure to only install for one user, not the whole system
-        - Be sure to select
+This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official [documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html).
+
+Jupyter notebooks are run on `python`, though additional things can be downloaded to allow you to use your programming language of choice. For examples of what you can do with Jupyter notebooks, click [here](), and [here](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
+
+- Download the full [anaconda](https://www.anaconda.com/download/) distribution i.e. not miniconda
+    - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is fowards-compatible.
+    - Be sure to only install for one user, not the whole system
+    - Be sure to select `Add Anaconda to my PATH environment variable` under Advanced Options
+    -
 - Use `kernels` to connect your programming language of choice with python and the notebook
     - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
-        - [STATA](### Installing the STATA Kernel)
-        - [R]()
+        - [Stata](### Installing the Stata Kernel)
+        - [R](### Connecting R with Jupyter)
 
 ### Creating a notebook
 
@@ -65,14 +69,12 @@ You can either open up the anaconda navigator and then Jupyter Notebooks, or ope
 
 Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate `kernel` if you would like to use a language other than `python`*)
 
-### Installing the STATA Kernel
+### Installing the Stata Kernel
 
-- Download [`stata_kernel`](https://kylebarron.github.io/stata_kernel/getting_started/)
-    - follow the instructions on the website, particularly if you are on Windows.
-    - It should work with `STATA 12`
-        - We have tested it
+The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the `kernel`, at which point, please refer to the original documentation linked above.
 
-Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each time
+Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line
+
 - `pip install stata_kernel`
 - `python -m stata_kernel.install`
 
@@ -87,4 +89,41 @@ In order to let `stata_kernel` talk to Stata, you need to link the Stata Automat
 4. Enter your CIHS details
 ---
 
-### Installing the R Kernel
+### Installing the SAS kernel
+
+*This has not yet been tested here at PHO.*
+
+Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line. First we need to install a dependecy called `saspy` that helps the kernel connect `SAS` to `python`
+
+- `pip install saspy`
+- `pip install sas_kernel`
+
+You should now see something like this.
+
+```
+Available kernels:
+python3    /home/sas/anaconda3/lib/python3.5/site-packages/ipykernel/resources
+sas        /home/sas/.local/share/jupyter/kernels/sas
+```
+
+Now verify that the SAS Executable is correct
+
+- find the sascfg.py file -- it is currently located in the install location (see above) `[install location]/site-packages/saspy/sascfg.py`. To query `pip` for the location of the file, type `pip show saspy`. Failing that, this command will search the OS for the file location: `find / -name sascfg.py`
+- edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in the file
+### Connecting R with Jupyter
+
+If you are hoping to make nice documents and reproducible work using `R`, I would highly recommend that you use the `R Markdown` or `R Notebook` through [`RStudio`](https://www.rstudio.com/products/rstudio/download/) application instead. However, if you would prefer Jupyter, then please read on.
+
+It is possible to download an `R kernel`, much like for `Stata` and `SAS`, but it can be a bit fickle, so a different approach is described below. It is important to note that with this method you are installing a fresh version of `R`, so you will not have access to the packages you have previously installed - you will need to reinstall them in this `R` environment, which could be done within a Jupyter notebook.
+
+Open a command prompt (Windows) / terminal (Linux/Mac) and type/copy-paste the following commands, pressing enter after each line
+
+- `conda install r-essentials r-igraph`
+- `Rscript -e 'install.packages("languageserver")'`
+
+If you would rather install an `R kernel` than a fresh install of `R` within the `anaconda` distribution, you can follow the instructions [here](https://richpauloo.github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of `R`.
+
+
+### Connecting other kernels
+
+To see a full list of `kernels` available for Jupter, along with the appropriate documentation and installation instructions, follow this [link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
