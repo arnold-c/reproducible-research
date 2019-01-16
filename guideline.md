@@ -91,7 +91,7 @@ In order to let `stata_kernel` talk to Stata, you need to link the Stata Automat
 
 ### Installing the SAS kernel
 
-*This has not yet been tested here at PHO.*
+*This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*
 
 Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line. First we need to install a dependecy called `saspy` that helps the kernel connect `SAS` to `python`
 
@@ -109,7 +109,9 @@ sas        /home/sas/.local/share/jupyter/kernels/sas
 Now verify that the SAS Executable is correct
 
 - find the sascfg.py file -- it is currently located in the install location (see above) `[install location]/site-packages/saspy/sascfg.py`. To query `pip` for the location of the file, type `pip show saspy`. Failing that, this command will search the OS for the file location: `find / -name sascfg.py`
-- edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in the file
+- edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this [file](https://github.com/sassoftware/saspy/blob/master/saspy/sascfg.py)
+
+
 ### Connecting R with Jupyter
 
 If you are hoping to make nice documents and reproducible work using `R`, I would highly recommend that you use the `R Markdown` or `R Notebook` through [`RStudio`](https://www.rstudio.com/products/rstudio/download/) application instead. However, if you would prefer Jupyter, then please read on.
