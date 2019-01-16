@@ -57,7 +57,9 @@ Jupyter notebooks are run on `python`, though additional things can be downloade
     - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is fowards-compatible.
     - Be sure to only install for one user, not the whole system
     - Be sure to select `Add Anaconda to my PATH environment variable` under Advanced Options
-    -
+    - Be sure to install `Anaconda` to the `H:\` drive on your computer, as this is where your data lives. To do this you will need to manually edit the installation path within the `anaconda` installer wizard, otherwise it will end up in the `C:\` drive
+        - This is OK if you are able to store data on this drive, and therefore can create your repositories within the `C:\` drive.
+        - Worst case scenario you can use the command `cd "H:/..."` at the top of the notebook to specify the relevant path to your data, but this is bad practise for the reasons mentioned [above](# Structuring a project).
 - Use `kernels` to connect your programming language of choice with python and the notebook
     - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
         - [Stata](### Installing the Stata Kernel)
@@ -65,7 +67,7 @@ Jupyter notebooks are run on `python`, though additional things can be downloade
 
 ### Creating a notebook
 
-You can either open up the anaconda navigator and then Jupyter Notebooks, or open Jupyter Notebooks directly. Once open, navigate to the directory you would like to create the notebook in (*If you are using a version control system like git, then you should be within the project's repository*)
+You can either open up the anaconda navigator and then Jupyter notebooks, or open Jupyter notebooks directly. Once open, navigate to the directory you would like to create the notebook in (*If you are using a version control system like git, then you should be within the project's repository*)
 
 Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate `kernel` if you would like to use a language other than `python`*)
 
