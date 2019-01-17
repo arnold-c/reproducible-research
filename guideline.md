@@ -92,9 +92,10 @@ Jupyter notebooks are run on `python`, though additional things can be downloade
         - Worst case scenario you can use the command `cd "H:/..."` at the top of the notebook to specify the relevant path to your data, but this is bad practise for the reasons mentioned [above](# Structuring a project).
 - Use `kernels` to connect your programming language of choice with python and the notebook
     - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
-        - [Stata](#stata_kernel)
-        - [SAS](#sas_kernel)
-        - [R](#r_kernel)
+        - [Stata](###installing-the-stata-kernel)
+        - [SAS](###installing-the-sas-kernel)
+        - [R](#connecting-r-with-jupyter)
+        - [Other kernels](###connecting-other-kernels)
 - Visualization for data exploration:
     - plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
@@ -104,7 +105,7 @@ You can either open up the anaconda navigator and then Jupyter notebooks, or ope
 
 Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate `kernel` if you would like to use a language other than `python`*)
 
-### <a name="stata_kernel"></a>A Installing the Stata Kernel
+### Installing the Stata Kernel
 
 The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the `kernel`, at which point, please refer to the original documentation linked above.
 
@@ -124,7 +125,7 @@ In order to let `stata_kernel` talk to Stata, you need to link the Stata Automat
 4. Enter your CIHS details
 
 
-### <a name="sas_kernel"></a>A Installing the SAS kernel
+### Installing the SAS kernel
 
 \**This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*\*
 
@@ -147,7 +148,7 @@ Now verify that the SAS Executable is correct
 - edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this [file](https://github.com/sassoftware/saspy/blob/master/saspy/sascfg.py)
 
 
-### <a name="r_kernel"></a>A Connecting R with Jupyter
+### Connecting R with Jupyter
 
 If you are hoping to make nice documents and reproducible work using `R`, I would highly recommend that you use the `R Markdown` or `R Notebook` through [`RStudio`](https://www.rstudio.com/products/rstudio/download/) application instead. However, if you would prefer Jupyter, then please read on.
 
