@@ -10,11 +10,6 @@ output:
       smooth_scroll: yes
 ---
 
-<center>PHO Data Management Guidelines<center>
-==============================
-
----
-
 # Reproducible Work
 
 ## What is reproducible work?
