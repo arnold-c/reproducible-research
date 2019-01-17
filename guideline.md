@@ -58,11 +58,10 @@ An important idea is that you should treat your data as read-only. You and your 
 - `out/`: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.
 - `figs/`: this contains figures that may be generated from your scripts.
 
-Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like `Git`, which we will discuss in the next section.
-
+Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like `git`, which we will discuss in the next section.
 
 **Key Points**
-- Use a version control system such as `Git` to track changes in your code.
+- Use a version control system such as `git` to track changes in your code.
 - Data isn’t touched one collected:
     - Do all *data munging* within your program i.e. no editing the excel spreadsheets!!!
 - Never set explicit file paths if you can avoid it e.g. `setwd()`
@@ -71,6 +70,8 @@ Importantly, if you follow the principle that your `data/` files are read-only, 
 # Git
 
 Think of it as tracked changes for your code. When working on a project by yourself, it’s important to be able to go back to previous versions if you make a mistake and can’t remember all the steps you went through since your last stable version.
+
+- SourceTree
 
 ## Branching
 
@@ -98,6 +99,8 @@ Jupyter notebooks are run on `python`, though additional things can be downloade
     - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
         - [Stata](### Installing the Stata Kernel)
         - [R](### Connecting R with Jupyter)
+- Visualization for data exploration:
+    - plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
 ### Creating a notebook
 
@@ -165,3 +168,27 @@ If you would rather install an `R kernel` than a fresh install of `R` within the
 ### Connecting other kernels
 
 To see a full list of `kernels` available for Jupter, along with the appropriate documentation and installation instructions, follow this [link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+
+# Additional resources
+
+This document only touches on enough to get you up an running with reproducible work. However, to become fully proficient you will need to delve deeper into the material - trust me, it'll make your life easier in the long run. Here are a few places to start for each section, many of which were the basis for the systems I implement and advocate for here.
+
+## Project structure
+
+https://nicercode.github.io/blog/2013-04-05-projects/
+
+https://tomwallis.info/2014/01/16/setting-up-a-project-directory/
+
+https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c
+
+This takes a deeper look into how to manage `python` environments with anaconda, and how this affects your project structures. This is useful if you are work with `python 2.x` and `python 3.x`, but also allows your to ensure old code won't get broken when modules are updated as each module is specific to the environment it is downloaded in.
+
+## Git
+
+https://happygitwithr.com/
+
+I cannot emphasise this enough: this is genuinely **the best resource** I have come across for explaining how to set up and organise a project with `git`. Whilst it is aimed at `R` users, there is a large amount of cross-over, so read it regardless of the language you use.
+
+https://medium.freecodecamp.org/how-not-to-be-afraid-of-git-anymore-fe1da7415286
+
+This helps you understand the nuts-and-bolts of `git` by learning to use the command line, rather than an application like SourceTree.
