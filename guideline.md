@@ -10,7 +10,7 @@ output:
       smooth_scroll: yes
 ---
 
-<center> PHO Data Management Guidelines
+<center>PHO Data Management Guidelines<center>
 ==============================
 
 ---
