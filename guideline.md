@@ -164,6 +164,11 @@ If you would rather install an `R kernel` than a fresh install of `R` within the
 
 To see a full list of `kernels` available for Jupter, along with the appropriate documentation and installation instructions, follow this [link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
 
+# Tidy data
+
+What do I mean by tidy data?
+- tidyverse info
+
 # Additional resources
 
 This document only touches on enough to get you up an running with reproducible work. However, to become fully proficient you will need to delve deeper into the material - trust me, it'll make your life easier in the long run. Here are a few places to start for each section, many of which were the basis for the systems I implement and advocate for here.
