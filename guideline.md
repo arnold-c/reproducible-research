@@ -32,7 +32,19 @@ Simply put, all code and work has mistakes and bugs. If you are able to
 - Data isn’t touched one collected:
 - Do all data munging within your program i.e. no editing the excel spreadsheets!!!
 - Never set explicit file paths if you can avoid it i.e. `setwd()`
-    - try and use a package that allows you to set relative paths e.g. `here_here` in `R`. This allows the project to be passed to someone else in its entirity and the code won't break because they don't have the same folder names and set up as you (also the case if you work on multiple computers/OS)
+    - Try and use a package that allows you to set relative paths e.g. `here_here` in `R`. This allows the project to be passed to someone else in its entirity and the code won't break because they don't have the same folder names and set up as you (also the case if you work on multiple computers/OS)
+
+This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.
+
+```
+proj/
++-- data/
++-- docs/
++-- out/
++-- figs/
++-- funs/
++-- out/
+```
 
 # Git
 
@@ -80,20 +92,20 @@ Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the f
 - `pip install stata_kernel`
 - `python -m stata_kernel.install`
 
----
-**Windows-specific steps**
 
-In order to let `stata_kernel` talk to Stata, you need to link the Stata Automation library:
+> **Windows-specific steps**
+>
+> In order to let `stata_kernel` talk to Stata, you need to link the Stata Automation library:
+>
+> 1. In the installation directory (most likely `C:\Program Files (x86)\Stata12` or similar), right-click on the Stata executable, for example, `StataSE.exe` (this will just show as `StataSE`, but is listed as an application). Choose `Create Shortcut`. Placing it on the Desktop is fine.
+> 2. Right-click on the newly created `Shortcut to StataSE.exe`, choose `Properties`, and append` /Register` to the end of the Target field. So if the target is currently `"C:\Program Files\Stata12\StataSE.exe"`, change it to `"C:\Program Files\Stata12\StataSE.exe" /Register` (note the space before `/`). Click OK.
+> 3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
+> 4. Enter your CIHS details
 
-1. In the installation directory (most likely `C:\Program Files (x86)\Stata12` or similar), right-click on the Stata executable, for example, `StataSE.exe` (this will just show as `StataSE`, but is listed as an application). Choose `Create Shortcut`. Placing it on the Desktop is fine.
-2. Right-click on the newly created `Shortcut to StataSE.exe`, choose `Properties`, and append` /Register` to the end of the Target field. So if the target is currently `"C:\Program Files\Stata12\StataSE.exe"`, change it to `"C:\Program Files\Stata12\StataSE.exe" /Register` (note the space before `/`). Click OK.
-3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
-4. Enter your CIHS details
----
 
 ### Installing the SAS kernel
 
-*This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*
+\**This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*\*
 
 Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line. First we need to install a dependecy called `saspy` that helps the kernel connect `SAS` to `python`
 
