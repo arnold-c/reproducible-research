@@ -45,7 +45,7 @@ proj/
 
 As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. `read_csv(here('data', 'data_file.csv'))` rather than `read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')`. The reason why we prefer relative paths is that they allow projects to be used by multiple people without the need to re-write code. If you change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.
 
-> **Note** the example above used an `R` package called `here_here`, calling the function `here()`. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.
+**Note:** the example above used an `R` package called `here_here`, calling the function `here()`. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.
 
 ## `data/`
 
@@ -54,15 +54,15 @@ An important idea is that you should treat your data as read-only. You and your 
 ## Other subdirectories
 
 - `docs/`: this contains the output documents. For example, if you are using `R Markdown` to create a pdf via `LaTeX`, you could place them here.
-- `figs`: this contains the functions you write and might want to reference. The idea is to create functions so that can give code a meaningful name. It also helps if you need to repeat a code chunk multiple times, especially if you need to edit it at some point, as you can just call the function rather than typing it out each time.
-- `out`: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.
-- `figs`: this contains figures that may be generated from your scripts.
+- `figs/`: this contains the functions you write and might want to reference. The idea is to create functions so that can give code a meaningful name. It also helps if you need to repeat a code chunk multiple times, especially if you need to edit it at some point, as you can just call the function rather than typing it out each time.
+- `out/`: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.
+- `figs/`: this contains figures that may be generated from your scripts.
 
 Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like `Git`, which we will discuss in the next section.
 
 
-> **Key Points**
-> - Use a version control system such as `Git` to track changes in your code.
+**Key Points**
+- Use a version control system such as `Git` to track changes in your code.
 - Data isn’t touched one collected:
     - Do all *data munging* within your program i.e. no editing the excel spreadsheets!!!
 - Never set explicit file paths if you can avoid it e.g. `setwd()`
@@ -115,14 +115,14 @@ Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the f
 - `python -m stata_kernel.install`
 
 
-> **Windows-specific steps**
->
-> In order to let `stata_kernel` talk to Stata, you need to link the Stata Automation library:
->
-> 1. In the installation directory (most likely `C:\Program Files (x86)\Stata12` or similar), right-click on the Stata executable, for example, `StataSE.exe` (this will just show as `StataSE`, but is listed as an application). Choose `Create Shortcut`. Placing it on the Desktop is fine.
-> 2. Right-click on the newly created `Shortcut to StataSE.exe`, choose `Properties`, and append` /Register` to the end of the Target field. So if the target is currently `"C:\Program Files\Stata12\StataSE.exe"`, change it to `"C:\Program Files\Stata12\StataSE.exe" /Register` (note the space before `/`). Click OK.
-> 3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
-> 4. Enter your CIHS details
+**Windows-specific steps**
+
+In order to let `stata_kernel` talk to Stata, you need to link the Stata Automation library:
+
+1. In the installation directory (most likely `C:\Program Files (x86)\Stata12` or similar), right-click on the Stata executable, for example, `StataSE.exe` (this will just show as `StataSE`, but is listed as an application). Choose `Create Shortcut`. Placing it on the Desktop is fine.
+2. Right-click on the newly created `Shortcut to StataSE.exe`, choose `Properties`, and append` /Register` to the end of the Target field. So if the target is currently `"C:\Program Files\Stata12\StataSE.exe"`, change it to `"C:\Program Files\Stata12\StataSE.exe" /Register` (note the space before `/`). Click OK.
+3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
+4. Enter your CIHS details
 
 
 ### Installing the SAS kernel
