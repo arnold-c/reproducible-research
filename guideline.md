@@ -10,8 +10,10 @@ output:
       smooth_scroll: yes
 ---
 
-PHO Data Management Guidelines
-------------------------------
+<center> PHO Data Management Guidelines
+==============================
+
+---
 
 # Reproducible Work
 
@@ -34,7 +36,6 @@ This is the structure that I find works for me. You may want to find a variation
 proj/
 ├── data/
 ├── docs/
-├── out/
 ├── figs/
 ├── funs/
 ├── out/
@@ -42,17 +43,30 @@ proj/
 └── analysis.R
 ```
 
-As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the root of the project directory, allowing easy use of relative paths over explicit paths e.g. `read_csv(here('data', 'data_file.csv'))` rather than `read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')`. The reason why we prefer relative paths is that they allow projects to be used by multiple people without the need to re-write code. If you change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.
+As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. `read_csv(here('data', 'data_file.csv'))` rather than `read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')`. The reason why we prefer relative paths is that they allow projects to be used by multiple people without the need to re-write code. If you change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.
 
-Another important idea is that you should treat your data as read-only. You and your team have likely worked hard to collect the data and it's easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, once the data is collected it should not be edited; all the work should happen in your code allowing it to be easily checked.
+> **Note** the example above used an `R` package called `here_here`, calling the function `here()`. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.
+
+## `data/`
+
+An important idea is that you should treat your data as read-only. You and your team have likely worked hard to collect the data and it's easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, once the data is collected it should not be edited; all the work should happen in your code, allowing it to be easily checked.
+
+## Other subdirectories
+
+- `docs/`: this contains the output documents. For example, if you are using `R Markdown` to create a pdf via `LaTeX`, you could place them here.
+- `figs`: this contains the functions you write and might want to reference. The idea is to create functions so that can give code a meaningful name. It also helps if you need to repeat a code chunk multiple times, especially if you need to edit it at some point, as you can just call the function rather than typing it out each time.
+- `out`: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.
+- `figs`: this contains figures that may be generated from your scripts.
+
+Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like `Git`, which we will discuss in the next section.
 
 
 > **Key Points**
-> - Use a version control system such as `Git` to track changes in your code
+> - Use a version control system such as `Git` to track changes in your code.
 - Data isn’t touched one collected:
     - Do all *data munging* within your program i.e. no editing the excel spreadsheets!!!
-- Never set explicit file paths if you can avoid it i.e. `setwd()`
-    - Try and use a package that allows you to set relative paths e.g. `here_here` in `R`. This allows the project to be passed to someone else in its entirity and the code won't break because they don't have the same folder names and set up as you (also the case if you work on multiple computers/OS)
+- Never set explicit file paths if you can avoid it e.g. `setwd()`
+    - Try and use a package that allows you to set relative paths e.g. `here_here` in `R`. This allows the project to be passed to someone else in its entirity and the code won't break because they don't have the same folder names and set up as you (also if you work on multiple computers/OS)
 
 # Git
 
