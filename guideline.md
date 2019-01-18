@@ -77,13 +77,17 @@ Branching is a key part of the `git` workflow. It allows you to make changes to 
 
 Simply put, when you create another branch you are creating a copy of your code at that point in time. This is useful because it allows you to make changes to your copy, and leave your original code intact! So there's no concern about breaking your working code while you test out some ideas.
 
+<img alt="guideline-554f4577.png" src="assets/guideline-554f4577.png" style="float: right;" width="40%" height="" >
+
 > "But isn't that why we use git?"
 
 Kind of. But git is only so powerful. If you have working code, you don't want to put it out of action whilst you test ideas out, especially if other people need to use your code and can't wait for you to figure out your future problems. So creating another branch allows you to get around this issue. For most projects, you can get away with just two branches, a `master` and a `develop`, which are explained below. If your project is complex, and requires multiple people to work on the code at the same time, it would be worth you looking at implementing [this model](https://nvie.com/posts/a-successful-git-branching-model/).
 
-<img alt="guideline-554f4577.png" src="assets/guideline-554f4577.png" style="float: right;" width="40%" height="" >
+The image to the right is copied from the model listed above. It is useful in illustrating the `master` and `develop` approach to branching.
 
-This image is taken from the model listed above. It is useful in illustrating the `master` and `develop` approach to branching. 
+### Creating a branch
+
+As with all things in `git`, you can do this multiple ways. I prefer to use the SourceTree application, as I find it far more intuitive when you can see the changes, but you can use the command line or git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learngitbranching.js.org/), which allows you to interact with the code through illustrations.
 
 # Notebooks
 
