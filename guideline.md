@@ -65,8 +65,25 @@ Importantly, if you follow the principle that your `data/` files are read-only, 
 Think of it as tracked changes for your code. When working on a project by yourself, it’s important to be able to go back to previous versions if you make a mistake and can’t remember all the steps you went through since your last stable version.
 
 - SourceTree
+- Remotes vs local
+- Basic commands
+    - commit
+    - push/pull
+    - fetch
 
 ## Branching
+
+Branching is a key part of the `git` workflow. It allows you to make changes to your code, without worrying about breaking previously 'good' code. But what is it?
+
+Simply put, when you create another branch you are creating a copy of your code at that point in time. This is useful because it allows you to make changes to your copy, and leave your original code intact! So there's no concern about breaking your working code while you test out some ideas.
+
+> "But isn't that why we use git?"
+
+Kind of. But git is only so powerful. If you have working code, you don't want to put it out of action whilst you test ideas out, especially if other people need to use your code and can't wait for you to figure out your future problems. So creating another branch allows you to get around this issue. For most projects, you can get away with just two branches, a `master` and a `develop`, which are explained below. If your project is complex, and requires multiple people to work on the code at the same time, it would be worth you looking at implementing [this model](https://nvie.com/posts/a-successful-git-branching-model/).
+
+<img alt="guideline-554f4577.png" src="assets/guideline-554f4577.png" style="float: right;" width="40%" height="" >
+
+This image is taken from the model listed above. It is useful in illustrating the `master` and `develop` approach to branching. 
 
 # Notebooks
 
@@ -179,16 +196,26 @@ https://nicercode.github.io/blog/2013-04-05-projects/
 
 https://tomwallis.info/2014/01/16/setting-up-a-project-directory/
 
+> These two resources describe the project structure that I advocate for in a little more detail, with a few minor differences. If you work in `R` I would recommend that you follow nicercode's other suggestions as well, particularly regarding the creation of an R project.
+
 https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c
 
-This takes a deeper look into how to manage `python` environments with anaconda, and how this affects your project structures. This is useful if you are work with `python 2.x` and `python 3.x`, but also allows your to ensure old code won't get broken when modules are updated as each module is specific to the environment it is downloaded in.
+> This takes a deeper look into how to manage `python` environments with anaconda, and how this affects your project structures. This is useful if you are work with `python 2.x` and `python 3.x`, but also allows your to ensure old code won't get broken when modules are updated as each module is specific to the environment it is downloaded in.
 
 ## Git
 
 https://happygitwithr.com/
 
-I cannot emphasise this enough: this is genuinely **the best resource** I have come across for explaining how to set up and organise a project with `git`. Whilst it is aimed at `R` users, there is a large amount of cross-over, so read it regardless of the language you use.
+> I cannot emphasise this enough: this is genuinely **the best resource** I have come across for explaining how to set up and organise a project with `git`. Whilst it is aimed at `R` users, there is a large amount of cross-over, so read it regardless of the language you use.
 
 https://medium.freecodecamp.org/how-not-to-be-afraid-of-git-anymore-fe1da7415286
 
-This helps you understand the nuts-and-bolts of `git` by learning to use the command line, rather than an application like SourceTree.
+> This helps you understand the nuts-and-bolts of `git` by learning to use the command line, rather than an application like SourceTree.
+
+https://git-scm.com/book/en/v2/
+
+> The literal book on git. Everything from the basics to the advanced.
+
+https://nvie.com/posts/a-successful-git-branching-model/
+
+> If you feel comfortable with the idea of branching and are interested in a good extension of what we've covered, this will help. Roughly speaking, the more complex you project is and the more people that are involved simultaneously, the more branches you want so you can handle problems as they come up, without breaking previously 'good' code.
