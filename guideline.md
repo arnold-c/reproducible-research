@@ -6,6 +6,8 @@ output:
   pdf_document:
       highlight: tango
       latex_engine: xelatex
+      fontfamily: merriweather
+      fontfamilyoptions: sfdefault
 ---
 
 # Reproducible Work
@@ -13,13 +15,16 @@ output:
 ## What is reproducible work?
 
 - Contains relevant code, including which packages were used
-- Contains enough text, either via `markdown` or comment to be able to understand what the purpose of each code is
+- Contains enough text, either via `markdown` or comments, to be able to understand what the purpose of each code is
     - Ideally integrates code and results, along with text, into a single document
 
 ## Why is it important?
 
-Simply put, all code and work has mistakes and bugs. If you are able to
+Simply put, mistakes happen. If your project if structured properly, you will have a code document that contains all of the relevant information, and it is easy to recreate the outcomes. That way, if you move computers, delete a document by accident, or hand over the project to another person, everything is neatly contained and can be reproduced without hassle.
 
+## How do I make reproducible work?
+
+There are many different ways to make reproducible work. The information listed here should give you the foundations upon which you can build your own systems. However, the principles are the same, and largely revolve around project structures and a version control system, such as `git`.
 
 # Structuring a project
 
@@ -38,7 +43,7 @@ proj/
 
 As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. `read_csv(here('data', 'data_file.csv'))` rather than `read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')`. The reason why we prefer relative paths is that they allow projects to be used by multiple people without the need to re-write code. If you change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.
 
-**Note:** the example above used an `R` package called `here_here`, calling the function `here()`. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.
+> **Note:** the example above used an `R` package called `here_here`, calling the function `here()`. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.
 
 ## `data/`
 
@@ -53,16 +58,39 @@ An important idea is that you should treat your data as read-only. You and your 
 
 Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like `git`, which we will discuss in the next section.
 
-**Key Points**
+## File names
+
+How you name files and directories may not seem like an important point, but it can cause quite a headache if you try and use code to automate processes, and at best, it just slows things down. To quote Aaron Quinlan, a bioinformatician, ["a space in a filename is a space in one's soul"](https://twitter.com/aaronquinlan/status/711593127551733761).
+
+Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to-name-files).
+
+- KISS (*Keep It Simple Stupid*): use simple and consistent file names
+    - It needs to be machine readable
+    - It needs to be human readable
+    - It needs to order well in a directory
+- No special characters and **no spaces**!
+- Use YYYY-MM-DD date format
+- Use `-` to delimit words and `_` to delimit sections
+    - i.e. `2019-01-19_my-data.csv`
+- Left-pad numbers
+    - i.e. `01_my-data.csv` vs `1_my-data.csv`
+    - If you don't, file orders get messed up when you get to double-digits
+
+## Key Points
 - Use a version control system such as `git` to track changes in your code.
 - Data isn’t touched one collected:
     - Do all *data munging* within your program i.e. no editing the excel spreadsheets!!!
-- Never set explicit file paths if you can avoid it e.g. `setwd()`
+- Never set explicit file paths (e.g. `setwd()`) if you can avoid it
     - Try and use a package that allows you to set relative paths e.g. `here_here` in `R`. This allows the project to be passed to someone else in its entirity and the code won't break because they don't have the same folder names and set up as you (also if you work on multiple computers/OS)
+- Format your filenames properly
 
 # Git
 
 Think of it as tracked changes for your code. When working on a project by yourself, it’s important to be able to go back to previous versions if you make a mistake and can’t remember all the steps you went through since your last stable version.
+
+## Set up
+
+There are many ways to get `git` running on your computer.
 
 - SourceTree
 - Remotes vs local
@@ -92,15 +120,20 @@ As with all things in `git`, you can do this multiple ways. I prefer to use the 
 # Notebooks
 
 - Many examples of different kinds of notebooks
-- Jupyter useful as you can see the results immediately integrated within the document
-    - Has a system to allow other statistical and programming languages to run via kernels
+- Jupyter notebooks are useful as you can see the results immediately integrated within the document
+    - Have a system to allow other statistical and programming languages to run via kernels
         - Other systems don’t allow this level of integration, so will not be explored in much detail
+- Jupyter labs is the updated version of notebooks that acts as a full IDE (integrated development environment), allowing you to
 
 ## Jupyter notebooks
 
 This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official [documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html).
 
-Jupyter notebooks are run on `python`, though additional things can be downloaded to allow you to use your programming language of choice. For examples of what you can do with Jupyter notebooks, click [here](), and [here](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
+Jupyter notebooks are run on `python`, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click [here](), and [here](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
+
+
+Mac's come shipped with a version of `python`, but it is most likely outdated, and it doesn't contain everythin we want. In order to get running, I strongly recommend downloading the `anaconda` distribution over other distributions, or even just directly from `python's` website. The instructions below will be enough to get you up and running with Jupyter notebooks in your language of choice.
+
 
 - Download the full [anaconda](https://www.anaconda.com/download/) distribution i.e. not miniconda
     - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is fowards-compatible.
@@ -119,6 +152,8 @@ Jupyter notebooks are run on `python`, though additional things can be downloade
     - plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
 ### Creating a notebook
+
+> **Note:** You can substitute the phrase *"Jupyter notebooks"* with *"Jupyter Labs"* if you would prefer to have a full IDE allowing you more control over the system.
 
 You can either open up the anaconda navigator and then Jupyter notebooks, or open Jupyter notebooks directly. Once open, navigate to the directory you would like to create the notebook in (*If you are using a version control system like git, then you should be within the project's repository*)
 
