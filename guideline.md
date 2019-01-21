@@ -151,6 +151,8 @@ Now you have `git` installed, there are a number of ways to use it. The easiest 
 
 ## Creating a repository
 
+\**This section will need to be updated after figuring out the PHO system*\*
+
 If everything has gone well until now, you're ready to create a project repository. This is where all your code, all your data, all your output files, everything, should live. Whilst you can create a repository directly on your computer, I would advise against this as it causes additional headaches when you want to connect it with Github. Instead, create the remote repository first on Github.
 
 - Go to www.github.com and click the `+` and *"New repository"*.
@@ -159,6 +161,8 @@ If everything has gone well until now, you're ready to create a project reposito
 - Initialize with a README file
 
 ### Connecting to Github
+
+\**This section will need to be updated after figuring out the PHO system*\*
 
 If you are using SourceTree, there are two ways to connect your computer to your Github repositories. I would recommend the first option, as it makes *cloning* repositories (making a copy on your local computer) easier in the future, as you don't have to go to Github each time to find the *HTTPS/SSH* address.
 
@@ -178,6 +182,12 @@ If you are using SourceTree, there are two ways to connect your computer to your
 3. Go to SourceTree, open a new tab, and click on *"Clone"*
 4. Paste the *HTTPS* address into the *"Source Path / URL:"* box
 5. Click on the *"Clone"* button at the bottom
+
+**Method 3** (*not recommended*)
+
+If you would like to do it the hard way and use the `Git Bash`, read the instructions [here](https://happygitwithr.com/push-pull-github.html)
+
+**Note:** if you would like to use SSH keys, read the instructions [here](https://help.github.com/articles/connecting-to-github-with-ssh/)
 
 ## Basic commands
 
