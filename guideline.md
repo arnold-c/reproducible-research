@@ -253,6 +253,62 @@ Mac's come shipped with a version of `python`, but it is most likely outdated, a
 - Visualization for data exploration:
     - plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
+**The following section is not essential.**
+
+Because I do not like the `In[]` `Out[]` text showing in documents, along with centering plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, please refer to the section below. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX).
+
+If you would like to customize the look of the notebook, [jupyterthemes](https://github.com/dunovank/jupyter-themes) is a great package that can be installed. I have also edited the `custom.css` file (`C:\Users\owner\.jupyter\custom\`), adding `display: None;` under the section
+
+```
+div.prompt,
+ .prompt {
+```
+
+so that it now reads
+
+```
+div.prompt,
+ .prompt {
+ font-family: monospace, monospace;
+ font-size: 9pt !important;
+ font-weight: normal;
+ display: None;
+ .
+ .
+ .
+}
+```
+
+This removes the `In[]` `Out[]` text. To center the output of tables/figures, add
+
+```
+.output_png {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+```
+to the `custom.css` file, right after the `.prompt {..}` section.
+
+To enable soft wrapping in the notebook, you need to edit the `notebook.json` file (`C:\Users\callum arnold\.jupyter\nbconfig\`). If it does not exist, you need to create it. Once open, add
+
+```
+{
+  "MarkdownCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  },
+  "CodeCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  }
+}
+```
+
+before restarting Jupyter.
+
 ### Creating a notebook
 
 > **Note:** You can substitute the phrase *"Jupyter notebooks"* with *"Jupyter Labs"* if you would prefer to have a full IDE allowing you more control over the system.
@@ -270,7 +326,6 @@ Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the f
 - `pip install stata_kernel`
 - `python -m stata_kernel.install`
 
-
 **Windows-specific steps**
 
 In order to let `stata_kernel` talk to Stata, you need to link the Stata Automation library:
@@ -279,7 +334,6 @@ In order to let `stata_kernel` talk to Stata, you need to link the Stata Automat
 2. Right-click on the newly created `Shortcut to StataSE.exe`, choose `Properties`, and append` /Register` to the end of the Target field. So if the target is currently `"C:\Program Files\Stata12\StataSE.exe"`, change it to `"C:\Program Files\Stata12\StataSE.exe" /Register` (note the space before `/`). Click OK.
 3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
 4. Enter your CIHS details
-
 
 ### Installing the SAS kernel
 
@@ -303,7 +357,6 @@ Now verify that the SAS Executable is correct
 - find the `sascfg.py` file -- it is currently located in the install location (see above) `[install location]/site-packages/saspy/sascfg.py`. To query `pip` for the location of the file, type `pip show saspy`. Failing that, this command will search the OS for the file location: `find / -name sascfg.py`
 - edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this [file](https://github.com/sassoftware/saspy/blob/master/saspy/sascfg.py)
 
-
 ### Connecting R with Jupyter
 
 If you are hoping to make nice documents and reproducible work using `R`, I would highly recommend that you use the `R Markdown` or `R Notebook` through [`RStudio`](https://www.rstudio.com/products/rstudio/download/) application instead. However, if you would prefer Jupyter, then please read on.
@@ -317,10 +370,35 @@ Open a command prompt (Windows) / terminal (Linux/Mac) and type/copy-paste the f
 
 If you would rather install an `R kernel` than a fresh install of `R` within the `anaconda` distribution, you can follow the instructions [here](https://richpauloo.github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of `R`.
 
-
 ### Connecting other kernels
 
 To see a full list of `kernels` available for Jupyter, along with the appropriate documentation and installation instructions, follow this [link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+
+### Git and Jupyter
+
+Unfortunately, `git` and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`.
+
+\****Test out the other options!**\**
+
+1. Clear all outputs before you save and commit the files. That way, `git` only tracks changes to the input
+2. [nbdime](https://nbdime.readthedocs.io/en/latest/index.html)
+3. [ReviewNB](https://www.reviewnb.com/)
+4. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
+
+# Output documents
+
+We've covered a lot of information up until now about setting up your projects and your code, but a big part of reproducible research is the creation of nice-looking documents. The reason we've gone to such effort to install Jupyter notebooks and connect them with our language of choice is that not only do they allow for excellent data exploration, but they also make documents that look professional.
+
+In scientific articles, whilst it's not essential, LaTeX is a nice touch, and Jupyter can give you a LaTeX formatted pdf documents. To do this, you will first need to install LaTeX. If you are on Windows, I would recommend the [MiKTeX](https://miktex.org/download) distribution, and if you use a Mac, then I would recommend the [MacTeX](http://www.tug.org/mactex/mactex-download.html) distribution. You will also need the "swiss-army knife" of file conversion, [pandoc](https://pandoc.org/installing.html). Pandoc is not *needed* for creating LaTeX-formatted pdfs, but if you have documents with unsupported characters and you need to use a different `pdf-engine` you'll need to use pandoc.
+
+During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH as listed [above](###windows). The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
+
+Now you're ready to create a LaTeX-formatted pdf document. All you need to do is click *File -> Download as -> PDF via LaTeX (.pdf)*.
+
+Unfortunately, when creating pdf documents, code is not hard wrapped. This means that if you have a very long line of code (> 80 characters), it will run out of the formatted area, and at worst, off the page. At present, I do not know a way to force Jupyter notebooks to wrap the output automatically, so instead you have to write clean code and start new lines using `,` and `\n` if it's too long.
+
+If you would rather not produce a pdf via LaTeX, instead wanting an arguably more readable output, you could create an html file. This is done in the same manner as pdf documents.
+
 
 # Tidy data
 
