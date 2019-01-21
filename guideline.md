@@ -92,9 +92,19 @@ Think of it as tracked changes for your code. When working on a project, even if
 
 There are many ways to get `git` running on your computer. Depending on your OS and the version you have, `git` may come pre-installed on your computer. However, it is a good idea to update it to the latest version, so I'd recommend you follow the steps below anyway.
 
-### Github/Bitbucket
+### Github
 
-It is not essential, but one of the best things about `git` is that online repositories create an easier way to sync your work between computers and colleagues, avoiding much of the mess caused when this work happens simultaneously/(insert file sharing system of choice) isn't syncing properly. 
+\**This section will need to be updated after figuring out the PHO system*\*
+
+It is not essential, but one of the best things about `git` is that online repositories create an easier way to sync your work between computers and colleagues, avoiding much of the mess caused when this work happens simultaneously/(insert file sharing system of choice) isn't syncing properly.
+
+With Github now offering [unlimited free private repositories](https://github.com/pricing), I would recommend that you set up an account with Github. It's very easy to register. Just click the link above and select the package you'd like.
+
+If you have an academic email address, consider making this your primary email address on the account, as it gives you a **PRO** account unlimited collaborators on private repositories, unlike the standard account that limits it to 3 collaborators.
+
+Be sure to choose a user name that is easy to remember, and easy to find. I would suggest just using your name.
+
+Now you have a Github account set up, this is your *remote*. If you work on a project with collaborators, this can be shared with them. That way, collaborators can work on their own versions of the code on their *local* machine (computer), and when it's ready for other people to use/help write, you can `push` it to the *remote* where other people can access it. Don't worry if you don't know what `push` is - we'll cover that once we've got `git` installed.
 
 ### Windows
 
@@ -126,7 +136,7 @@ git config --global user.email 'my_email@gmail.com'
 
 Typing in `git config --global --list` is a way to check that your details have been saved correctly.
 
-**Note:** it is essential that you enter the same **email** as your Github/Bitbucket account information. This way you can connect the two. If you would prefer to use a different user name than your Github/Bitbucket user name you can. This would help show you which computer you completed the work on, but it is not important to most people.
+**Note:** it is essential that you enter the same **email** as your Github account information. This way you can connect the two. If you would prefer to use a different user name than your Github user name you can. This would help show you which computer you completed the work on, but it is not important to most people.
 
 
 ### Installation problems
@@ -135,7 +145,39 @@ If you followed the instructions above, `git` should be ready to go. However, so
 
 ## Git client
 
-Now you have `git` installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the SourceTree client, but you can use others.
+Now you have `git` installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the [SourceTree](https://www.sourcetreeapp.com/) client, but you can use others.
+
+
+
+## Creating a repository
+
+If everything has gone well until now, you're ready to create a project repository. This is where all your code, all your data, all your output files, everything, should live. Whilst you can create a repository directly on your computer, I would advise against this as it causes additional headaches when you want to connect it with Github. Instead, create the remote repository first on Github.
+
+- Go to www.github.com and click the `+` and *"New repository"*.
+- Choose a project name
+- Decide whether you want it to be a public or private project (choose private if working on PHO data and research, as you can always convert it to public later)
+- Initialize with a README file
+
+### Connecting to Github
+
+If you are using SourceTree, there are two ways to connect your computer to your Github repositories. I would recommend the first option, as it makes *cloning* repositories (making a copy on your local computer) easier in the future, as you don't have to go to Github each time to find the *HTTPS/SSH* address.
+
+**Method 1**
+
+1. Go to *Tools -> Options -> Authentification* in SourceTree and add your Github account details
+2. Leave the preferred protocol at *"HTTPS"* for the moment, unless you know what you're doing with SSH keys
+3. Now open a new tab, click on *Remote*, and you should see your repositories listed
+4. Clone the repositories that you'd like to work on
+
+> **Note:** Now SourceTree and Github are connected, you shouldn't have to do the first few steps - just go to step 3.
+
+**Method 2**
+
+1. Go to your repository on Github and click on the green *"Clone or download"* button
+2. Copy the *HTTPS* address (your settings should say *"Clone with HTTPS"* above it, otherwise click *"Use HTTPS"*)
+3. Go to SourceTree, open a new tab, and click on *"Clone"*
+4. Paste the *HTTPS* address into the *"Source Path / URL:"* box
+5. Click on the *"Clone"* button at the bottom
 
 ## Basic commands
 
@@ -148,13 +190,6 @@ There are many commands that you could learn in `git`, but these are the basics,
 - `pull`: this commands copies the version of the code from your remote to your local machine. Use this when you want to get the most up-to-date version of your code to work on (assuming your local version isn't the most up-to-date)
 - `push`: the opposite of `pull`. If your local version is the most up-to-date version, `push` your version to the remote.
 
-
-- SourceTree
-- Remotes vs local
-- Basic commands
-    - commit
-    - push/pull
-    - fetch
 
 ## Branching
 
