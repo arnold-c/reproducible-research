@@ -78,19 +78,76 @@ Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to
 
 ## Key Points
 - Use a version control system such as `git` to track changes in your code.
-- Data isn’t touched one collected:
+- Data isn't touched one collected:
     - Do all *data munging* within your program i.e. no editing the excel spreadsheets!!!
 - Never set explicit file paths (e.g. `setwd()`) if you can avoid it
-    - Try and use a package that allows you to set relative paths e.g. `here_here` in `R`. This allows the project to be passed to someone else in its entirity and the code won't break because they don't have the same folder names and set up as you (also if you work on multiple computers/OS)
+    - Try and use a package that allows you to set relative paths e.g. `here_here` in `R`. This allows the project to be passed to someone else in its entirety and the code won't break because they don't have the same folder names and set up as you (also if you work on multiple computers/OS)
 - Format your filenames properly
 
 # Git
 
-Think of it as tracked changes for your code. When working on a project by yourself, it’s important to be able to go back to previous versions if you make a mistake and can’t remember all the steps you went through since your last stable version.
+Think of it as tracked changes for your code. When working on a project, even if you're the only one coding, it’s important to be able to go back to previous versions if you make a mistake and can’t remember all the steps you went through since your last stable version.
 
 ## Set up
 
-There are many ways to get `git` running on your computer.
+There are many ways to get `git` running on your computer. Depending on your OS and the version you have, `git` may come pre-installed on your computer. However, it is a good idea to update it to the latest version, so I'd recommend you follow the steps below anyway.
+
+### Github/Bitbucket
+
+It is not essential, but one of the best things about `git` is that online repositories create an easier way to sync your work between computers and colleagues, avoiding much of the mess caused when this work happens simultaneously/(insert file sharing system of choice) isn't syncing properly. 
+
+### Windows
+
+1. Install [Git for Windows](https://gitforwindows.org/)
+    - This gives you `git bash`, which is a much nicer way of interfacing with `git` than the command line.
+    - **Note:** when asked about "*Adjusting your PATH environment*", be sure to select "*Git from the command line and also from 3rd-party software*". The other default options should be fine. For more details about the installation settings, please click [here](https://github.com/jennybc/happy-git-with-r/issues/105)
+2. Open up `Git Bash` and enter `where git`. Open up the command line and enter `where git`. Depending on whether you have administrator privileges, the outputs should look something like this, respectively
+    1. `which git` : `/mingw64/bin/git`
+    2. `where git` : `C:\Users\owner\AppData\Local\Programs\Git\bin\git.exe` (User privileges)
+        1. `where git` : `C:\Program Files\Git\bin\git.exe` (administrator privileges)
+    - If you see `cmd` instead of `bin`, then you need to edit the `PATH` in your environment variables. You can do this by typing `environment variables` into the Start box and scrolling to the `PATH` section of User/System variables (depending on whether you have administrator privileges), and changing `cmd` to `bin` in the `git.exe` path.
+
+### Mac
+
+There are more (workable) ways to install `git` on OSX than on Windows, but I think this is the best option as it gives you a great package manager for the future.
+
+1.  Open the terminal and enter `/usr/bin/ruby -e "$(curl -fsSL https:/raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. Enter `brew install git` into the terminal
+
+### Final set up steps
+
+Now that you have `git` running, you need to tell it who you are. This allows multiple people to make changes to code, and the correct names will be attached to the changes.
+
+Open up the `Git Bash` and enter
+```
+git config --global user.name 'Firstname Lastname'
+git config --global user.email 'my_email@gmail.com'
+```
+
+Typing in `git config --global --list` is a way to check that your details have been saved correctly.
+
+**Note:** it is essential that you enter the same **email** as your Github/Bitbucket account information. This way you can connect the two. If you would prefer to use a different user name than your Github/Bitbucket user name you can. This would help show you which computer you completed the work on, but it is not important to most people.
+
+
+### Installation problems
+
+If you followed the instructions above, `git` should be ready to go. However, sometimes you still end up with errors. This is far more likely with Windows that Mac, but if you find that the next steps don't work for you, see if the other installation options [here](https://happygitwithr.com/install-git.html) work for you, or the trouble shooting tips [here](https://happygitwithr.com/troubleshooting.html) (and [here](https://github.com/jennybc/happy-git-with-r/issues/67) if you're on Windows), which are useful when trying to connect `git` with `RStudio`
+
+## Git client
+
+Now you have `git` installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the SourceTree client, but you can use others.
+
+## Basic commands
+
+There are many commands that you could learn in `git`, but these are the basics, and will be sufficient for pretty much everything you'll need to do at the moment.
+
+- `commit`: this standings for *committing* a change to your file in `git`. Think of it as saving a document, but instead of saving the whole document as-is, `git` saves just the changes since the last version. This makes it very efficient, especially when it comes to backing up your work.
+**Key points:**
+    - `commit` often. By making and saving small changes, your code versions becomes more readable in case you need to go back and find out exactly what and where it went wrong.
+    -  Always write helpful messages - keep them succinct, but make sure they describe what the change you made was.
+- `pull`: this commands copies the version of the code from your remote to your local machine. Use this when you want to get the most up-to-date version of your code to work on (assuming your local version isn't the most up-to-date)
+- `push`: the opposite of `pull`. If your local version is the most up-to-date version, `push` your version to the remote.
+
 
 - SourceTree
 - Remotes vs local
@@ -101,7 +158,7 @@ There are many ways to get `git` running on your computer.
 
 ## Branching
 
-Branching is a key part of the `git` workflow. It allows you to make changes to your code, without worrying about breaking previously 'good' code. But what is it?
+Branching is a key part of the `git` work-flow. It allows you to make changes to your code, without worrying about breaking previously 'good' code. But what is it?
 
 Simply put, when you create another branch you are creating a copy of your code at that point in time. This is useful because it allows you to make changes to your copy, and leave your original code intact! So there's no concern about breaking your working code while you test out some ideas.
 
@@ -115,7 +172,7 @@ The image to the right is copied from the model listed above. It is useful in il
 
 ### Creating a branch
 
-As with all things in `git`, you can do this multiple ways. I prefer to use the SourceTree application, as I find it far more intuitive when you can see the changes, but you can use the command line or git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learngitbranching.js.org/), which allows you to interact with the code through illustrations.
+As with all things in `git`, you can do this multiple ways. I prefer to use the SourceTree client, as I find it far more intuitive when you can see the changes, but you can use the command line or git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learngitbranching.js.org/), which allows you to interact with the code through illustrations.
 
 # Notebooks
 
@@ -132,16 +189,16 @@ This section will give you a brief overview of what a Jupyter notebook is and ho
 Jupyter notebooks are run on `python`, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click [here](), and [here](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
 
 
-Mac's come shipped with a version of `python`, but it is most likely outdated, and it doesn't contain everythin we want. In order to get running, I strongly recommend downloading the `anaconda` distribution over other distributions, or even just directly from `python's` website. The instructions below will be enough to get you up and running with Jupyter notebooks in your language of choice.
+Mac's come shipped with a version of `python`, but it is most likely outdated, and it doesn't contain everything we want. In order to get running, I strongly recommend downloading the `anaconda` distribution over other distributions, or even just directly from `python's` website. The instructions below will be enough to get you up and running with Jupyter notebooks in your language of choice.
 
 
 - Download the full [anaconda](https://www.anaconda.com/download/) distribution i.e. not miniconda
-    - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is fowards-compatible.
+    - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is forwards-compatible.
     - Be sure to only install for one user, not the whole system
     - Be sure to select `Add Anaconda to my PATH environment variable` under Advanced Options
     - Be sure to install `Anaconda` to the `H:\` drive on your computer, as this is where your data lives. To do this you will need to manually edit the installation path within the `anaconda` installer wizard, otherwise it will end up in the `C:\` drive
         - This is OK if you are able to store data on this drive, and therefore can create your repositories within the `C:\` drive.
-        - Worst case scenario you can use the command `cd "H:/..."` at the top of the notebook to specify the relevant path to your data, but this is bad practise for the reasons mentioned [above](# Structuring a project).
+        - Worst case scenario you can use the command `cd "H:/..."` at the top of the notebook to specify the relevant path to your data, but this is bad practice for the reasons mentioned [above](# Structuring a project).
 - Use `kernels` to connect your programming language of choice with python and the notebook
     - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
         - [Stata](###installing-the-stata-kernel)
@@ -218,7 +275,7 @@ If you would rather install an `R kernel` than a fresh install of `R` within the
 
 ### Connecting other kernels
 
-To see a full list of `kernels` available for Jupter, along with the appropriate documentation and installation instructions, follow this [link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+To see a full list of `kernels` available for Jupyter, along with the appropriate documentation and installation instructions, follow this [link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
 
 # Tidy data
 
