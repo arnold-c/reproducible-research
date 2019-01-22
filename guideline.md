@@ -310,23 +310,39 @@ The image to the right is copied from the model listed above. It is useful in il
 
 As with all things in Git, you can do this multiple ways. I prefer to use the SourceTree client, as I find it far more intuitive when you can see the changes, but you can use the command line or Git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learnGitbranching.js.org/), which allows you to interact with the code through illustrations.
 
+When you are in SourceTree, open the repository you would like to create a branch in. You will notice that there are two buttons called `Branch` and `Merge`. If you click on `Branch`, you will see something like this
+
+<img alt="guideline-b2aa08de.png" src="assets/guideline-b2aa08de.png" width="" height="" >
+
+Enter the branch name you would like to create into `New Branch` (I would suggest `develop`), and hit `Create Branch`. That's it. You now have a `master` and `develop` branch.
+
+You might notice the tick-box `Checkout New Branch`. This means SourceTree will execute the command `git checkout develop` i.e. you will move to the `develop` branch to continue your work. Now, any changes you make to your code will happen in the `develop` copy of the code, not in your `master` branch. Neat. If you want to move back to `master` branch at some point, you simply right click on the `master` branch on the left side of SourceTree, and select `Checkout master...`.
+
+### Merging a branch
+
+You've created a `develop` branch so you can keep you `master` pristine and in working condition. But now you've made changes you're happy with, and you want to incorporate them in the main code. To do this, you need to `merge` the changes from `develop` into `master`.
+
+To do this, first you need to `checkout` the `master` branch, so you are merging changes *into* it. Then, click on the `Merge` button in SourceTree. Select the `commit` you would like to merge into the `master` branch (most likely the top one in the `develop` branch), and click `OK`. You should have a view like this.
+
+<img alt="guideline-eeaa7b68.png" src="assets/guideline-eeaa7b68.png" width="150%" height="" >
+
+You have now merged your first feature. Whilst the `merge` feature is particularly useful, it is not the only way of doing this. `rebase` is another option that works in a slightly different way. It is slightly beyond the scope of this document, but you should read [this document](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and visit [this website](https://learnGitbranching.js.org/), as suggested previously, to get practice putting them both into practice.
+
 # Notebooks
 
-- Many examples of different kinds of notebooks
-- Jupyter notebooks are useful as you can see the results immediately integrated within the document
-    - Have a system to allow other statistical and programming languages to run via kernels
-        - Other systems don’t allow this level of integration, so will not be explored in much detail
-- Jupyter labs is the updated version of notebooks that acts as a full IDE (integrated development environment), allowing you to
+There are many different types of notebooks, but we will only explore Jupyter notebooks. The reason why we won't look at other options is because Jupyter notebooks are very well established and have numerous kernels available that allow for the use of many different statistical and programming languages. **Note:** if you are using R, you should be using RStudio in combination with R Notebooks or Rmd files (or using `#'` in your `.R` scripts to insert markdown comments), which are far more suited to R than Jupyter is.
+
+But first, what is a notebook, and why should we use them?
+
+A notebook is a way of producing documents that mix plain text and code, which was one of the key goals at the beginning of this guide! Whilst [they are not perfect](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/edit#slide=id.g3a428e2eb8_0_305) (though read [this](https://yihui.name/en/2018/09/notebook-war/) to see some rebuttals), and should not be used for doing heavy coding and scripting, they are excellent for data exploration and producing output documents. You just need to be careful to run all the code in a fresh environment often enough to ensure you don't have any *hidden* packages/modules loaded in the background that aren't part of your code.
 
 ## Jupyter notebooks
 
-This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official [documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html).
+This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official [documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html). Jupyter Labs has now been released as a newer version of notebooks, giving you a full IDE (integrated development environment) and more control over the notebooks and working environment. This guide will not explore these features, as we are more interested in how to use the notebook.
 
 Jupyter notebooks are run on Python, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click [here](https://nbviewer.jupyter.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb), and [here](https://Github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
 
-
 Mac's come shipped with a version of Python, but it is most likely outdated, and it doesn't contain everything we want. In order to get running, I strongly recommend downloading the Anaconda distribution over other distributions, or even just directly from Python's website. The instructions below will be enough to get you up and running with Jupyter notebooks in your language of choice.
-
 
 - Download the full [Anaconda](https://www.anaconda.com/download/) distribution i.e. not miniconda
     - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is forwards-compatible.
@@ -341,12 +357,10 @@ Mac's come shipped with a version of Python, but it is most likely outdated, and
         - [SAS](###installing-the-sas-kernel)
         - [R](#connecting-r-with-jupyter)
         - [Other kernels](###connecting-other-kernels)
-- Visualization for data exploration:
-    - plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
-**The following section is not essential.**
+**The following section is not essential and can be ignored if you want to keep things as simple as possible.**
 
-Because I do not like the `In[]` `Out[]` text showing in documents, along with centring plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, please refer to the section below. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX).
+Because I do not like the `In[]` `Out[]` text showing in documents, along with centering plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, please refer to the section below. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX). If you do this, it is essential that you **routinely restart the kernel to run everything again in a fresh environment.**
 
 If you would like to customize the look of the notebook, [jupyterthemes](https://Github.com/dunovank/jupyter-themes) is a great package that can be installed. I have also edited the `custom.css` file (`C:\Users\owner\.jupyter\custom\`), adding `display: None;` under the section
 
@@ -406,11 +420,17 @@ before restarting Jupyter.
 
 You can either open up the anaconda navigator and then Jupyter notebooks, or open Jupyter notebooks directly. Once open, navigate to the directory you would like to create the notebook in (*If you are using a version control system like Git, then you should be within the project's repository*)
 
-Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate `kernel` if you would like to use a language other than `python`*)
+Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate kernel if you would like to use a language other than Python*)
 
-### Installing the Stata Kernel
+### Kernels
 
-The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.Github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the `kernel`, at which point, please refer to the original documentation linked above.
+A kernel is program that allows the notebook to connect with, and run, your code. Jupyter comes with the Python code pre-installed, but if you want to use a different language, you will need to download a specific kernel.
+
+Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow this [link](https://Github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+
+#### Installing the Stata Kernel
+
+The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.Github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.
 
 Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line
 
@@ -426,7 +446,7 @@ In order to let `stata_kernel` talk to Stata, you need to link the Stata Automat
 3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
 4. Enter your CIHS details
 
-### Installing the SAS kernel
+#### Installing the SAS kernel
 
 \**This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://Github.com/sassoftware/sas_kernel)*\*
 
@@ -448,30 +468,26 @@ Now verify that the SAS Executable is correct
 - find the `sascfg.py` file -- it is currently located in the install location (see above) `[install location]/site-packages/saspy/sascfg.py`. To query `pip` for the location of the file, type `pip show saspy`. Failing that, this command will search the OS for the file location: `find / -name sascfg.py`
 - edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this [file](https://Github.com/sassoftware/saspy/blob/master/saspy/sascfg.py)
 
-### Connecting R with Jupyter
+#### Connecting R with Jupyter
 
-If you are hoping to make nice documents and reproducible work using `R`, I would highly recommend that you use the `R Markdown` or `R Notebook` through [`RStudio`](https://www.rstudio.com/products/rstudio/download/) application instead. However, if you would prefer Jupyter, then please read on.
+If you are hoping to make nice documents and reproducible work using R, I would highly recommend that you use the R Markdown or R Notebook through [RStudio](https://www.rstudio.com/products/rstudio/download/) application instead. However, if you would prefer Jupyter, then please read on.
 
-It is possible to download an `R kernel`, much like for `Stata` and `SAS`, but it can be a bit fickle, so a different approach is described below. It is important to note that with this method you are installing a fresh version of `R`, so you will not have access to the packages you have previously installed - you will need to reinstall them in this `R` environment, which could be done within a Jupyter notebook.
+It is possible to download an R kernel, much like for Stata and SAS, but it can be a bit fickle, so a different approach is described below. It is important to note that with this method you are installing a fresh version of R, so you will not have access to the packages you have previously installed - you will need to reinstall them in this R environment, which could be done within a Jupyter notebook.
 
-Open a command prompt (Windows) / terminal (Linux/Mac) and type/copy-paste the following commands, pressing enter after each line
+Open a command prompt (Windows) / terminal (Linux/Mac) and enter the following commands:
 
 - `conda install r-essentials r-igraph`
 - `Rscript -e 'install.packages("languageserver")'`
 
-If you would rather install an `R kernel` than a fresh install of `R` within the `anaconda` distribution, you can follow the instructions [here](https://richpauloo.Github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of `R`.
-
-### Connecting other kernels
-
-To see a full list of `kernels` available for Jupyter, along with the appropriate documentation and installation instructions, follow this [link](https://Github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+If you would rather install an R kernel than a fresh install of R within the Anaconda distribution, you can follow the instructions [here](https://richpauloo.Github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of R.
 
 ### Git and Jupyter
 
-Unfortunately, `Git` and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`.
+Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`.
 
 \****Test out the other options!**\**
 
-1. Clear all outputs before you save and commit the files. That way, `Git` only tracks changes to the input
+1. Clear all outputs before you save and commit the files. That way, Git only tracks changes to the input
 2. [nbdime](https://nbdime.readthedocs.io/en/latest/index.html)
 3. [ReviewNB](https://www.reviewnb.com/)
 4. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
@@ -490,11 +506,15 @@ Unfortunately, when creating pdf documents, code is not hard wrapped. This means
 
 If you would rather not produce a pdf via LaTeX, instead wanting an arguably more readable output, you could create an html file. This is done in the same manner as pdf documents.
 
-
 # Tidy data
 
 What do I mean by tidy data?
 - tidyverse info
+
+# Data visualization
+
+- Visualization for data exploration:
+    - plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
 # Additional resources
 
