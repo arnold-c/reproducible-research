@@ -189,7 +189,7 @@ $ git commit -m 'initial project version'
     - `git remote add remote_name ~/OneDrive/repos/project.git`
         - substitute `remote_name` with your name of choice
 4. `push`/`pull` your commits using
-    - `git push gdrive master`
+    - `git push remote_name master`
 
 You can share the OneDrive repository (folder) so that multiple people can work on the project. However, if you do this, **it is essential you coordinate your `push`/`pull` commands to avoid corrupting the repository.**
 
