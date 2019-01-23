@@ -1,8 +1,6 @@
 ---
 title: "PHO Data Management Guidelines"
-author:
-- "Callum Arnold"
-- "Steph L. Hughes"
+author: "Callum Arnold"
 date: \today
 output:
   pdf_document:
@@ -12,75 +10,6 @@ output:
       fontfamilyoptions: sfdefault
 urlcolor: purple
 ---
-# Data quality control
-
-## Why is data quality control important?
-
-There are several reasons why we need to consider quality control when
-working with data. The need for version control, detailed information on
-how we analyzed data (reproducibility), proper storage of data, and many
-others. If we don't follow strict data quality control guidelines, we
-might lose track of data, have altered copies of datasets, or not know
-how analyses were performed.
-
-Quality control of data must be organized such that data can be easily
-located and analyses can be easily reproduced by independent PHO
-employees.
-
-From the point we receive data to the point our manuscript is accepted
-by a peer-reviewed journal, each and every step in between must be
-carefully considered and tracked.
-
-## How will I receive data?
-
-PHO typically receives data via a secure online transfer (remotely) or
-USB key (in person). These data are often sent in Microsoft Excel as one
-of the following file types:
-
--   .csv
--   .doc
--   .docx
-
-A password may or may not be associated with the data file to ensure
-document security, regardless of whether or not data are sensitive (for
-information on sensitive vs. non-sensitive data, see "What are
-'sensitive' and 'non-sensitive' data?" below).
-
-## Where should I store data?
-
-Once you have received your data, you should make a good habit of saving
-it in a clear and consistent manner. Data should be named (see "How do I
-name files?" below) and saved in several locations. At PHO, it is best
-that you save copies of data on your personal drive (H:\\\\) as well as
-shared team drives (I:\\\\ and/or SharePoint, depending in whether data
-are sensitive). (For information on sensitive vs. non-sensitive data,
-see "What are 'sensitive' and 'non-sensitive' data?" below.)
-
-It is imperative that one pristine, \**untouched copy of the original
-dataset*\* remains intact in your H:\\\\ drive *and* on at least one of
-the shared team drives. This is in case you need to check or refer back
-to anything at a later date, or transfer duties to a colleague.
-
-## What are "sensitive" and "non-sensitive" data?
-
-Sensitive data refers to:
-
--   Data which contain identifiable information
--   Personal data (e.g. name, health card number, post code, etc.)
-
-These data contain information which can identify individual persons.
-Therefore, they must be carefully protected and only shared with those
-who have special permission. They are also not the norm and are
-typically used only when absolutely necessary.
-
-Non-sensitive data refer to:
-
--   Data which have been de-identified (e.g. unique identifier)
--   Aggregated data (e.g. post code region)
-
-Because these data are designed not to be traceable to the individual
-level, less care and protection is required. However, safeguards are
-still often used for reassurance.
 
 # Reproducible Work
 
