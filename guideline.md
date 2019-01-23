@@ -17,6 +17,8 @@ urlcolor: purple
 
 ## Why is data quality control important?
 
+> I am not sure this section is adding anything over the reproducible research section. Consider merging into [reproducible ... important]()
+
 There are several reasons why we need to consider quality control when working with data. The need for version control, detailed information on how we analyzed data (reproducibility), proper storage of data, and many others. If we don't follow strict data quality control guidelines, we might lose track of data, have altered copies of datasets, or not know how analyses were performed.
 
 Quality control of data must be organized such that data can be easily located and analyses can be easily reproduced by independent PHO employees.
@@ -24,6 +26,8 @@ Quality control of data must be organized such that data can be easily located a
 From the point we receive data to the point our manuscript is accepted by a peer-reviewed journal, each and every step in between must be carefully considered and tracked.
 
 ## How will I receive data?
+
+> Does this need spelling out?
 
 PHO typically receives data via a secure online transfer (remotely) or USB key (in person). These data are often sent in Microsoft Excel as one of the following file types:
 
@@ -35,12 +39,16 @@ A password may or may not be associated with the data file to ensure document se
 
 ## Where should I store data?
 
+> Merge into [Structuring a project](#structuring-a-project) as many of these points are already there
+
 Once you have received your data, you should make a good habit of saving it in a clear and consistent manner. Data should be [named](#how-to-name-files) and saved in several locations. At PHO, it is best that you save copies of data on your personal drive (`H:\\`) as well as shared team drives (`I:\\` and/or SharePoint, depending in whether data are [sensitive](#sensitive-data)).
 
 It is imperative that one pristine, *untouched copy of the original dataset* remains intact in your `H:\\` drive *and* on at least one of the shared team drives. This is in case you need to check or refer back to anything at a later date, or transfer duties to a colleague.
 
 
 ## What is sensitive data? <a id = "sensitive-data"></a>
+
+> Move as a subsection of [Structuring a project](#structuring-a-project) - everything else can go there
 
 Sensitive data refer to:
 
@@ -57,6 +65,8 @@ Non-sensitive data refer to:
 Because these data are designed not to be traceable to the individual level, less care and protection is required. However, safeguards are still often used for reassurance.
 
 ## How to name files
+
+> This would move back as a subsection of [Structuring a project](#structuring-a-project)
 
 How you name files and directories may not seem like an important point, but it can cause quite a headache if you try and use code to automate processes, and at best, it just slows things down. To quote Aaron Quinlan, a bioinformatician, ["a space in a filename is a space in one's soul"](https://twitter.com/aaronquinlan/status/711593127551733761).
 
@@ -76,15 +86,21 @@ Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to
 
 ## How do I treat data throughout the analysis stage?
 
+> Ideally data should never be touched once it has been collected. All the editing should happen in the code. This could be condensed and added to the [data/](#data) section of Structuring a project
+
 While you are busy analyzing data, data must remain clear and traceable. Should you need to edit or clean data, you should save a new (separate) copy of the dataset (using file [naming conventions](#how-to-name-files)) in your `H:\\` drive each time you alter the data.
 
 As you progress throughout your analyses, it is also essential that you keep a clear record of how you have analyzed the data. This includes which statistical software you have used to analyze the data as well as the code which you used to perform the analyses.
 
 ## How do I treat data throughout the reporting stage?
 
+> This should be it's own subsection of [Structuring a project](#structuring-a-project) explaining setting up a `repo/` directory that contains all your different projects
+
 Once you have reached the reporting stage, you should have a final copy of the dataset you used for your analyses saved in your `H:\\` drive, as well as in at least one of the shared team drives. A final copy of all of your results (this refers to things like your graphs, tables, etc.) should also be saved in your `H:\\` drive, as well as in at least one of the shared team drives.
 
 It is also essential that you have a final copy of your code saved so your colleagues can replicate your analyses, using the final copy of the dataset you have saved. Ideally your final code will be saved with your final results; this can be done in either a Microsoft Excel or Word file with all code typed and results copy and pasted. Alternatively, this can be done using a [Jupyter notebook](#jupyter-notebooks).
+
+---
 
 # Reproducible Work
 
