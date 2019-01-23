@@ -1,8 +1,6 @@
-Data quality control
-====================
+# Data quality control
 
-Why is data quality control important? 
----------------------------------------
+## Why is data quality control important? 
 
 There are several reasons why we need to consider quality control when working with data. The need for version control, detailed information on how we analyzed data (reproducibility), proper storage of data, and many others. If we don't follow strict data quality control guidelines, we might lose track of data, have altered copies of datasets, or not know how analyses were performed.
 
@@ -10,8 +8,7 @@ Quality control of data must be organized such that data can be easily located a
 
 From the point we receive data to the point our manuscript is accepted by a peer-reviewed journal, each and every step in between must be carefully considered and tracked.
 
-How will I receive data?
-------------------------
+## How will I receive data?
 
 PHO typically receives data via a secure online transfer (remotely) or USB key (in person). These data are often sent in Microsoft Excel as one of the following file types:
 
@@ -23,15 +20,13 @@ PHO typically receives data via a secure online transfer (remotely) or USB key (
 
 A password may or may not be associated with the data file to ensure document security, regardless of whether or not data are sensitive (for information on sensitive vs. non-sensitive data, see "What are 'sensitive' and 'non-sensitive' data?" below).
 
-Where should I store data?
---------------------------
+## Where should I store data?
 
 Once you have received your data, you should make a good habit of saving it in a clear and consistent manner. Data should be named (see "How do I name files?" below) and saved in several locations. At PHO, it is best that you save copies of data on your personal drive (H:\\\\) as well as shared team drives (I:\\\\ and/or SharePoint, depending in whether data are sensitive). (For information on sensitive vs. non-sensitive data, see "What are 'sensitive' and 'non-sensitive' data?" below.)
 
 It is imperative that one pristine, *untouched copy of the original dataset* remains intact in your H:\\\\ drive *and* on at least one of the shared team drives. This is in case you need to check or refer back to anything at a later date, or transfer duties to a colleague.
 
-What are "sensitive" and "non-sensitive" data?
-----------------------------------------------
+## What are "sensitive" and "non-sensitive" data?
 
 Sensitive data refer to:
 
@@ -49,8 +44,7 @@ Non-sensitive data refer to:
 
 Because these data are designed not to be traceable to the individual level, less care and protection is required. However, safeguards are still often used for reassurance.
 
-How do I name files?
---------------------
+## How do I name files?
 
 How you name files and directories may not seem like an important point, but it can cause quite a headache if you try and use code to automate processes, and at best, it just slows things down. To quote Aaron Quinlan, a bioinformatician, ["a space in a filename is a space in one's soul"](https://twitter.com/aaronquinlan/status/711593127551733761).
 
@@ -78,25 +72,21 @@ Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to
 
     -   If you don't, file orders get messed up when you get to double-digits
 
-How do I treat data throughout the analysis stage?
---------------------------------------------------
+## How do I treat data throughout the analysis stage?
 
 While you are busy analyzing data, data must remain clear and traceable. Should you need to edit or clean data, you should save a new (separate) copy of the dataset (using file naming conventions, as detailed above in "How do I name files?") in your H:\\\\ drive each time you alter the data.
 
 As you progress throughout your analyses, it is also essential that you keep a clear record of how you have analyzed the data. This includes which statistical software you have used to analyze the data as well as the code which you used to perform the analyses.
 
-How do I treat data throughout the reporting stage?
----------------------------------------------------
+## How do I treat data throughout the reporting stage?
 
 Once you have reached the reporting stage, you should have a final copy of the dataset you used for your analyses saved in your H:\\\\ drive, as well as in at least one of the shared team drives. A final copy of all of your results (this refers to things like your graphs, tables, etc.) should also be saved in your H:\\\\ drive, as well as in at least one of the shared team drives.
 
 It is also essential that you have a final copy of your code saved so your colleagues can replicate your analyses, using the final copy of the dataset you have saved. Ideally your final code will be saved with your final results; this can be done in either a Microsoft Excel or Word file with all code typed and results copy and pasted. Alternatively, this can be done using a Jupyter Notebook. For a more in-depth look at how to tackle this using Jupyter Notebooks, see "Reproducible work" and "Structuring a project" below.
 
-Reproducible work
-=================
+# Reproducible work
 
-What is reproducible work?
---------------------------
+## What is reproducible work?
 
 -   Contains relevant code, including which packages were used
 
@@ -104,18 +94,15 @@ What is reproducible work?
 
     -   Ideally integrates code and results, along with text, into a single document (**literate programming!**)
 
-Why is it important?
---------------------
+## Why is it important?
 
 Simply put, mistakes happen. If your project is structured properly, you will have a code document that contains all of the relevant information, and it is easy to recreate the outcomes. That way, if you move computers, delete a document by accident, or hand over the project to another person, everything is neatly contained and can be reproduced without hassle.
 
-How do I make reproducible work?
---------------------------------
+## How do I make reproducible work?
 
 There are many different ways to make reproducible work. The information listed here should give you the foundations upon which you can build your own systems. However, the principles are the same and largely revolve around project structures and a version control system, such as Git.
 
-Structuring a project
-=====================
+# Structuring a project
 
 This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.
 
@@ -132,13 +119,11 @@ As you can see, the project repository contains separate directories that you ca
 
 > **Note:** the example above used an R package called `here_here`, calling the function `here()`. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.
 
-`data/`
--------
+## `data/`
 
 An important idea is that you should treat your data as read-only. You and your team have likely worked hard to collect the data and it's easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, once the data is collected it should not be edited; all the work should happen in your code, allowing it to be easily checked.
 
-Other subdirectories
---------------------
+## Other subdirectories
 
 -   `docs/`: this contains the output documents. For example, if you are using R Markdown to create a pdf via LaTeX, you could place them here.
 
@@ -150,8 +135,7 @@ Other subdirectories
 
 Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like Git comes in, which we will discuss in the next section.
 
-Key Points
-----------
+## Key Points
 
 -   Use a version control system such as Git to track changes in your code.
 
@@ -169,13 +153,11 @@ Key Points
 
 -   Format your filenames properly
 
-Git
-===
+# Git
 
 Think of it as tracked changes for your code. When working on a project, even if you're the only one coding, it's important to be able to go back to previous versions if you make a mistake and can't remember all the steps you went through since your last stable version.
 
-Set up
-------
+## Set up
 
 There are many ways to get Git running on your computer. Depending on your OS and the version you have, Git may come pre-installed on your computer. However, it is a good idea to update it to the latest version, so I'd recommend you follow the steps below anyway.
 
@@ -222,13 +204,11 @@ Typing in `git config --global --list` is a way to check that your details have 
 
 If you followed the instructions above, Git should be ready to go. However, sometimes you still end up with errors. This is far more likely with Windows that Mac, but if you find that the next steps don't work for you, see if the other installation options [here](https://happyGitwithr.com/install-Git.html) work for you, or the trouble shooting tips [here](https://happyGitwithr.com/troubleshooting.html) (and [here](https://Github.com/jennybc/happy-Git-with-r/issues/67) if you're on Windows), which are useful when trying to connect Git with RStudio
 
-Git client
-----------
+## Git client
 
 Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the [SourceTree](https://www.sourcetreeapp.com/) client, but you can use others.
 
-Remote repositories
--------------------
+## Remote repositories
 
 It is not essential, but one of the best things about Git is that online repositories create an easier way to sync your work between computers and colleagues, avoiding much of the mess caused when this work happens simultaneously/(insert file sharing system of choice) isn't syncing properly. In this section, I will explain the correct way to utilize this, and the other way ...
 
@@ -347,8 +327,7 @@ If you want to use a different file syncing system, then you need to create a *b
 
 You can share the OneDrive repository (folder) so that multiple people can work on the project. However, if you do this, **it is essential you coordinate your** `push`**/**`pull` **commands to avoid corrupting the repository.**
 
-Creating a repository
----------------------
+## Creating a repository
 
 \**This section will need to be updated after figuring out the PHO system*\*
 
@@ -398,8 +377,7 @@ If you would like to do it the hard way and use the Git Bash, read the instructi
 
 **Note:** if you would like to use SSH keys, read the instructions [here](https://help.Github.com/articles/connecting-to-Github-with-ssh/)
 
-Basic commands
---------------
+## Basic commands
 
 There are many commands that you could learn in Git, but these are the basics, and will be sufficient for pretty much everything you'll need to do at the moment.
 
@@ -413,8 +391,7 @@ There are many commands that you could learn in Git, but these are the basics, a
 
 -   `push`: the opposite of `pull`. If your local version is the most up-to-date version, `push` your version to the remote.
 
-Branching
----------
+## Branching
 
 Branching is a key part of the Git work-flow. It allows you to make changes to your code, without worrying about breaking previously 'good' code. But what is it?
 
@@ -444,8 +421,7 @@ To do this, first you need to `checkout` the `master` branch, so you are merging
 
 You have now merged your first feature. Whilst the `merge` feature is particularly useful, it is not the only way of doing this. `rebase` is another option that works in a slightly different way. It is slightly beyond the scope of this document, but you should read [this document](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and visit [this website](https://learnGitbranching.js.org/), as suggested previously, to get practice putting them both into practice.
 
-Notebooks
-=========
+# Notebooks
 
 There are many different types of notebooks, but we will only explore Jupyter notebooks. The reason why we won't look at other options is because Jupyter notebooks are very well established and have numerous kernels available that allow for the use of many different statistical and programming languages. **Note:** if you are using R, you should be using RStudio in combination with R Notebooks or Rmd files (or using `#'` in your `.R` scripts to insert markdown comments), which are far more suited to R than Jupyter is.
 
@@ -453,8 +429,7 @@ But first, what is a notebook, and why should we use them?
 
 A notebook is a way of producing documents that mix plain text and code, which was one of the key goals at the beginning of this guide! Whilst [they are not perfect](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/edit#slide=id.g3a428e2eb8_0_305) (though read [this](https://yihui.name/en/2018/09/notebook-war/) to see some rebuttals), and should not be used for doing heavy coding and scripting, they are excellent for data exploration and producing output documents. You just need to be careful to run all the code in a fresh environment often enough to ensure you don't have any *hidden* packages/modules loaded in the background that aren't part of your code.
 
-Jupyter notebooks
------------------
+## Jupyter notebooks
 
 This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official [documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html). Jupyter Labs has now been released as a newer version of notebooks, giving you a full IDE (integrated development environment) and more control over the notebooks and working environment. This guide will not explore these features, as we are more interested in how to use the notebook.
 
@@ -623,8 +598,7 @@ Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few 
 
 4.  [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
 
-Output documents
-================
+# Output documents
 
 We've covered a lot of information up until now about setting up your projects and your code, but a big part of reproducible research is the creation of nice-looking documents. The reason we've gone to such effort to install Jupyter notebooks and connect them with our language of choice is that not only do they allow for excellent data exploration, but they also make documents that look professional.
 
@@ -638,25 +612,21 @@ Unfortunately, when creating pdf documents, code is not hard wrapped. This means
 
 If you would rather not produce a pdf via LaTeX, instead wanting an arguably more readable output, you could create an html file. This is done in the same manner as pdf documents.
 
-Tidy data
-=========
+# Tidy data
 
 What do I mean by tidy data? - tidyverse info
 
-Data visualization
-==================
+# Data visualization
 
 -   Visualization for data exploration:
 
     -   plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
-Additional resources
-====================
+# Additional resources
 
 This document only touches on enough to get you up an running with reproducible work. However, to become fully proficient you will need to delve deeper into the material - trust me, it'll make your life easier in the long run. Here are a few places to start for each section, many of which were the basis for the systems I implement and advocate for here.
 
-Project structure
------------------
+## Project structure
 
 https://nicercode.Github.io/blog/2013-04-05-projects/
 
@@ -668,8 +638,7 @@ https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-mana
 
 > This takes a deeper look into how to manage `python` environments with anaconda, and how this affects your project structures. This is useful if you are work with `python 2.x` and `python 3.x`, but also allows your to ensure old code won't get broken when modules are updated as each module is specific to the environment it is downloaded in.
 
-Git
----
+## Git
 
 https://happyGitwithr.com/
 
