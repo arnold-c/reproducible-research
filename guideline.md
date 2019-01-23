@@ -17,7 +17,7 @@ urlcolor: purple
 
 ## Why is data quality control important?
 
-There are several reasons why we need to consider quality control when working with data. The need for version control, detailed information on how we analyzed data (reproducibility), proper storage of data, and many others. If we don’t follow strict data quality control guidelines, we might lose track of data, have altered copies of datasets, or not know how analyses were performed.
+There are several reasons why we need to consider quality control when working with data. The need for version control, detailed information on how we analyzed data (reproducibility), proper storage of data, and many others. If we don't follow strict data quality control guidelines, we might lose track of data, have altered copies of datasets, or not know how analyses were performed.
 
 Quality control of data must be organized such that data can be easily located and analyses can be easily reproduced by independent PHO employees.
 
@@ -31,16 +31,16 @@ PHO typically receives data via a secure online transfer (remotely) or USB key (
 - .doc
 - .docx
 
-A password may or may not be associated with the data file to ensure document security, regardless of whether or not data are sensitive (for information on sensitive vs. non-sensitive data, see “What are ‘sensitive’ and ‘non-sensitive’ data?” below).
+A password may or may not be associated with the data file to ensure document security, regardless of whether or not data is [sensitive](#sensitive-data).
 
 ## Where should I store data?
 
-Once you have received your data, you should make a good habit of saving it in a clear and consistent manner. Data should be named (see “How do I name files?” below) and saved in several locations. At PHO, it is best that you save copies of data on your personal drive (`H:\\`) as well as shared team drives (`I:\\` and/or SharePoint, depending in whether data are sensitive). (For information on sensitive vs. non-sensitive data, see “What are ‘sensitive’ and ‘non-sensitive’ data?” below.)
+Once you have received your data, you should make a good habit of saving it in a clear and consistent manner. Data should be [named](#how-to-name-files) and saved in several locations. At PHO, it is best that you save copies of data on your personal drive (`H:\\`) as well as shared team drives (`I:\\` and/or SharePoint, depending in whether data are [sensitive](#sensitive-data)).
 
 It is imperative that one pristine, *untouched copy of the original dataset* remains intact in your `H:\\` drive *and* on at least one of the shared team drives. This is in case you need to check or refer back to anything at a later date, or transfer duties to a colleague.
 
 
-## What are "sensitive" and "non-sensitive" data?
+## What is sensitive data? <a id = "sensitive-data"></a>
 
 Sensitive data refer to:
 
@@ -76,7 +76,7 @@ Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to
 
 ## How do I treat data throughout the analysis stage?
 
-While you are busy analyzing data, data must remain clear and traceable. Should you need to edit or clean data, you should save a new (separate) copy of the dataset (using file naming conventions, as detailed above in “How do I name files?”) in your `H:\\` drive each time you alter the data.
+While you are busy analyzing data, data must remain clear and traceable. Should you need to edit or clean data, you should save a new (separate) copy of the dataset (using file [naming conventions](#how-to-name-files)) in your `H:\\` drive each time you alter the data.
 
 As you progress throughout your analyses, it is also essential that you keep a clear record of how you have analyzed the data. This includes which statistical software you have used to analyze the data as well as the code which you used to perform the analyses.
 
@@ -84,8 +84,7 @@ As you progress throughout your analyses, it is also essential that you keep a c
 
 Once you have reached the reporting stage, you should have a final copy of the dataset you used for your analyses saved in your `H:\\` drive, as well as in at least one of the shared team drives. A final copy of all of your results (this refers to things like your graphs, tables, etc.) should also be saved in your `H:\\` drive, as well as in at least one of the shared team drives.
 
-It is also essential that you have a final copy of your code saved so your colleagues can replicate your analyses, using the final copy of the dataset you have saved. Ideally your final code will be saved with your final results; this can be done in either a Microsoft Excel or Word file with all code typed and results copy and pasted. Alternatively, this can be done using a Jupyter Notebook. For a more in-depth look at how to tackle this using Jupyter Notebooks, see “Reproducible work” and “Structuring a project” below.
-
+It is also essential that you have a final copy of your code saved so your colleagues can replicate your analyses, using the final copy of the dataset you have saved. Ideally your final code will be saved with your final results; this can be done in either a Microsoft Excel or Word file with all code typed and results copy and pasted. Alternatively, this can be done using a [Jupyter notebook](#jupyter-notebooks).
 
 # Reproducible Work
 
@@ -147,7 +146,7 @@ Importantly, if you follow the principle that your `data/` files are read-only, 
 
 # Git
 
-Think of it as tracked changes for your code. When working on a project, even if you're the only one coding, it’s important to be able to go back to previous versions if you make a mistake and can’t remember all the steps you went through since your last stable version.
+Think of it as tracked changes for your code. When working on a project, even if you're the only one coding, it's important to be able to go back to previous versions if you make a mistake and can't remember all the steps you went through since your last stable version.
 
 ## Set up
 
@@ -162,7 +161,7 @@ There are many ways to get Git running on your computer. Depending on your OS an
     1. `which git` : `/mingw64/bin/git`
     2. `where git` : `C:\Users\owner\AppData\Local\Programs\git\bin\git.exe` (User privileges)
         1. `where git` : `C:\Program Files\git\bin\git.exe` (administrator privileges)
-    - If you see `cmd` instead of `bin`, then you need to edit the PATH in your environment variables. You can do this by typing `environment variables` into the Start box and scrolling to the PATH section of User/System variables (depending on whether you have administrator privileges), and changing `cmd` to `bin` in the `git.exe` path.
+    - If you see `cmd` instead of `bin`, then you need to edit the PATH in your environment variables <a id = "env-variables"></a>. You can do this by typing `environment variables` into the Start box and scrolling to the PATH section of User/System variables (depending on whether you have administrator privileges), and changing `cmd` to `bin` in the `git.exe` path.
 
 ### Mac
 
@@ -210,11 +209,11 @@ Now that you've decided to use GitHub, it's very easy to register. Just click th
 
 Be sure to choose a user name that is easy to remember, and easy to find. I would suggest just using your name.
 
-Now you have a GitHub account set up, this is your *remote*. If you work on a project with collaborators, this can be shared with them. That way, collaborators can work on their own versions of the code on their *local* machine (computer), and when it's ready for other people to use/help write, they can `push` it to the *remote* where others can access it. Don't worry if you don't know what `push` is - we'll cover that [soon](##basic-commands)
+Now you have a GitHub account set up, this is your *remote*. If you work on a project with collaborators, this can be shared with them. That way, collaborators can work on their own versions of the code on their *local* machine (computer), and when it's ready for other people to use/help write, they can `push` it to the *remote* where others can access it. Don't worry if you don't know what `push` is - we'll cover that [soon](#basic-commands)
 
 ### Private server
 
-It is possible to use and get the benefits of Git without a purpose-made online repository such as GitHub, but it's not as simple and it's not as stable. Because services like Dropbox and OneDrive are not built for storing and tracking changes in code and *dot* files, it can go wrong, especially when more than one author is involved. Of all the file syncing systems, Dropbox seems to be the best option due to the [git-remote-dropbox extension](https://github.com/anishathalye/git-remote-dropbox), but this is still inferior to GitHub etc. With these home-made systems, corruption of the project repository is a matter of "when", not "if". If you insist on using this option, go read the [git basic commands](##basic-commands) first, come back, and read on ...
+It is possible to use and get the benefits of Git without a purpose-made online repository such as GitHub, but it's not as simple and it's not as stable. Because services like Dropbox and OneDrive are not built for storing and tracking changes in code and *dot* files, it can go wrong, especially when more than one author is involved. Of all the file syncing systems, Dropbox seems to be the best option due to the [git-remote-dropbox extension](https://github.com/anishathalye/git-remote-dropbox), but this is still inferior to GitHub etc. With these home-made systems, corruption of the project repository is a matter of "when", not "if". If you insist on using this option, go read the [git basic commands](#basic-commands) first, come back, and read on ...
 
 #### Dropbox - the Bad
 
@@ -415,15 +414,15 @@ Mac's come shipped with a version of Python, but it is most likely outdated, and
         - Worst case scenario you can use the command `cd "H:/..."` at the top of the notebook to specify the relevant path to your data, but this is bad practice for the reasons mentioned [above](#structuring-a-project).
 - Use `kernels` to connect your programming language of choice with python and the notebook
     - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
-        - [Stata](###installing-the-stata-kernel)
-        - [SAS](###installing-the-sas-kernel)
+        - [Stata](#installing-the-stata-kernel)
+        - [SAS](#installing-the-sas-kernel)
         - [R](#connecting-r-with-jupyter)
 
 ### Kernels
 
 A kernel is program that allows the notebook to connect with, and run, your code. Jupyter comes with the Python code pre-installed, but if you want to use a different language, you will need to download a specific kernel.
 
-Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow this [link](https://Github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow [this link](https://Github.com/jupyter/jupyter/wiki/Jupyter-kernels).
 
 #### Installing the Stata kernel
 
@@ -576,7 +575,7 @@ We've covered a lot of information up until now about setting up your projects a
 
 In scientific articles, whilst it's not essential, LaTeX is a nice touch, and Jupyter can give you a LaTeX formatted pdf documents. To do this, you will first need to install LaTeX. If you are on Windows, I would recommend the [MiKTeX](https://miktex.org/download) distribution, and if you use a Mac, then I would recommend the [MacTeX](http://www.tug.org/mactex/mactex-download.html) distribution. You will also need the "swiss-army knife" of file conversion, [pandoc](https://pandoc.org/installing.html). Pandoc is not *needed* for creating LaTeX-formatted pdfs, but if you have documents with unsupported characters and you need to use a different `pdf-engine` you'll need to use pandoc.
 
-During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH as listed [above](###windows). The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads  `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
+During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH as listed [above](#env-variables). The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads  `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
 
 Now you're ready to create a LaTeX-formatted pdf document. All you need to do is click *File -> Download as -> PDF via LaTeX (.pdf)*.
 
