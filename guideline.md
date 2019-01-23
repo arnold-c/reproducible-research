@@ -340,7 +340,11 @@ A notebook is a way of producing documents that mix plain text and code, which w
 
 This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official [documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html). Jupyter Labs has now been released as a newer version of notebooks, giving you a full IDE (integrated development environment) and more control over the notebooks and working environment. This guide will not explore these features, as we are more interested in how to use the notebook.
 
+> **Note:** throughout this section you can substitute the phrase *"Jupyter notebooks"* with *"Jupyter Labs"* if you would prefer to have a full IDE allowing you more control over the system.
+
 Jupyter notebooks are run on Python, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click [here](https://nbviewer.jupyter.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb), and [here](https://Github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
+
+### Installing Jupyter notebooks
 
 Mac's come shipped with a version of Python, but it is most likely outdated, and it doesn't contain everything we want. In order to get running, I strongly recommend downloading the Anaconda distribution over other distributions, or even just directly from Python's website. The instructions below will be enough to get you up and running with Jupyter notebooks in your language of choice.
 
@@ -356,71 +360,6 @@ Mac's come shipped with a version of Python, but it is most likely outdated, and
         - [Stata](###installing-the-stata-kernel)
         - [SAS](###installing-the-sas-kernel)
         - [R](#connecting-r-with-jupyter)
-        - [Other kernels](###connecting-other-kernels)
-
-**The following section is not essential and can be ignored if you want to keep things as simple as possible.**
-
-Because I do not like the `In[]` `Out[]` text showing in documents, along with centering plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, please refer to the section below. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX). If you do this, it is essential that you **routinely restart the kernel to run everything again in a fresh environment.**
-
-If you would like to customize the look of the notebook, [jupyterthemes](https://Github.com/dunovank/jupyter-themes) is a great package that can be installed. I have also edited the `custom.css` file (`C:\Users\owner\.jupyter\custom\`), adding `display: None;` under the section
-
-```
-div.prompt,
- .prompt {
-```
-
-so that it now reads
-
-```
-div.prompt,
- .prompt {
- font-family: monospace, monospace;
- font-size: 9pt !important;
- font-weight: normal;
- display: None;
- .
- .
- .
-}
-```
-
-This removes the `In[]` `Out[]` text. To centre the output of tables/figures, add
-
-```
-.output_png {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-}
-```
-to the `custom.css` file, right after the `.prompt {..}` section.
-
-To enable soft wrapping in the notebook, you need to edit the `notebook.json` file (`C:\Users\callum arnold\.jupyter\nbconfig\`). If it does not exist, you need to create it. Once open, add
-
-```
-{
-  "MarkdownCell": {
-    "cm_config": {
-      "lineWrapping": true
-    }
-  },
-  "CodeCell": {
-    "cm_config": {
-      "lineWrapping": true
-    }
-  }
-}
-```
-
-before restarting Jupyter.
-
-### Creating a notebook
-
-> **Note:** You can substitute the phrase *"Jupyter notebooks"* with *"Jupyter Labs"* if you would prefer to have a full IDE allowing you more control over the system.
-
-You can either open up the anaconda navigator and then Jupyter notebooks, or open Jupyter notebooks directly. Once open, navigate to the directory you would like to create the notebook in (*If you are using a version control system like Git, then you should be within the project's repository*)
-
-Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate kernel if you would like to use a language other than Python*)
 
 ### Kernels
 
@@ -428,7 +367,7 @@ A kernel is program that allows the notebook to connect with, and run, your code
 
 Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow this [link](https://Github.com/jupyter/jupyter/wiki/Jupyter-kernels).
 
-#### Installing the Stata Kernel
+#### Installing the Stata kernel
 
 The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.Github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.
 
@@ -481,6 +420,29 @@ Open a command prompt (Windows) / terminal (Linux/Mac) and enter the following c
 
 If you would rather install an R kernel than a fresh install of R within the Anaconda distribution, you can follow the instructions [here](https://richpauloo.Github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of R.
 
+### Creating a notebook
+
+You can either open up the Anaconda navigator and then Jupyter notebooks, or open Jupyter notebooks directly. Once open, navigate to the directory you would like to create the notebook in (*If you are using a version control system like Git, then you should be within the project's repository*)
+
+Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate kernel if you would like to use a language other than Python*)
+
+### Running a Jupyter notebook
+
+\**Update this section*\*
+
+Now you have the notebook open in your chosen language, it's time to start doing some data exploration and analysis. Here, we'll cover some basic commands that will get you started, but to fully leverage the power of the notebook, you should read the [Jupyter documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#code-cells), along with the documentation of your preferred kernel, particularly sections relating to `magic` commands (which are language-specific).
+
+- `Shift + Enter`
+- `Command + Enter`
+- `Esc`
+    - `Ctrl/Cmd + a`
+    - `Ctrl/Cmd + b`
+    - `dd`
+    - `Ctrl/Cmd + m`
+    - `Ctrl/Cmd + y`
+- `Enter`
+    - `Tab`
+
 ### Git and Jupyter
 
 Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`.
@@ -491,6 +453,64 @@ Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few 
 2. [nbdime](https://nbdime.readthedocs.io/en/latest/index.html)
 3. [ReviewNB](https://www.reviewnb.com/)
 4. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
+
+### Customizing Jupyter notebook's UI
+
+**The following section is not essential and can be ignored if you want to keep things as simple as possible.**
+
+Because I do not like the `In[]` `Out[]` text showing in documents, along with centering plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, this section should help you. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX). If you do this, it is essential that you **routinely restart the kernel to run everything again in a fresh environment** as it is incredibly easy to run code blocks out of order and forget how this changes the output and introduces *hidden* packages.
+
+If you would like to customize the look of the notebook, [jupyterthemes](https://Github.com/dunovank/jupyter-themes) is a great package that can be installed. I have also edited the `custom.css` file (`C:\Users\owner\.jupyter\custom\`), adding `display: None;` under the section
+
+```
+div.prompt,
+ .prompt {
+```
+
+so that it now reads
+
+```
+div.prompt,
+ .prompt {
+ font-family: monospace, monospace;
+ font-size: 9pt !important;
+ font-weight: normal;
+ display: None;
+ .
+ .
+ .
+}
+```
+
+This removes the `In[]` `Out[]` text. To centre the output of tables/figures, add
+
+```
+.output_png {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+```
+to the `custom.css` file, right after the `.prompt {..}` section.
+
+To enable soft wrapping in the notebook, you need to edit the `notebook.json` file (`C:\Users\callum arnold\.jupyter\nbconfig\`). If it does not exist, you need to create it. Once open, add
+
+```
+{
+  "MarkdownCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  },
+  "CodeCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  }
+}
+```
+
+before restarting Jupyter.
 
 # Output documents
 
