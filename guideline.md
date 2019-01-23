@@ -1,6 +1,8 @@
 ---
 title: "PHO Data Management Guidelines"
-author: "Callum Arnold"
+author:
+- "Callum Arnold"
+- "Steph L. Hughes"
 date: \today
 output:
   pdf_document:
@@ -10,6 +12,80 @@ output:
       fontfamilyoptions: sfdefault
 urlcolor: purple
 ---
+
+# Data quality control
+
+## Why is data quality control important?
+
+There are several reasons why we need to consider quality control when working with data. The need for version control, detailed information on how we analyzed data (reproducibility), proper storage of data, and many others. If we don’t follow strict data quality control guidelines, we might lose track of data, have altered copies of datasets, or not know how analyses were performed.
+
+Quality control of data must be organized such that data can be easily located and analyses can be easily reproduced by independent PHO employees.
+
+From the point we receive data to the point our manuscript is accepted by a peer-reviewed journal, each and every step in between must be carefully considered and tracked.
+
+## How will I receive data?
+
+PHO typically receives data via a secure online transfer (remotely) or USB key (in person). These data are often sent in Microsoft Excel as one of the following file types:
+
+- .csv
+- .doc
+- .docx
+
+A password may or may not be associated with the data file to ensure document security, regardless of whether or not data are sensitive (for information on sensitive vs. non-sensitive data, see “What are ‘sensitive’ and ‘non-sensitive’ data?” below).
+
+## Where should I store data?
+
+Once you have received your data, you should make a good habit of saving it in a clear and consistent manner. Data should be named (see “How do I name files?” below) and saved in several locations. At PHO, it is best that you save copies of data on your personal drive (`H:\\`) as well as shared team drives (`I:\\` and/or SharePoint, depending in whether data are sensitive). (For information on sensitive vs. non-sensitive data, see “What are ‘sensitive’ and ‘non-sensitive’ data?” below.)
+
+It is imperative that one pristine, *untouched copy of the original dataset* remains intact in your `H:\\` drive *and* on at least one of the shared team drives. This is in case you need to check or refer back to anything at a later date, or transfer duties to a colleague.
+
+
+## What are "sensitive" and "non-sensitive" data?
+
+Sensitive data refer to:
+
+- Data which contain identifiable information
+- Personal data (e.g. name, health card number, post code, etc.)
+
+These data contain information which can identify individual persons. Therefore, they must be carefully protected and only shared with those who have special permission. They are also not the norm and are typically used only when absolutely necessary.
+
+Non-sensitive data refer to:
+
+- Data which have been de-identified (e.g. unique identifier)
+- Aggregated data (e.g. post code region)
+
+Because these data are designed not to be traceable to the individual level, less care and protection is required. However, safeguards are still often used for reassurance.
+
+## How to name files
+
+How you name files and directories may not seem like an important point, but it can cause quite a headache if you try and use code to automate processes, and at best, it just slows things down. To quote Aaron Quinlan, a bioinformatician, ["a space in a filename is a space in one's soul"](https://twitter.com/aaronquinlan/status/711593127551733761).
+
+Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to-name-files):
+
+- KISS (*Keep It Simple Stupid*): use simple and consistent file names
+    - It needs to be machine readable
+    - It needs to be human readable
+    - It needs to order well in a directory
+- No special characters and **no spaces**!
+- Use YYYY-MM-DD date format
+- Use `-` to delimit words and `_` to delimit sections
+    - i.e. `2019-01-19_my-data.csv`
+- Left-pad numbers
+    - i.e. `01_my-data.csv` vs `1_my-data.csv`
+    - If you don't, file orders get messed up when you get to double-digits
+
+## How do I treat data throughout the analysis stage?
+
+While you are busy analyzing data, data must remain clear and traceable. Should you need to edit or clean data, you should save a new (separate) copy of the dataset (using file naming conventions, as detailed above in “How do I name files?”) in your `H:\\` drive each time you alter the data.
+
+As you progress throughout your analyses, it is also essential that you keep a clear record of how you have analyzed the data. This includes which statistical software you have used to analyze the data as well as the code which you used to perform the analyses.
+
+## How do I treat data throughout the reporting stage?
+
+Once you have reached the reporting stage, you should have a final copy of the dataset you used for your analyses saved in your `H:\\` drive, as well as in at least one of the shared team drives. A final copy of all of your results (this refers to things like your graphs, tables, etc.) should also be saved in your `H:\\` drive, as well as in at least one of the shared team drives.
+
+It is also essential that you have a final copy of your code saved so your colleagues can replicate your analyses, using the final copy of the dataset you have saved. Ideally your final code will be saved with your final results; this can be done in either a Microsoft Excel or Word file with all code typed and results copy and pasted. Alternatively, this can be done using a Jupyter Notebook. For a more in-depth look at how to tackle this using Jupyter Notebooks, see “Reproducible work” and “Structuring a project” below.
+
 
 # Reproducible Work
 
@@ -58,24 +134,6 @@ An important idea is that you should treat your data as read-only. You and your 
 - `figs/`: this contains figures that may be generated from your scripts.
 
 Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like Git comes in, which we will discuss in the next section.
-
-## File names
-
-How you name files and directories may not seem like an important point, but it can cause quite a headache if you try and use code to automate processes, and at best, it just slows things down. To quote Aaron Quinlan, a bioinformatician, ["a space in a filename is a space in one's soul"](https://twitter.com/aaronquinlan/status/711593127551733761).
-
-Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to-name-files):
-
-- KISS (*Keep It Simple Stupid*): use simple and consistent file names
-    - It needs to be machine readable
-    - It needs to be human readable
-    - It needs to order well in a directory
-- No special characters and **no spaces**!
-- Use YYYY-MM-DD date format
-- Use `-` to delimit words and `_` to delimit sections
-    - i.e. `2019-01-19_my-data.csv`
-- Left-pad numbers
-    - i.e. `01_my-data.csv` vs `1_my-data.csv`
-    - If you don't, file orders get messed up when you get to double-digits
 
 ## Key Points
 - Use a version control system such as Git to track changes in your code.
