@@ -17,7 +17,7 @@ urlcolor: purple
 
 ## Why is data quality control important?
 
-> I am not sure this section is adding anything over the reproducible research section. Consider merging into [reproducible ... important]()
+> I am not sure this section is adding anything over the reproducible research section. Consider merging into [Reproducible work - why is it important](#why-is-it-important)
 
 There are several reasons why we need to consider quality control when working with data. The need for version control, detailed information on how we analyzed data (reproducibility), proper storage of data, and many others. If we don't follow strict data quality control guidelines, we might lose track of data, have altered copies of datasets, or not know how analyses were performed.
 
@@ -523,9 +523,10 @@ Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few 
 \****Test out the other options!**\**
 
 1. Clear all outputs before you save and commit the files. That way, Git only tracks changes to the input
-2. [nbdime](https://nbdime.readthedocs.io/en/latest/index.html)
-3. [ReviewNB](https://www.reviewnb.com/)
-4. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
+2. Download the notebook as a markdown file allowing `diffs` to be tracked in Git as normal
+3. [nbdime](https://nbdime.readthedocs.io/en/latest/index.html)
+4. [ReviewNB](https://www.reviewnb.com/)
+5. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
 
 ### Customizing Jupyter notebook's UI
 
