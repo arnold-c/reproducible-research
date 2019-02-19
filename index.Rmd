@@ -1,0 +1,23 @@
+--- 
+title: "PHO Data Management Guidelines"
+author: 
+- "Callum Arnold"
+- "Steph L Hughes"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: 
+  bookdown::gitbook:
+    split_by: section+number
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "This is an introduction to data management and project organisation"
+---
+
+# Welcome, and what this book is about {-}
+
+This book's focus is on how to produce reproducible research, and should serve as an introduction to data management and project organisation with a particular focus on what can be achieved at Public Health Ontario. Whilst there are many tools that we can use to ensure our projects and code are tidy and result in reproducible work, some of these are not possible to implement given the potential requirements for administrative priviges during set up. As such, we have divided this book into multiple sections, progressively getting more involved as the book continues. Whilst you may be able to utilise these more sophisticated tools, the core of reproducible research remains the same, so the first chapters still apply.
+
+We hope that you enjoy the content and feel like you come away having learnt something useful, and that this book can serve as a reference document for your future research. If you have any questions that cannot be answered within the book, or you would like to contribute and improve this document, please contact us. 
