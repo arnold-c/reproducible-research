@@ -14,7 +14,7 @@
   
   
   <meta property="og:description" content="This is an introduction to data management and project organisation" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta name="github-repo" content="arnold-c/pho-data-management" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="4.3 Remote repositories | PHO Data Management Guidelines" />
@@ -26,7 +26,7 @@
 <meta name="author" content="Steph L Hughes">
 
 
-<meta name="date" content="2019-02-20">
+<meta name="date" content="2019-02-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -65,7 +65,7 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">PHO Data Management Guidelines</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome, and what this book is about</a></li>
@@ -195,17 +195,17 @@
 <ol style="list-style-type: decimal">
 <li>Create a project folder on your computer <strong>(not in your Dropbox folder)</strong>, and open up the Git Bash within the folder</li>
 <li>Enter <code>git init</code> to initialize your folder as a Git repository</li>
-<li>Enter <code>git remote add origin "dropbox:///path/to/repo"</code></li>
+<li>Enter <code>git remote add origin &quot;dropbox:///path/to/repo&quot;</code></li>
 </ol>
 <p>If a repository already exists in a Dropbox folder, and you want to make a local copy, you can do the following:</p>
 <ol style="list-style-type: decimal">
 <li>Create a project folder on your computer, and open up the Git Bash within the folder</li>
-<li>Enter <code>git clone "dropbox:///path/to/repo" -b master</code></li>
+<li>Enter <code>git clone &quot;dropbox:///path/to/repo&quot; -b master</code></li>
 </ol>
 <p>You are now set up to use Dropbox as your remote repository and can <code>commit</code>, <code>push</code>, and <code>pull</code> changes using the Git Bash commands:</p>
 <ul>
 <li><code>git add .</code> This <em>stages</em> the changes to your files, and it is essential to do before you <code>commit</code></li>
-<li><code>git commit -m "your commit message"</code></li>
+<li><code>git commit -m &quot;your commit message&quot;</code></li>
 <li><code>git push origin master</code></li>
 <li><code>git pull origin master</code></li>
 </ul>
@@ -263,9 +263,9 @@ git commit -m &quot;your commit message&quot;</code></pre>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "google": false,
 "linkedin": false,
 "weibo": false,
@@ -286,7 +286,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["pho-data-management.pdf", "pho-data-management.epub"],
 "toc": {
 "collapse": "subsection"
 }
