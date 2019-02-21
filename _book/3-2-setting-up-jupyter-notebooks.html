@@ -26,7 +26,7 @@
 <meta name="author" content="Steph L Hughes">
 
 
-<meta name="date" content="2019-02-08">
+<meta name="date" content="2019-02-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -166,7 +166,7 @@
 <li>Be sure to install Anaconda to the <code>H:\</code> drive on your computer, as this is where your data lives. To do this you will need to manually edit the installation path within the Anaconda installer wizard, otherwise it will end up in the <code>C:\</code> drive
 <ul>
 <li>This is OK if you are able to store data on this drive, and therefore can create your repositories within the <code>C:\</code> drive.</li>
-<li>Worst case scenario you can use the command <code>cd &quot;H:/...&quot;</code> at the top of the notebook to specify the relevant path to your data, but this is bad practice for the reasons mentioned <a href="1-2-structuring-a-project.html#structuring-a-project">above</a>.</li>
+<li>Worst case scenario you can use the command <code>cd "H:/..."</code> at the top of the notebook to specify the relevant path to your data, but this is bad practice for the reasons mentioned <a href="1-2-structuring-a-project.html#structuring-a-project">above</a>.</li>
 </ul></li>
 </ul></li>
 <li>Use <code>kernels</code> to connect your programming language of choice with python and the notebook
@@ -196,7 +196,7 @@
 <p>In order to let <code>stata_kernel</code> talk to Stata, you need to link the Stata Automation library:</p>
 <ol style="list-style-type: decimal">
 <li>In the installation directory (most likely <code>C:\Program Files (x86)\Stata12</code> or similar), right-click on the Stata executable, for example, <code>StataSE.exe</code> (this will just show as <code>StataSE</code>, but is listed as an application). Choose <code>Create Shortcut</code>. Placing it on the Desktop is fine.</li>
-<li>Right-click on the newly created <code>Shortcut to StataSE.exe</code>, choose <code>Properties</code>, and append<code>/Register</code> to the end of the Target field. So if the target is currently <code>&quot;C:\Program Files\Stata12\StataSE.exe&quot;</code>, change it to <code>&quot;C:\Program Files\Stata12\StataSE.exe&quot; /Register</code> (note the space before <code>/</code>). Click OK.</li>
+<li>Right-click on the newly created <code>Shortcut to StataSE.exe</code>, choose <code>Properties</code>, and append<code>/Register</code> to the end of the Target field. So if the target is currently <code>"C:\Program Files\Stata12\StataSE.exe"</code>, change it to <code>"C:\Program Files\Stata12\StataSE.exe" /Register</code> (note the space before <code>/</code>). Click OK.</li>
 <li>Right-click on the updated <code>Shortcut to StataSE.exe</code>; choose Run as administrator.</li>
 <li>Enter your CIHS details</li>
 </ol>
@@ -226,7 +226,7 @@ sas        /home/sas/.local/share/jupyter/kernels/sas</code></pre>
 <p>Open a command prompt (Windows) / terminal (Linux/Mac) and enter the following commands:</p>
 <ul>
 <li><code>conda install r-essentials r-igraph</code></li>
-<li><code>Rscript -e 'install.packages(&quot;languageserver&quot;)'</code></li>
+<li><code>Rscript -e 'install.packages("languageserver")'</code></li>
 </ul>
 <p>If you would rather install an R kernel than a fresh install of R within the Anaconda distribution, you can follow the instructions <a href="https://richpauloo.Github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/">here</a>. The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of R.</p>
 </div>

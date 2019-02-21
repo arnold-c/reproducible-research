@@ -85,7 +85,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-02-08}
+    \date{2019-02-20}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -153,7 +153,7 @@ There are many different ways to make reproducible work. The information listed 
 \hypertarget{structuring-a-project}{%
 \section{Structuring a project}\label{structuring-a-project}}
 
-The first step in creating reproducible research is creating self-contained projects. Everything that goes in to, and comes out of, the project, should be contained within a single folder (directory). At PHO, it is best that you create these directories within your personal drive (\texttt{H:\textbackslash{}}). I would recommend that you create a folder called \texttt{repos/} that your project folders live in, e.g. \texttt{H:/repos/proj/}. This way, if you like to store other files on your \texttt{H:\textbackslash{}} drive, your project folders are neatly separated. Whilst we will discuss version control with Git \protect\hyperlink{git}{later}, I would suggest that you also routinely back up your project folder to either the shared team drives (\texttt{I:\textbackslash{}} or SharePoint, depending on whether the data is \protect\hyperlink{sensitive-data}{sensitive}).
+The first step in creating reproducible research is creating self-contained projects. Everything that goes in to, and comes out of, the project, should be contained within a single folder (directory). At PHO, it is best that you create these directories within your personal drive (\texttt{H:\textbackslash{}}). I would recommend that you create a folder called \texttt{repos/} that your project folders live in, e.g.~\texttt{H:/repos/proj/}. This way, if you like to store other files on your \texttt{H:\textbackslash{}} drive, your project folders are neatly separated. Whilst we will discuss version control with Git \protect\hyperlink{git}{later}, I would suggest that you also routinely back up your project folder to either the shared team drives (\texttt{I:\textbackslash{}} or SharePoint, depending on whether the data is \protect\hyperlink{sensitive-data}{sensitive}).
 
 Now you have set up your \texttt{repos/} folder in your \texttt{H:\textbackslash{}} drive, it is time to create the project folder. This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.
 
@@ -170,7 +170,7 @@ H:/
         └── analysis.R
 \end{verbatim}
 
-As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. \texttt{read\_csv(here(\textquotesingle{}data\textquotesingle{},\ \textquotesingle{}data\_file.csv\textquotesingle{}))} rather than \texttt{read\_csv(\textquotesingle{}C:/Users/owner/Documents/Repos/my\_project/data/data\_file.csv\textquotesingle{})}. The reason why relative paths are preferable is that they allow projects to be used by multiple people without the need to re-write code. If you use explicit paths and change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.
+As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g.~\texttt{read\_csv(here(\textquotesingle{}data\textquotesingle{},\ \textquotesingle{}data\_file.csv\textquotesingle{}))} rather than \texttt{read\_csv(\textquotesingle{}C:/Users/owner/Documents/Repos/my\_project/data/data\_file.csv\textquotesingle{})}. The reason why relative paths are preferable is that they allow projects to be used by multiple people without the need to re-write code. If you use explicit paths and change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.
 
 \begin{quote}
 \textbf{Note:} the example above used an R package called \texttt{here\_here}, calling the function \texttt{here()}. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.
@@ -181,7 +181,7 @@ As you can see, the project repository contains separate directories that you ca
 
 An important idea is that you should \textbf{treat your data as read-only}. You and your team have likely worked hard to collect the data and it's easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, \textbf{once the data is collected it should not be edited}; all the work should happen in your code, allowing it to be easily checked.
 
-If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. \texttt{proj-cleaning.R}). However, if you do need to edit the files manually (\textbf{and I strongly recommend against it} as it makes it harder to reproduce as there isn't a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file \protect\hyperlink{how-to-name-files}{naming conventions}) in your project directory (e.g. \texttt{H:/repos/proj/2019-01-24\_data-file.csv}). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on \protect\hyperlink{git}{Git}, you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don't have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time.
+If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g.~\texttt{proj-cleaning.R}). However, if you do need to edit the files manually (\textbf{and I strongly recommend against it} as it makes it harder to reproduce as there isn't a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file \protect\hyperlink{how-to-name-files}{naming conventions}) in your project directory (e.g.~\texttt{H:/repos/proj/2019-01-24\_data-file.csv}). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on \protect\hyperlink{git}{Git}, you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don't have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time.
 
 \hypertarget{other-subdirectories}{%
 \subsection{Other subdirectories}\label{other-subdirectories}}
@@ -231,7 +231,7 @@ Instead try and use something like \href{https://speakerdeck.com/jennybc/how-to-
   \begin{itemize}
   \tightlist
   \item
-    i.e. \texttt{2019-01-19\_my-data.csv}
+    i.e.~\texttt{2019-01-19\_my-data.csv}
   \end{itemize}
 \item
   Left-pad numbers
@@ -239,7 +239,7 @@ Instead try and use something like \href{https://speakerdeck.com/jennybc/how-to-
   \begin{itemize}
   \tightlist
   \item
-    i.e. \texttt{01\_my-data.csv} vs \texttt{1\_my-data.csv}
+    i.e.~\texttt{01\_my-data.csv} vs \texttt{1\_my-data.csv}
   \item
     If you don't, file orders get messed up when you get to double-digits
   \end{itemize}
@@ -307,12 +307,12 @@ If you've followed the steps up until here, you will have a project folder in yo
     Make sure this is the case by routinely clearing your programming environment and re-running the code in a clean environment to ensure your results aren't contingent on \emph{`hidden'} packages/modules that were \href{https://onunicornsandgenes.blog/2017/04/02/using-r-dont-save-your-workspace/}{loaded erroneously}
   \end{itemize}
 \item
-  Never set explicit file paths (e.g. \texttt{setwd()}) if you can avoid it
+  Never set explicit file paths (e.g.~\texttt{setwd()}) if you can avoid it
 
   \begin{itemize}
   \tightlist
   \item
-    Try and use a package that allows you to set relative paths e.g. \texttt{here\_here} in R. This allows the project to be passed to someone else in its entirety and the code won't break because they don't have the same folder names and set up as you (also if you work on multiple computers/OS)
+    Try and use a package that allows you to set relative paths e.g.~\texttt{here\_here} in R. This allows the project to be passed to someone else in its entirety and the code won't break because they don't have the same folder names and set up as you (also if you work on multiple computers/OS)
   \end{itemize}
 \item
   Format your filenames properly
@@ -711,7 +711,7 @@ If you followed the instructions above, Git should be ready to go. However, some
 \hypertarget{git-client}{%
 \section{Git client}\label{git-client}}
 
-Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the \href{https://www.sourcetreeapp.com/}{SourceTree} client, but you can use others.
+Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the \href{https://www.sourcetreeapp.com/}{SourceTree} client, but you can use others. \href{https://www.gitkraken.com/}{GitKraken} is a good alternative, and nicely, it also works on Linux, which many clients don't. I have had some issues connecting SourceTree with GitHub, so have moved towards GitKraken for some projects, and have no qualms with it so far.
 
 \hypertarget{remote-repositories}{%
 \section{Remote repositories}\label{remote-repositories}}
