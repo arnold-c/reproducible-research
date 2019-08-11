@@ -12,10 +12,23 @@ output:
       fontfamilyoptions: sfdefault
 urlcolor: purple
 ---
+# Welcome, and what this book is about
+
+This book’s focus is on how to produce reproducible research, and should serve as an introduction to data management and project organisation with a particular focus on what can be achieved at Public Health Ontario. Whilst there are many tools that we can use to ensure our projects and code are tidy and result in reproducible work, some of these are not possible to implement given the potential requirements for administrative privileges during set up. As such, we have divided this book into multiple sections, progressively getting more involved as the book continues. Whilst you may be able to utilise these more sophisticated tools, the core of reproducible research remains the same, so the first chapters still apply.
+
+We hope that you enjoy the content and feel like you come away having learnt something useful, and that this book can serve as a reference document for your future research. If you have any questions that cannot be answered within the book, or you would like to contribute and improve this document, please contact us.
+
+> This document is here to assist you in making reproducible research. Through the course of this document, we explain techniques that can be employed easily to help add structure to your research projects and reduce the time spent poring over code to determine if your code really does produce the table and figures you have in your manuscript or poster. Not only does this aid you, but it is essential if the project moves between PHO employees. We also hope that the structures we suggest will help you find documents and files more easily.
+>
+> We start by explaining what reproducible research is, why we need it, and how the data we receive can be integrated into a reproducible research workflow. Next, we suggest ways in which you can structure projects to assist this workflow. We end by discussing how to create a Jupyter Notebook and produce the output documents, allowing you to integrate your code and results in a dynamic document.
 
 # Reproducible work - an introduction
 
+This chapter focusses on what everyone can and should be doing. The guidelines here do not require anything to be downloaded, so can be implemented immediately and easily. If you follow the principles laid out here, you are well on your way to making reproducible research.
+
 ## What is reproducible work?
+
+> At its core, reproducible research is about being transparent in how to produce the results you report. In doing so, this allows anyone with your data and code to reproduce the work you have produced. This includes you, as there will be many times you need to check results, and a reproducible workflow will allow you to spot mistakes easily, and give you confidence that the code and data you use give the reported outcome every time they are run.
 
 - Contains relevant code, including which packages were used, and which programming language was used
 - Contains enough text, either via markdown or comments, to be able to understand the purpose of the code chunks and code document
@@ -26,9 +39,15 @@ urlcolor: purple
 
 Simply put, mistakes happen. Projects also move between PHO employees. If your project is structured properly, you will have a code document that contains all of the relevant information, and it is easy to recreate the outcomes. Importantly, you will also have the necessary input files (and tracking of **all** their changes) stored within the project folder. That way, if you move computers, delete a document by accident, or hand over the project to another person, everything is neatly contained and can be reproduced without hassle.
 
+> Simply put, mistakes happen. If your project is structured properly, you will have a code document that contains all of the relevant information, and it is easy to recreate the outcomes. That way, if you move computers, delete a document by accident, or hand over the project to another person, everything is neatly contained and can be reproduced without hassle.
+
 ## How do I make reproducible work?
 
 There are many different ways to make reproducible work. The information listed here should give you the foundations upon which you can build your own systems. However, the principles are the same and largely revolve around project structures and a version control system, such as Git.
+
+> There are many different ways to make reproducible work. The information listed here should give you the foundations upon which you can build your own systems. However, the principles are the same and largely revolve around project structures, and dynamic documents that contain both the code and the results embedded in them. This way, updates to the code will automatically update results (including tables and figures), and you don’t need to worry about incorrectly copying the wrong version, or even retyping numbers in a table.
+>
+> Whilst it is a bit beyond the scope of what this document can cover, a version control system like Git can prove to be an invaluable tool in making reproducible research. It is essential tracked changes for everything you do in a project: all the changes in your code, which files you produce, where you move files, the results your create … and the list goes on. If you would like to learn how to use Git, you should read this fantastic resource by Jenny Bryan and co. It is aimed at R users, but much of it is generalizable. More resources are available at the end of the document
 
 # Structuring a project
 
@@ -57,7 +76,7 @@ As you can see, the project repository contains separate directories that you ca
 
 An important idea is that you should **treat your data as read-only**. You and your team have likely worked hard to collect the data and it's easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, **once the data is collected it should not be edited**; all the work should happen in your code, allowing it to be easily checked.
 
-If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. `proj-cleaning.R`). However, if you do need to edit the files manually (**and I strongly recommend against it** as it makes it harder to reproduce as there isn't a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file [naming conventions](#how-to-name-files)) in your project directory (e.g. `H:/repos/proj/2019-01-24_data-file.csv`). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on [Git](#git), you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don't have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time. 
+If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. `proj-cleaning.R`). However, if you do need to edit the files manually (**and I strongly recommend against it** as it makes it harder to reproduce as there isn't a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file [naming conventions](#how-to-name-files)) in your project directory (e.g. `H:/repos/proj/2019-01-24_data-file.csv`). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on [Git](#git), you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don't have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time.
 
 ## Other subdirectories
 
@@ -68,7 +87,7 @@ If you are following good data practices and treating your data as read-only, al
 
 Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like Git comes in, which we will discuss in the next section.
 
-## How to name files
+## How to name files and directories
 
 How you name files and directories may not seem like an important point, but it can cause quite a headache if you try and use code to automate processes, and at best, it just slows things down. To quote Aaron Quinlan, a bioinformatician, ["a space in a filename is a space in one's soul"](https://twitter.com/aaronquinlan/status/711593127551733761).
 
@@ -132,9 +151,9 @@ There are many ways to get Git running on your computer. Depending on your OS an
 
 ### Windows
 
-1. Install [Git for Windows](https://Gitforwindows.org/)
+1. Install [Git for Windows](https://gitforwindows.org/)
     - This gives you Git Bash, which is a much nicer way of interfacing with Git than the command line.
-    - **Note:** when asked about "*Adjusting your PATH environment*", be sure to select "*Git from the command line and also from 3rd-party software*". The other default options should be fine. For more details about the installation settings, please click [here](https://Github.com/jennybc/happy-Git-with-r/issues/105)
+    - **Note:** when asked about "*Adjusting your PATH environment*", be sure to select "*Git from the command line and also from 3rd-party software*". The other default options should be fine. For more details about the installation settings, please click [here](https://github.com/jennybc/happy-git-with-r/issues/105)
 2. Open up Git Bash and enter `where git`. Open up the command line and enter `where git`. Depending on whether you have administrator privileges, the outputs should look something like this, respectively
     1. `which git` : `/mingw64/bin/git`
     2. `where git` : `C:\Users\owner\AppData\Local\Programs\git\bin\git.exe` (User privileges)
@@ -165,7 +184,7 @@ Typing in `git config --global --list` is a way to check that your details have 
 
 ### Installation problems
 
-If you followed the instructions above, Git should be ready to go. However, sometimes you still end up with errors. This is far more likely with Windows that Mac, but if you find that the next steps don't work for you, see if the other installation options [here](https://happyGitwithr.com/install-Git.html) work for you, or the trouble shooting tips [here](https://happyGitwithr.com/troubleshooting.html) (and [here](https://Github.com/jennybc/happy-Git-with-r/issues/67) if you're on Windows), which are useful when trying to connect Git with RStudio
+If you followed the instructions above, Git should be ready to go. However, sometimes you still end up with errors. This is far more likely with Windows that Mac, but if you find that the next steps don't work for you, see if the other installation options [here](https://happygitwithr.com/install-git.html) work for you, or the trouble shooting tips [here](https://happygitwithr.com/troubleshooting.html) (and [here](https://github.com/jennybc/happy-git-with-r/issues/67) if you're on Windows), which are useful when trying to connect Git with RStudio
 
 ## Git client
 
@@ -311,9 +330,9 @@ If you are using SourceTree, there are two ways to connect your computer to your
 
 **Method 3** (*not recommended*)
 
-If you would like to do it the hard way and use the Git Bash, read the instructions [here](https://happyGitwithr.com/push-pull-Github.html)
+If you would like to do it the hard way and use the Git Bash, read the instructions [here](https://happygitwithr.com/push-pull-github.html)
 
-**Note:** if you would like to use SSH keys, read the instructions [here](https://help.Github.com/articles/connecting-to-Github-with-ssh/)
+**Note:** if you would like to use SSH keys, read the instructions [here](https://help.github.com/articles/connecting-to-github-with-ssh/)
 
 ## Basic commands
 
@@ -337,13 +356,13 @@ Simply put, when you create another branch you are creating a copy of your code 
 
 > "But isn't that why we use Git?"
 
-Kind of. But Git is only so powerful. If you have working code, you don't want to put it out of action whilst you test ideas out, especially if other people need to use your code and can't wait for you to figure out your future problems. So creating another branch allows you to get around this issue. For most projects, you can get away with just two branches, a `master` and a `develop`, which are explained below. If your project is complex, and requires multiple people to work on the code at the same time, it would be worth you looking at implementing [this model](https://nvie.com/posts/a-successful-Git-branching-model/).
+Kind of. But Git is only so powerful. If you have working code, you don't want to put it out of action whilst you test ideas out, especially if other people need to use your code and can't wait for you to figure out your future problems. So creating another branch allows you to get around this issue. For most projects, you can get away with just two branches, a `master` and a `develop`, which are explained below. If your project is complex, and requires multiple people to work on the code at the same time, it would be worth you looking at implementing [this model](https://nvie.com/posts/a-successful-git-branching-model/).
 
 The image to the right is copied from the model listed above. It is useful in illustrating the `master` and `develop` approach to branching.
 
 ### Creating a branch
 
-As with all things in Git, you can do this multiple ways. I prefer to use the SourceTree client, as I find it far more intuitive when you can see the changes, but you can use the command line or Git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learnGitbranching.js.org/), which allows you to interact with the code through illustrations.
+As with all things in Git, you can do this multiple ways. I prefer to use the SourceTree client, as I find it far more intuitive when you can see the changes, but you can use the command line or Git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learngitbranching.js.org/), which allows you to interact with the code through illustrations.
 
 When you are in SourceTree, open the repository you would like to create a branch in. You will notice that there are two buttons called `Branch` and `Merge`. If you click on `Branch`, you will see something like this
 
@@ -361,11 +380,13 @@ To do this, first you need to `checkout` the `master` branch, so you are merging
 
 <img alt="guideline-eeaa7b68.png" src="assets/guideline-eeaa7b68.png" width="150%" height="" >
 
-You have now merged your first feature. Whilst the `merge` feature is particularly useful, it is not the only way of doing this. `rebase` is another option that works in a slightly different way. It is slightly beyond the scope of this document, but you should read [this document](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and visit [this website](https://learnGitbranching.js.org/), as suggested previously, to get practice putting them both into practice.
+You have now merged your first feature. Whilst the `merge` feature is particularly useful, it is not the only way of doing this. `rebase` is another option that works in a slightly different way. It is slightly beyond the scope of this document, but you should read [this document](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and visit [this website](https://learngitbranching.js.org/), as suggested previously, to get practice putting them both into practice.
 
 # Notebooks
 
-There are many different types of notebooks, but we will only explore Jupyter notebooks. The reason why we won't look at other options is because Jupyter notebooks are very well established and have numerous kernels available that allow for the use of many different statistical and programming languages. **Note:** if you are using R, you should be using RStudio in combination with R Notebooks or Rmd files (or using `#'` in your `.R` scripts to insert markdown comments), which are far more suited to R than Jupyter is.
+There are many different types of notebooks, but we will only explore Jupyter notebooks. The reason why we won't look at other options is because Jupyter notebooks are very well established and have numerous kernels available that allow for the use of many different statistical and programming languages.
+
+> **Note:** if you are using R, you should be using RStudio in combination with R Notebooks or Rmd files (or using `#'` in your `.R` scripts to insert markdown comments), which are far more suited to R than Jupyter is.
 
 But first, what is a notebook, and why should we use them?
 
@@ -377,7 +398,7 @@ This section will give you a brief overview of what a Jupyter notebook is and ho
 
 > **Note:** throughout this section you can substitute the phrase *"Jupyter notebooks"* with *"Jupyter Labs"* if you would prefer to have a full IDE allowing you more control over the system.
 
-Jupyter notebooks are run on Python, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click [here](https://nbviewer.jupyter.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb), and [here](https://Github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
+Jupyter notebooks are run on Python, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click [here](https://nbviewer.jupyter.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb), and [here](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
 
 ### Installing Jupyter notebooks
 
@@ -400,11 +421,11 @@ Mac's come shipped with a version of Python, but it is most likely outdated, and
 
 A kernel is program that allows the notebook to connect with, and run, your code. Jupyter comes with the Python code pre-installed, but if you want to use a different language, you will need to download a specific kernel.
 
-Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow [this link](https://Github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow [this link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
 
 #### Installing the Stata kernel
 
-The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.Github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.
+The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.
 
 Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line
 
@@ -422,7 +443,7 @@ In order to let `stata_kernel` talk to Stata, you need to link the Stata Automat
 
 #### Installing the SAS kernel
 
-\**This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://Github.com/sassoftware/sas_kernel)*\*
+\**This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*\*
 
 Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line. First we need to install a dependency called `saspy` that helps the kernel connect `SAS` to `python`
 
@@ -440,7 +461,7 @@ sas        /home/sas/.local/share/jupyter/kernels/sas
 Now verify that the SAS Executable is correct
 
 - find the `sascfg.py` file -- it is currently located in the install location (see above) `[install location]/site-packages/saspy/sascfg.py`. To query `pip` for the location of the file, type `pip show saspy`. Failing that, this command will search the OS for the file location: `find / -name sascfg.py`
-- edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this [file](https://Github.com/sassoftware/saspy/blob/master/saspy/sascfg.py)
+- edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this [file](https://github.com/sassoftware/saspy/blob/master/saspy/sascfg.py)
 
 #### Connecting R with Jupyter
 
@@ -453,7 +474,7 @@ Open a command prompt (Windows) / terminal (Linux/Mac) and enter the following c
 - `conda install r-essentials r-igraph`
 - `Rscript -e 'install.packages("languageserver")'`
 
-If you would rather install an R kernel than a fresh install of R within the Anaconda distribution, you can follow the instructions [here](https://richpauloo.Github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of R.
+If you would rather install an R kernel than a fresh install of R within the Anaconda distribution, you can follow the instructions [here](https://richpauloo.github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of R.
 
 ### Creating a notebook
 
@@ -465,7 +486,29 @@ Select the **New** button in the top right corner, and then select the language 
 
 \**Update this section*\*
 
+> Now you have the notebook open in your chosen language, it’s time to start doing some data exploration and analysis. Here, we’ll cover some basic commands that will get you started, but to fully leverage the power of the notebook, you should read the Jupyter documentation, along with the documentation of your preferred kernel, particularly sections relating to magic commands (which are language-specific).
+>
+> When you are writing in a cell (‘Edit’ mode), you can use these commands:
+
 Now you have the notebook open in your chosen language, it's time to start doing some data exploration and analysis. Here, we'll cover some basic commands that will get you started, but to fully leverage the power of the notebook, you should read the [Jupyter documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#code-cells), along with the documentation of your preferred kernel, particularly sections relating to `magic` commands (which are language-specific).
+
+| **Keyboard shortcut** |                                                                     |
+|:----------------------|:--------------------------------------------------------------------|
+| `Shift + Enter`       | Executes the current cell and enters you into the next one          |
+| `Ctrl/Cmd + Enter`    | Executes the current cell, but does not enter you into the next one |
+| `Esc`                 | This exits 'Edit' mode without executing the cells                  |
+| `Tab`                 | Code completion or indent                                           |
+
+If you are not in 'Edit' mode ('Command' mode), and therefore at least one cell is selected, you can use these commands:
+
+| **Keyboard shortcut** |                                                        |
+|:----------------------|:-------------------------------------------------------|
+| `Ctrl/Cmd + a`        | Add an empty cell above your current cell              |
+| `Ctrl/Cmd + b`        | Add an empty cell below your current cell              |
+| `dd`                  | Delete the selected cell                               |
+| `Ctrl/Cmd + m`        | Change the cell type to 'Markdown' so you can add text |
+| `Ctrl/Cmd + y`        | Change the cell type to 'Code' so you can add code     |
+| `Enter`               | Enter 'Edit' mode                                      |
 
 - `Shift + Enter`
 - `Command + Enter`
@@ -480,7 +523,7 @@ Now you have the notebook open in your chosen language, it's time to start doing
 
 ### Git and Jupyter
 
-Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`.
+Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`. This is here to serve as an introduction to the tools, but not as a tutorial, so only the links to the documentation have been provided for you to read.
 
 \****Test out the other options!**\**
 
@@ -496,7 +539,7 @@ Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few 
 
 Because I do not like the `In[]` `Out[]` text showing in documents, along with centering plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, this section should help you. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX). If you do this, it is essential that you **routinely restart the kernel to run everything again in a fresh environment** as it is incredibly easy to run code blocks out of order and forget how this changes the output and introduces *hidden* packages.
 
-If you would like to customize the look of the notebook, [jupyterthemes](https://Github.com/dunovank/jupyter-themes) is a great package that can be installed. I have also edited the `custom.css` file (`C:\Users\owner\.jupyter\custom\`), adding `display: None;` under the section
+If you would like to customize the look of the notebook, [jupyterthemes](https://github.com/dunovank/jupyter-themes) is a great package that can be installed. I have also edited the `custom.css` file (`C:\Users\owner\.jupyter\custom\`), adding `display: None;` under the section
 
 ```
 div.prompt,
@@ -554,7 +597,7 @@ We've covered a lot of information up until now about setting up your projects a
 
 In scientific articles, whilst it's not essential, LaTeX is a nice touch, and Jupyter can give you a LaTeX formatted pdf documents. To do this, you will first need to install LaTeX. If you are on Windows, I would recommend the [MiKTeX](https://miktex.org/download) distribution, and if you use a Mac, then I would recommend the [MacTeX](http://www.tug.org/mactex/mactex-download.html) distribution. You will also need the "swiss-army knife" of file conversion, [pandoc](https://pandoc.org/installing.html). Pandoc is not *needed* for creating LaTeX-formatted pdfs, but if you have documents with unsupported characters and you need to use a different `pdf-engine` you'll need to use pandoc.
 
-During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH as listed [above](#env-variables). The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads  `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
+During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH as listed [above](#env-variables). In Windows you do this by navigating to `Environment Variables` from the Windows key and editing the PATH in `User Variables`. In Mac, you should open the terminal and enter `touch ~/.bash_profile; open ~/.bash_profile`, which opens (or creates if missing) the file that stores your PATH. From here, type `export PATH="path-to-latex-executable:$PATH"` to add the executable to the path. Now save and exit the text editor, run `source ~/.bash_profile` in your terminal, and you're good to go. The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads  `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
 
 Now you're ready to create a LaTeX-formatted pdf document. All you need to do is click *File -> Download as -> PDF via LaTeX (.pdf)*.
 
@@ -578,7 +621,7 @@ This document only touches on enough to get you up an running with reproducible 
 
 ## Project structure
 
-https://nicercode.Github.io/blog/2013-04-05-projects/
+https://nicercode.github.io/blog/2013-04-05-projects/
 
 https://tomwallis.info/2014/01/16/setting-up-a-project-directory/
 
@@ -590,18 +633,18 @@ https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-mana
 
 ## Git
 
-https://happyGitwithr.com/
+https://happygitwithr.com/
 
 > I cannot emphasise this enough: this is genuinely **the best resource** I have come across for explaining how to set up and organise a project with `Git`. Whilst it is aimed at `R` users, there is a large amount of cross-over, so read it regardless of the language you use.
 
-https://medium.freecodecamp.org/how-not-to-be-afraid-of-Git-anymore-fe1da7415286
+https://medium.freecodecamp.org/how-not-to-be-afraid-of-git-anymore-fe1da7415286
 
 > This helps you understand the nuts-and-bolts of `Git` by learning to use the command line, rather than an application like SourceTree.
 
-https://Git-scm.com/book/en/v2/
+https://git-scm.com/book/en/v2/
 
 > The literal book on Git. Everything from the basics to the advanced.
 
-https://nvie.com/posts/a-successful-Git-branching-model/
+https://nvie.com/posts/a-successful-git-branching-model/
 
 > If you feel comfortable with the idea of branching and are interested in a good extension of what we've covered, this will help. Roughly speaking, the more complex you project is and the more people that are involved simultaneously, the more branches you want so you can handle problems as they come up, without breaking previously 'good' code.
