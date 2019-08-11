@@ -298,11 +298,11 @@ before restarting Jupyter.
 
 ### Output documents
 
-We've covered a lot of information up until now about setting up your projects and your code, but a big part of reproducible research is the creation of nice-looking documents. The reason we've gone to such effort to install Jupyter notebooks and connect them with our language of choice is that not only do they allow for excellent data exploration, but they also make documents that look professional.
+We've covered a lot of information up until now about setting up your projects and your code, but a big part of reproducible research is the creation of nice-looking and transparent documents. The reason we've gone to such effort to install Jupyter notebooks and connect them with our language of choice is that not only do they allow for excellent data exploration, but they also make documents that look professional.
 
 In scientific articles, whilst it's not essential, LaTeX is a nice touch, and Jupyter can give you a LaTeX formatted pdf documents. To do this, you will first need to install LaTeX. If you are on Windows, I would recommend the [MiKTeX](https://miktex.org/download) distribution, and if you use a Mac, then I would recommend the [MacTeX](http://www.tug.org/mactex/mactex-download.html) distribution. You will also need the "swiss-army knife" of file conversion, [pandoc](https://pandoc.org/installing.html). Pandoc is not *needed* for creating LaTeX-formatted pdfs, but if you have documents with unsupported characters and you need to use a different `pdf-engine` you'll need to use pandoc.
 
-During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH as listed [above](#env-variables). In Windows you do this by navigating to `Environment Variables` from the Windows key and editing the PATH in `User Variables`. In Mac, you should open the terminal and enter `touch ~/.bash_profile; open ~/.bash_profile`, which opens (or creates if missing) the file that stores your PATH. From here, type `export PATH="path-to-latex-executable:$PATH"` to add the executable to the path. Now save and exit the text editor, run `source ~/.bash_profile` in your terminal, and you're good to go. The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads  `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
+During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH<a id = "env-variables"></a>. In Windows you do this by navigating to `Environment Variables` from the Windows key and editing the PATH in `User Variables`. In Mac, you should open the terminal and enter `touch ~/.bash_profile; open ~/.bash_profile`, which opens (or creates if missing) the file that stores your PATH. From here, type `export PATH="path-to-latex-executable:$PATH"` to add the executable to the path. Now save and exit the text editor, run `source ~/.bash_profile` in your terminal, and you're good to go. The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads  `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
 
 Now you're ready to create a LaTeX-formatted pdf document. All you need to do is click *File -> Download as -> PDF via LaTeX (.pdf)*.
 
@@ -312,7 +312,7 @@ If you would rather not produce a pdf via LaTeX, instead wanting an arguably mor
 
 # Git
 
-Think of it as tracked changes for your code. When working on a project, even if you're the only one coding, it's important to be able to go back to previous versions if you make a mistake and can't remember all the steps you went through since your last stable version.
+As mentioned, a version control system is an integral part of any reproducible research project. Think of it as tracked changes for your code. When working on a project, even if you're the only one coding, it's important to be able to go back to previous versions if you make a mistake and can't remember all the steps you went through since your last stable version. Git isn't the only VCS available, but it's the most prevalent, and has a good support community, so is what will be the focus in this book.
 
 ## Set up
 
@@ -327,13 +327,13 @@ There are many ways to get Git running on your computer. Depending on your OS an
     1. `which git` : `/mingw64/bin/git`
     2. `where git` : `C:\Users\owner\AppData\Local\Programs\git\bin\git.exe` (User privileges)
         1. `where git` : `C:\Program Files\git\bin\git.exe` (administrator privileges)
-    - If you see `cmd` instead of `bin`, then you need to edit the PATH in your environment variables <a id = "env-variables"></a>. You can do this by typing `environment variables` into the Start box and scrolling to the PATH section of User/System variables (depending on whether you have administrator privileges), and changing `cmd` to `bin` in the `git.exe` path.
+    - If you see `cmd` instead of `bin`, then you need to edit the PATH in your environment variables, [as above](#env-variables). You can do this by typing `environment variables` into the Start box and scrolling to the PATH section of User/System variables (depending on whether you have administrator privileges), and changing `cmd` to `bin` in the `git.exe` path.
 
 ### Mac
 
 There are more (workable) ways to install Git on OSX than on Windows, but I think this is the best option as it gives you a great package manager for the future.
 
-1.  Open the terminal and enter `/usr/bin/ruby -e "$(curl -fsSL https:/raw.Githubusercontent.com/Homebrew/install/master/install)"`
+1.  Open the terminal and enter `/usr/bin/ruby -e "$(curl -fsSL https:/raw.githubusercontent.com/Homebrew/install/master/install)"`
 2. Enter `brew install git` into the terminal
 
 ### Final Git set up steps
@@ -353,19 +353,17 @@ Typing in `git config --global --list` is a way to check that your details have 
 
 ### Installation problems
 
-If you followed the instructions above, Git should be ready to go. However, sometimes you still end up with errors. This is far more likely with Windows that Mac, but if you find that the next steps don't work for you, see if the other installation options [here](https://happygitwithr.com/install-git.html) work for you, or the trouble shooting tips [here](https://happygitwithr.com/troubleshooting.html) (and [here](https://github.com/jennybc/happy-git-with-r/issues/67) if you're on Windows), which are useful when trying to connect Git with RStudio
+If you followed the instructions above, Git should be ready to go. However, sometimes you still end up with errors. This is far more likely with Windows that Mac, but if you find that the next steps don't work for you, see if the other installation options from Jenny Bryan's book [here](https://happygitwithr.com/install-git.html) work for you, or the trouble shooting tips [here](https://happygitwithr.com/troubleshooting.html) (and [here](https://github.com/jennybc/happy-git-with-r/issues/67) if you're on Windows), which are useful when trying to connect Git with RStudio.
 
 ## Git client
 
-Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the [SourceTree](https://www.sourcetreeapp.com/) client, but you can use others.
+Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the [GitKraken](https://www.gitkraken.com/) client, and they're associated GloBoards for project To-Do's, but you can use others.[SourceTree](https://www.sourcetreeapp.com/) is another good alternative, but I have had some issues connecting to some GitHub accounts, so I have since moved away from it.
 
 ## Remote repositories
 
-It is not essential, but one of the best things about Git is that online repositories create an easier way to sync your work between computers and colleagues, avoiding much of the mess caused when this work happens simultaneously/(insert file sharing system of choice) isn't syncing properly. In this section, I will explain the correct way to utilize this, and the other way ...
+It is not essential, but one of the best things about Git is that online repositories create an easier way to sync your work between computers and colleagues, avoiding much of the mess caused when this work happens simultaneously / your file sharing system of choice isn't syncing properly. In this section, I will explain the correct way to utilize this, and the other way ...
 
 ### GitHub - the Good
-
-\**This section will need to be updated after figuring out the PHO system*\*
 
 GitHub is built for this. You should take full advantage of the effort and troubleshooting that has gone into the platform. **Don't try and recreate the wheel**
 
@@ -375,7 +373,7 @@ Now that you've decided to use GitHub, it's very easy to register. Just click th
 
 Be sure to choose a user name that is easy to remember, and easy to find. I would suggest just using your name.
 
-Now you have a GitHub account set up, this is your *remote*. If you work on a project with collaborators, this can be shared with them. That way, collaborators can work on their own versions of the code on their *local* machine (computer), and when it's ready for other people to use/help write, they can `push` it to the *remote* where others can access it. Don't worry if you don't know what `push` is - we'll cover that [soon](#basic-commands)
+Now you have a GitHub account set up, this is your *remote*. If you work on a project with collaborators, this can be shared with them. That way, collaborators can work on their own versions of the code on their *local* machine (computer), and when it's ready for other people to use/help write, they can `push` it to the *remote* where others can access it. Don't worry if you don't know what `push` is - we'll cover that [soon](#basic-commands).
 
 ### Private server
 
@@ -465,20 +463,16 @@ You can share the OneDrive repository (folder) so that multiple people can work 
 
 ## Creating a repository
 
-\**This section will need to be updated after figuring out the PHO system*\*
-
 If everything has gone well until now, you're ready to create a project repository. This is where all your code, all your data, all your output files, everything, should live. Whilst you can create a repository directly on your computer, I would advise against this as it causes additional headaches when you want to connect it with GitHub. Instead, create the remote repository first on GitHub.
 
-- Go to www.Github.com and click the `+` and *"New repository"*.
+- Go to www.github.com and click the `+` and *"New repository"*.
 - Choose a project name
-- Decide whether you want it to be a public or private project (choose private if working on PHO data and research, as you can always convert it to public later)
+- Decide whether you want it to be a public or private project (choose private if working on sensitive data and research, as you can always convert it to public later)
 - Initialize with a README file
 
 ### Connecting to GitHub
 
-\**This section will need to be updated after figuring out the PHO system*\*
-
-If you are using SourceTree, there are two ways to connect your computer to your GitHub repositories. I would recommend the first option, as it makes *cloning* repositories (making a copy on your local computer) easier in the future, as you don't have to go to GitHub each time to find the *HTTPS/SSH* address.
+If you are using SourceTree, there are two ways to connect your computer to your GitHub repositories. I would recommend the first option, as it makes *cloning* repositories (making a copy on your local computer) easier in the future, as you don't have to go to GitHub each time to find the *HTTPS/SSH* address. The methods for GitKraken are essentially the same, and SourceTree seems to be slightly more popular, hence why I describe it here.
 
 **Method 1**
 
@@ -531,9 +525,9 @@ The image to the right is copied from the model listed above. It is useful in il
 
 ### Creating a branch
 
-As with all things in Git, you can do this multiple ways. I prefer to use the SourceTree client, as I find it far more intuitive when you can see the changes, but you can use the command line or Git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learngitbranching.js.org/), which allows you to interact with the code through illustrations.
+As with all things in Git, you can do this multiple ways. I prefer to use the client, as I find it far more intuitive when you can see the changes, but you can use the command line or Git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learngitbranching.js.org/), which allows you to interact with the code through illustrations.
 
-When you are in SourceTree, open the repository you would like to create a branch in. You will notice that there are two buttons called `Branch` and `Merge`. If you click on `Branch`, you will see something like this
+When you are in your client (in this case, SourceTree), open the repository you would like to create a branch in. You will notice that there are two buttons called `Branch` and `Merge`. If you click on `Branch`, you will see something like this
 
 <img alt="guideline-b2aa08de.png" src="assets/guideline-b2aa08de.png" width="" height="" >
 
@@ -549,13 +543,11 @@ To do this, first you need to `checkout` the `master` branch, so you are merging
 
 <img alt="guideline-eeaa7b68.png" src="assets/guideline-eeaa7b68.png" width="150%" height="" >
 
-You have now merged your first feature. Whilst the `merge` feature is particularly useful, it is not the only way of doing this. `rebase` is another option that works in a slightly different way. It is slightly beyond the scope of this document, but you should read [this document](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and visit [this website](https://learngitbranching.js.org/), as suggested previously, to get practice putting them both into practice.
+You have now merged your first feature. Whilst the `merge` feature is particularly useful, it is not the only way of doing this. `rebase` is another option that works in a slightly different way. It is slightly beyond the scope of this document, but you should read [this document](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and visit [this website](https://learngitbranching.js.org/), as suggested previously, to get experience of putting them both into practice.
 
 ## Git and Jupyter
 
 Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`. This is here to serve as an introduction to the tools, but not as a tutorial, so only the links to the documentation have been provided for you to read.
-
-\****Test out the other options!**\**
 
 1. Clear all outputs before you save and commit the files. That way, Git only tracks changes to the input
 2. Download the notebook as a markdown file allowing `diffs` to be tracked in Git as normal
@@ -563,15 +555,6 @@ Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few 
 4. [ReviewNB](https://www.reviewnb.com/)
 5. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
 
-# Tidy data
-
-What do I mean by tidy data?
-- tidyverse info
-
-# Data visualization
-
-- Visualization for data exploration:
-    - plotly (https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
 # Additional resources
 
