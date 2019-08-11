@@ -143,9 +143,7 @@ Mac's come shipped with a version of Python, but it is most likely outdated, and
     - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is forwards-compatible.
     - Be sure to only install for one user, not the whole system
     - Be sure to select `Add Anaconda to my PATH environment variable` under Advanced Options
-    - Be sure to install Anaconda to the `H:\` drive on your computer, as this is where your data lives. To do this you will need to manually edit the installation path within the Anaconda installer wizard, otherwise it will end up in the `C:\` drive
-        - This is OK if you are able to store data on this drive, and therefore can create your repositories within the `C:\` drive.
-        - Worst case scenario you can use the command `cd "H:/..."` at the top of the notebook to specify the relevant path to your data, but this is bad practice for the reasons mentioned [above](#structuring-a-project).
+    - Be sure to install Anaconda to the drive where your data lives. To do this you will need to manually edit the installation path within the Anaconda installer wizard, otherwise it will automatically end up in the `C:\` drive
 - Use `kernels` to connect your programming language of choice with python and the notebook
     - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
         - [Stata](#installing-the-stata-kernel)
@@ -160,7 +158,7 @@ Below, the installation instructions are described for common languages used in 
 
 #### Installing the Stata kernel
 
-The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.github.io/stata_kernel/getting_started/). It should work with `Stata 12` (we have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.
+The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.github.io/stata_kernel/getting_started/). It should work with `Stata 12` (I have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.
 
 Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line
 
@@ -174,11 +172,10 @@ In order to let `stata_kernel` talk to Stata, you need to link the Stata Automat
 1. In the installation directory (most likely `C:\Program Files (x86)\Stata12` or similar), right-click on the Stata executable, for example, `StataSE.exe` (this will just show as `StataSE`, but is listed as an application). Choose `Create Shortcut`. Placing it on the Desktop is fine.
 2. Right-click on the newly created `Shortcut to StataSE.exe`, choose `Properties`, and append` /Register` to the end of the Target field. So if the target is currently `"C:\Program Files\Stata12\StataSE.exe"`, change it to `"C:\Program Files\Stata12\StataSE.exe" /Register` (note the space before `/`). Click OK.
 3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
-4. Enter your CIHS details
 
 #### Installing the SAS kernel
 
-\**This has not yet been tested here at PHO. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*\*
+\**This has not yet been tested here. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*\*
 
 Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line. First we need to install a dependency called `saspy` that helps the kernel connect `SAS` to `python`
 
@@ -219,13 +216,9 @@ Select the **New** button in the top right corner, and then select the language 
 
 ### Running a Jupyter notebook
 
-\**Update this section*\*
-
-> Now you have the notebook open in your chosen language, it’s time to start doing some data exploration and analysis. Here, we’ll cover some basic commands that will get you started, but to fully leverage the power of the notebook, you should read the Jupyter documentation, along with the documentation of your preferred kernel, particularly sections relating to magic commands (which are language-specific).
->
-> When you are writing in a cell (‘Edit’ mode), you can use these commands:
-
 Now you have the notebook open in your chosen language, it's time to start doing some data exploration and analysis. Here, we'll cover some basic commands that will get you started, but to fully leverage the power of the notebook, you should read the [Jupyter documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#code-cells), along with the documentation of your preferred kernel, particularly sections relating to `magic` commands (which are language-specific).
+
+When you are writing in a cell (‘Edit’ mode), you can use these commands:
 
 | **Keyboard shortcut** |                                                                     |
 |:----------------------|:--------------------------------------------------------------------|
@@ -244,17 +237,6 @@ If you are not in 'Edit' mode ('Command' mode), and therefore at least one cell 
 | `Ctrl/Cmd + m`        | Change the cell type to 'Markdown' so you can add text |
 | `Ctrl/Cmd + y`        | Change the cell type to 'Code' so you can add code     |
 | `Enter`               | Enter 'Edit' mode                                      |
-
-- `Shift + Enter`
-- `Command + Enter`
-- `Esc`
-    - `Ctrl/Cmd + a`
-    - `Ctrl/Cmd + b`
-    - `dd`
-    - `Ctrl/Cmd + m`
-    - `Ctrl/Cmd + y`
-- `Enter`
-    - `Tab`
 
 ### Customizing Jupyter notebook's UI
 
@@ -295,7 +277,7 @@ This removes the `In[]` `Out[]` text. To centre the output of tables/figures, ad
 ```
 to the `custom.css` file, right after the `.prompt {..}` section.
 
-To enable soft wrapping in the notebook, you need to edit the `notebook.json` file (`C:\Users\callum arnold\.jupyter\nbconfig\`). If it does not exist, you need to create it. Once open, add
+To enable soft wrapping in the notebook, you need to edit the `notebook.json` file (`C:\Users\owner\.jupyter\nbconfig\`). If it does not exist, you need to create it. Once open, add
 
 ```
 {
@@ -314,7 +296,7 @@ To enable soft wrapping in the notebook, you need to edit the `notebook.json` fi
 
 before restarting Jupyter.
 
-## Output documents
+### Output documents
 
 We've covered a lot of information up until now about setting up your projects and your code, but a big part of reproducible research is the creation of nice-looking documents. The reason we've gone to such effort to install Jupyter notebooks and connect them with our language of choice is that not only do they allow for excellent data exploration, but they also make documents that look professional.
 
