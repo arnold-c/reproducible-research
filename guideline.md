@@ -24,7 +24,7 @@ We hope that you enjoy the content and feel like you come away having learnt som
 
 # Reproducible work - an introduction
 
-This chapter focusses on what everyone can and should be doing. The guidelines here do not require anything to be downloaded, so can be implemented immediately and easily. If you follow the principles laid out here, you are well on your way to making reproducible research.
+This chapter focuses on what everyone can and should be doing. The guidelines here do not require anything to be downloaded, so can be implemented immediately and easily. If you follow the principles laid out here, you are well on your way to making reproducible research.
 
 ## What is reproducible work?
 
@@ -553,7 +553,7 @@ Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few 
 2. Download the notebook as a markdown file allowing `diffs` to be tracked in Git as normal
 3. [nbdime](https://nbdime.readthedocs.io/en/latest/index.html)
 4. [ReviewNB](https://www.reviewnb.com/)
-5. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control
+5. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control.
 
 
 # Additional resources
