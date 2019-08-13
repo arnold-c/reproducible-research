@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.3 Remote repositories | PHO Data Management Guidelines</title>
-  <meta name="description" content="This is an introduction to data management and project organisation">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="This is an introduction to data management and project organisation" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.3 Remote repositories | PHO Data Management Guidelines" />
   <meta property="og:type" content="book" />
@@ -22,15 +21,15 @@
   <meta name="twitter:description" content="This is an introduction to data management and project organisation" />
   
 
-<meta name="author" content="Callum Arnold">
-<meta name="author" content="Steph L Hughes">
+<meta name="author" content="Callum Arnold" />
+<meta name="author" content="Steph L Hughes" />
 
 
-<meta name="date" content="2019-02-21">
+<meta name="date" content="2019-08-13" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="4-2-git-client.html">
@@ -195,17 +194,17 @@
 <ol style="list-style-type: decimal">
 <li>Create a project folder on your computer <strong>(not in your Dropbox folder)</strong>, and open up the Git Bash within the folder</li>
 <li>Enter <code>git init</code> to initialize your folder as a Git repository</li>
-<li>Enter <code>git remote add origin &quot;dropbox:///path/to/repo&quot;</code></li>
+<li>Enter <code>git remote add origin "dropbox:///path/to/repo"</code></li>
 </ol>
 <p>If a repository already exists in a Dropbox folder, and you want to make a local copy, you can do the following:</p>
 <ol style="list-style-type: decimal">
 <li>Create a project folder on your computer, and open up the Git Bash within the folder</li>
-<li>Enter <code>git clone &quot;dropbox:///path/to/repo&quot; -b master</code></li>
+<li>Enter <code>git clone "dropbox:///path/to/repo" -b master</code></li>
 </ol>
 <p>You are now set up to use Dropbox as your remote repository and can <code>commit</code>, <code>push</code>, and <code>pull</code> changes using the Git Bash commands:</p>
 <ul>
 <li><code>git add .</code> This <em>stages</em> the changes to your files, and it is essential to do before you <code>commit</code></li>
-<li><code>git commit -m &quot;your commit message&quot;</code></li>
+<li><code>git commit -m "your commit message"</code></li>
 <li><code>git push origin master</code></li>
 <li><code>git pull origin master</code></li>
 </ul>
