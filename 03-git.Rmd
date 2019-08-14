@@ -1,0 +1,244 @@
+# Git
+
+As mentioned, a version control system is an integral part of any reproducible research project. Think of it as tracked changes for your code. When working on a project, even if you're the only one coding, it's important to be able to go back to previous versions if you make a mistake and can't remember all the steps you went through since your last stable version. Git isn't the only VCS available, but it's the most prevalent, and has a good support community, so is what will be the focus in this book.
+
+## Set up
+
+There are many ways to get Git running on your computer. Depending on your OS and the version you have, Git may come pre-installed on your computer. However, it is a good idea to update it to the latest version, so I'd recommend you follow the steps below anyway.
+
+### Windows
+
+1. Install [Git for Windows](https://gitforwindows.org/)
+    - This gives you Git Bash, which is a much nicer way of interfacing with Git than the command line.
+    - **Note:** when asked about "*Adjusting your PATH environment*", be sure to select "*Git from the command line and also from 3rd-party software*". The other default options should be fine. For more details about the installation settings, please click [here](https://github.com/jennybc/happy-git-with-r/issues/105)
+2. Open up Git Bash and enter `where git`. Open up the command line and enter `where git`. Depending on whether you have administrator privileges, the outputs should look something like this, respectively
+    1. `which git` : `/mingw64/bin/git`
+    2. `where git` : `C:\Users\owner\AppData\Local\Programs\git\bin\git.exe` (User privileges)
+        1. `where git` : `C:\Program Files\git\bin\git.exe` (administrator privileges)
+    - If you see `cmd` instead of `bin`, then you need to edit the PATH in your environment variables, [as above](#env-variables). You can do this by typing `environment variables` into the Start box and scrolling to the PATH section of User/System variables (depending on whether you have administrator privileges), and changing `cmd` to `bin` in the `git.exe` path.
+
+### Mac
+
+There are more (workable) ways to install Git on OSX than on Windows, but I think this is the best option as it gives you a great package manager for the future.
+
+1.  Open the terminal and enter `/usr/bin/ruby -e "$(curl -fsSL https:/raw.githubusercontent.com/Homebrew/install/master/install)"`
+2. Enter `brew install git` into the terminal
+
+### Final Git set up steps
+
+Now that you have Git running, you need to tell it who you are. This allows multiple people to make changes to code, and the correct names will be attached to the changes.
+
+Open up the Git Bash and enter
+```
+git config --global user.name 'Firstname Lastname'
+git config --global user.email 'my_email@gmail.com'
+```
+
+Typing in `git config --global --list` is a way to check that your details have been saved correctly.
+
+**Note:** it is essential that you enter the same **email** as your GitHub account information. This way you can connect the two. If you would prefer to use a different user name than your GitHub user name you can. This would help show you which computer you completed the work on, but it is not important to most people.
+
+
+### Installation problems
+
+If you followed the instructions above, Git should be ready to go. However, sometimes you still end up with errors. This is far more likely with Windows that Mac, but if you find that the next steps don't work for you, see if the other installation options from Jenny Bryan's book [here](https://happygitwithr.com/install-git.html) work for you, or the trouble shooting tips [here](https://happygitwithr.com/troubleshooting.html) (and [here](https://github.com/jennybc/happy-git-with-r/issues/67) if you're on Windows), which are useful when trying to connect Git with RStudio.
+
+## Git client
+
+Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the [GitKraken](https://www.gitkraken.com/) client, and they're associated GloBoards for project To-Do's, but you can use others. [SourceTree](https://www.sourcetreeapp.com/) is another good alternative, but I have had some issues connecting to some GitHub accounts, so I have since moved away from it.
+
+## Remote repositories
+
+It is not essential, but one of the best things about Git is that online repositories create an easier way to sync your work between computers and colleagues, avoiding much of the mess caused when this work happens simultaneously / your file sharing system of choice isn't syncing properly. In this section, I will explain the correct way to utilize this, and the other way ...
+
+### GitHub - the Good
+
+GitHub is built for this. You should take full advantage of the effort and troubleshooting that has gone into the platform. **Don't try and recreate the wheel**
+
+With GitHub now offering [unlimited free private repositories](https://Github.com/pricing), I would recommend that you set up an account with GitHub. The reason why I suggest GitHub over a different purpose-built platform (such as Bitbucket or GitLab) is the community. Previously, I would have recommended Bitbucket due to the unlimited free private repositories, but this is no longer a restriction with GitHub. With GitHub, if you ever want to make your code open-source, you immediately have access to the largest community of programmers who can help you improve your code, as well as putting it to good use. And isn't that why we do research?
+
+Now that you've decided to use GitHub, it's very easy to register. Just click the link above and select the package you'd like. If you have an academic email address, consider making this your primary email address on the account, as it gives you a **PRO** account unlimited collaborators on private repositories, unlike the standard account that limits it to 3 collaborators.
+
+Be sure to choose a user name that is easy to remember, and easy to find. I would suggest just using your name.
+
+Now you have a GitHub account set up, this is your *remote*. If you work on a project with collaborators, this can be shared with them. That way, collaborators can work on their own versions of the code on their *local* machine (computer), and when it's ready for other people to use/help write, they can `push` it to the *remote* where others can access it. Don't worry if you don't know what `push` is - we'll cover that [soon](#basic-commands).
+
+### Private server
+
+It is possible to use and get the benefits of Git without a purpose-made online repository such as GitHub, but it's not as simple and it's not as stable. Because services like Dropbox and OneDrive are not built for storing and tracking changes in code and *dot* files, it can go wrong, especially when more than one author is involved. Of all the file syncing systems, Dropbox seems to be the best option due to the [git-remote-dropbox extension](https://github.com/anishathalye/git-remote-dropbox), but this is still inferior to GitHub etc. With these home-made systems, corruption of the project repository is a matter of "when", not "if". If you insist on using this option, go read the [git basic commands](#basic-commands) first, come back, and read on ...
+
+#### Dropbox - the Bad
+
+##### git-remote-dropbox
+Install the git-remote-dropbox extension. The instructions were copied from the [documentation](https://github.com/anishathalye/git-remote-dropbox) and \**have not been tested*\*.
+
+1. Install the helper with `pip install git-remote-dropbox`.
+2. Generate an OAuth 2 token by going to the app console, creating a Dropbox API app with "Full Dropbox" access (or "App folder" access if you prefer, if you're not going to be using Dropbox's sharing features to use git-remote-dropbox in a multi-user setup), and generating an access token for yourself.
+3. Save your OAuth token in `~/.config/git/git-remote-dropbox.json` or `~/.git-remote-dropbox.json`. The file should look something like this:
+
+```
+{
+    "default": "xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+- git-remote-dropbox supports using multiple Dropbox accounts. You can create OAuth tokens for different accounts and add them all to the config file, using a user-defined username as the key:
+
+```
+{
+    "alice": "xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxx",
+    "ben": "xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxx",
+    "charlie": "xxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+- You can tell git-remote-dropbox to use the token corresponding to username by specifying a URL like `dropbox://username@/path/to/repo`.
+
+- You can also specify the token inline by using a URL like `dropbox://:token@/path/to/repo`.
+
+##### Creating a Dropbox repository
+
+Now you've installed the helper extension, you can start using Dropbox for your *remote* repositories. Unless a project already exists with a Dropbox repository (i.e. you've been added to the project and were not the one to set it up), I would recommend that you first create the repositories on your local machine using the steps below.
+
+1. Create a project folder on your computer **(not in your Dropbox folder)**, and open up the Git Bash within the folder
+2. Enter `git init` to initialize your folder as a Git repository
+3. Enter `git remote add origin "dropbox:///path/to/repo"`
+
+If a repository already exists in a Dropbox folder, and you want to make a local copy, you can do the following:
+
+1. Create a project folder on your computer, and open up the Git Bash within the folder
+2. Enter `git clone "dropbox:///path/to/repo" -b master`
+
+You are now set up to use Dropbox as your remote repository and can `commit`, `push`, and `pull` changes using the Git Bash commands:
+
+- `git add .` This *stages* the changes to your files, and it is essential to do before you `commit`
+- `git commit -m "your commit message"`
+- `git push origin master`
+- `git pull origin master`
+
+#### OneDrive/Google Drive/Network Drive/others - the Ugly
+
+\**The instructions for this are based off the following articles and have not been tested*\*.
+
+https://blog.geekforbrains.com/how-to-use-dropbox-and-git-for-private-repos-e1d304d5ff79
+
+http://autchen.github.io/guides/2016/03/10/git-onedrive.html
+
+http://tony.halcyonlane.com/blog/2011/09/22/Using-git-at-work-on-a-Windows-network-drive//
+
+https://medium.com/@techstreams/git-google-drive-simple-git-host-3a84db4fc1fd
+
+
+If you want to use a different file syncing system, then you need to create a *bare* remote repository. This is structured differently than a normal git repository, which makes it *slightly* better for use as a remote repository ... but it's still a bad idea and can corrupt the project.
+
+1. Create/open an existing project folder on your computer **(not in your OneDrive folder)**, and open up the Git Bash within the folder
+2. Enter `git init` to initialize your folder as a Git repository
+3. Assuming you have files already in the directory, you should commit them using
+
+```
+git add --all
+git commit -m "your commit message"
+```
+
+4. Create the bare repo in OneDrive etc using
+    - `git init --bare . ~/OneDrive///path/to/repo/project.git`
+5. Configure your remote using
+    - `git remote add origin ~/OneDrive///path/to/repo/project.git`
+6. `push`/`pull` your commits using
+    - `git push origin master`
+
+You can share the OneDrive repository (folder) so that multiple people can work on the project. However, if you do this, **it is essential you coordinate your `push`/`pull` commands to avoid corrupting the repository.**
+
+## Creating a repository
+
+If everything has gone well until now, you're ready to create a project repository. This is where all your code, all your data, all your output files, everything, should live. Whilst you can create a repository directly on your computer, I would advise against this as it causes additional headaches when you want to connect it with GitHub. Instead, create the remote repository first on GitHub.
+
+- Go to www.github.com and click the `+` and *"New repository"*.
+- Choose a project name
+- Decide whether you want it to be a public or private project (choose private if working on sensitive data and research, as you can always convert it to public later)
+- Initialize with a README file
+
+### Connecting to GitHub
+
+If you are using SourceTree, there are two ways to connect your computer to your GitHub repositories. I would recommend the first option, as it makes *cloning* repositories (making a copy on your local computer) easier in the future, as you don't have to go to GitHub each time to find the *HTTPS/SSH* address. The methods for GitKraken are essentially the same, and SourceTree seems to be slightly more popular, hence why I describe it here.
+
+**Method 1**
+
+1. Go to *Tools -> Options -> Authentication* in SourceTree and add your GitHub account details
+2. Leave the preferred protocol at *"HTTPS"* for the moment, unless you know what you're doing with SSH keys
+3. Now open a new tab, click on *Remote*, and you should see your repositories listed
+4. Clone the repositories that you'd like to work on
+
+> **Note:** Now SourceTree and GitHub are connected, you shouldn't have to do the first few steps - just go to step 3.
+
+**Method 2**
+
+1. Go to your repository on GitHub and click on the green *"Clone or download"* button
+2. Copy the *HTTPS* address (your settings should say *"Clone with HTTPS"* above it, otherwise click *"Use HTTPS"*)
+3. Go to SourceTree, open a new tab, and click on *"Clone"*
+4. Paste the *HTTPS* address into the *"Source Path / URL:"* box
+5. Click on the *"Clone"* button at the bottom
+
+**Method 3** (*not recommended*)
+
+If you would like to do it the hard way and use the Git Bash, read the instructions [here](https://happygitwithr.com/push-pull-github.html)
+
+**Note:** if you would like to use SSH keys, read the instructions [here](https://help.github.com/articles/connecting-to-github-with-ssh/)
+
+## Basic commands
+
+There are many commands that you could learn in Git, but these are the basics, and will be sufficient for pretty much everything you'll need to do at the moment.
+
+- `commit`: this standings for *committing* a change to your file in Git. Think of it as saving a document, but instead of saving the whole document as-is, Git saves just the changes since the last version. This makes it very efficient, especially when it comes to backing up your work.
+**Key points:**
+    - `commit` often. By making and saving small changes, your code versions becomes more readable in case you need to go back and find out exactly what and where it went wrong.
+    -  Always write helpful messages - keep them succinct, but make sure they describe what the change you made was.
+- `pull`: this commands copies the version of the code from your remote to your local machine. Use this when you want to get the most up-to-date version of your code to work on (assuming your local version isn't the most up-to-date)
+- `push`: the opposite of `pull`. If your local version is the most up-to-date version, `push` your version to the remote.
+
+
+## Branching
+
+Branching is a key part of the Git work-flow. It allows you to make changes to your code, without worrying about breaking previously 'good' code. But what is it?
+
+Simply put, when you create another branch you are creating a copy of your code at that point in time. This is useful because it allows you to make changes to your copy, and leave your original code intact! So there's no concern about breaking your working code while you test out some ideas.
+
+<img alt="guideline-554f4577.png" src="assets/guideline-554f4577.png" style="float: right;" width="40%" height="" >
+
+> "But isn't that why we use Git?"
+
+Kind of. But Git is only so powerful. If you have working code, you don't want to put it out of action whilst you test ideas out, especially if other people need to use your code and can't wait for you to figure out your future problems. So creating another branch allows you to get around this issue. For most projects, you can get away with just two branches, a `master` and a `develop`, which are explained below. If your project is complex, and requires multiple people to work on the code at the same time, it would be worth you looking at implementing [this model](https://nvie.com/posts/a-successful-git-branching-model/).
+
+The image to the right is copied from the model listed above. It is useful in illustrating the `master` and `develop` approach to branching.
+
+### Creating a branch
+
+As with all things in Git, you can do this multiple ways. I prefer to use the client, as I find it far more intuitive when you can see the changes, but you can use the command line or Git bash. If you want to explore the command line code, I would recommend visiting [this website](https://learngitbranching.js.org/), which allows you to interact with the code through illustrations.
+
+When you are in your client (in this case, SourceTree), open the repository you would like to create a branch in. You will notice that there are two buttons called `Branch` and `Merge`. If you click on `Branch`, you will see something like this
+
+<img alt="guideline-b2aa08de.png" src="assets/guideline-b2aa08de.png" width="" height="" >
+
+Enter the branch name you would like to create into `New Branch` (I would suggest `develop`), and hit `Create Branch`. That's it. You now have a `master` and `develop` branch.
+
+You might notice the tick-box `Checkout New Branch`. This means SourceTree will execute the command `git checkout develop` i.e. you will move to the `develop` branch to continue your work. Now, any changes you make to your code will happen in the `develop` copy of the code, not in your `master` branch. Neat. If you want to move back to `master` branch at some point, you simply right click on the `master` branch on the left side of SourceTree, and select `Checkout master...`.
+
+### Merging a branch
+
+You've created a `develop` branch so you can keep you `master` pristine and in working condition. But now you've made changes you're happy with, and you want to incorporate them in the main code. To do this, you need to `merge` the changes from `develop` into `master`.
+
+To do this, first you need to `checkout` the `master` branch, so you are merging changes *into* it. Then, click on the `Merge` button in SourceTree. Select the `commit` you would like to merge into the `master` branch (most likely the top one in the `develop` branch), and click `OK`. You should have a view like this.
+
+<img alt="guideline-eeaa7b68.png" src="assets/guideline-eeaa7b68.png" width="150%" height="" >
+
+You have now merged your first feature. Whilst the `merge` feature is particularly useful, it is not the only way of doing this. `rebase` is another option that works in a slightly different way. It is slightly beyond the scope of this document, but you should read [this document](https://www.atlassian.com/git/tutorials/merging-vs-rebasing) and visit [this website](https://learngitbranching.js.org/), as suggested previously, to get experience of putting them both into practice.
+
+## Git and Jupyter
+
+Unfortunately, Git and Jupyter don't always play nicely, so we have to do a few things to try and get around the issues. Due to the way the notebooks create and store the outputs from the code, `diffs` become unreadable. There are a few ways to get around this. The first option is the simplest, but the others provide a little more control over what you see in the `diffs`. This is here to serve as an introduction to the tools, but not as a tutorial, so only the links to the documentation have been provided for you to read.
+
+1. Clear all outputs before you save and commit the files. That way, Git only tracks changes to the input
+2. Download the notebook as a markdown file allowing `diffs` to be tracked in Git as normal
+3. [nbdime](https://nbdime.readthedocs.io/en/latest/index.html)
+4. [ReviewNB](https://www.reviewnb.com/)
+5. [Nextjournal](https://nextjournal.com/) is a promising take on notebooks that simplifies the  process of making reproducible research. Currently it is only in beta, and for private research, but if it has a free version when it becomes established it would be a good option allowing a 'Google Docs' style of version control.

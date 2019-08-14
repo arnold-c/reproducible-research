@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.2 Structuring a project | A Guide to Reproducible Research</title>
+  <title>3.2 Using Jupyter notebooks | A Guide to Reproducible Research</title>
   <meta name="description" content="This is an introduction to reproducible research, data management, and project organisation" />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.2 Structuring a project | A Guide to Reproducible Research" />
+  <meta property="og:title" content="3.2 Using Jupyter notebooks | A Guide to Reproducible Research" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="arnold-c/repro-research" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.2 Structuring a project | A Guide to Reproducible Research" />
+  <meta name="twitter:title" content="3.2 Using Jupyter notebooks | A Guide to Reproducible Research" />
   
   <meta name="twitter:description" content="This is an introduction to reproducible research, data management, and project organisation" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="2-1-reproducible-work-an-introduction.html">
-<link rel="next" href="2-3-how-to-name-files-and-directories.html">
+<link rel="prev" href="3-1-jupyter-notebooks.html">
+<link rel="next" href="3-3-output-documents.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -135,39 +135,123 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="structuring-a-project" class="section level2">
-<h2><span class="header-section-number">2.2</span> Structuring a project</h2>
-<p>The first step in creating reproducible research is creating self-contained projects. Everything that goes in to, and comes out of, the project, should be contained within a single folder (directory). I would recommend that you create a folder called <code>repos/</code> that your project folders live in, e.g. <code>C:/User/owner/Documents/repos/proj/</code>. This way your project folders are neatly separated from other files. Whilst we will discuss version control with Git <a href="4-git.html#git">later</a>, I would suggest that you also routinely back up your project folder to separate drives (cloud and/or external hard drives), using a <a href="https://www.nakivo.com/blog/3-2-1-backup-rule-efficient-data-protection-strategy/">3-2-1 system</a>.</p>
-<p>Now you have set up your <code>repos/</code> folder, it is time to create the project folder. This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.</p>
-<pre><code>C:/
-└── Documents/
-    └── repos/
-        └── proj/
-            ├── data/
-            ├── docs/
-            ├── figs/
-            ├── funs/
-            ├── out/
-            ├── cleaning.R
-            └── analysis.R</code></pre>
-<p>As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. <code>read_csv(here('data', 'data_file.csv'))</code> rather than <code>read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')</code>. The reason why relative paths are preferable is that they allow projects to be used by multiple people without the need to re-write code. If you use explicit paths and change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.</p>
-<blockquote>
-<p><strong>Note:</strong> the example above used an R package called <code>here_here</code>, calling the function <code>here()</code>. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.</p>
-</blockquote>
-<div id="data" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> <code>data/</code></h3>
-<p>An important idea is that you should <strong>treat your data as read-only</strong>. You and your team have likely worked hard to collect the data and it’s easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, <strong>once the data is collected it should not be edited</strong>; all the work should happen in your code, allowing it to be easily checked.</p>
-<p>If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. <code>proj-cleaning.R</code>). However, if you do need to edit the files manually (<strong>and I strongly recommend against it</strong> as it makes it harder to reproduce as there isn’t a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file <a href="#how-to-name-files">naming conventions</a>) in your project directory (e.g. <code>H:/repos/proj/2019-01-24_data-file.csv</code>). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on <a href="4-git.html#git">Git</a>, you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don’t have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time.</p>
+<div id="using-jupyter-notebooks" class="section level2">
+<h2><span class="header-section-number">3.2</span> Using Jupyter notebooks</h2>
+<p>Now you have set up Jupyter to run with the programming language of your choice, we should start using it. How you do that is detailed in this section.</p>
+<div id="creating-a-notebook" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Creating a notebook</h3>
+<p>You can either open up the Anaconda navigator and then Jupyter notebooks, or open Jupyter notebooks directly. Once open, navigate to the directory you would like to create the notebook in (<em>If you are using a version control system like Git, then you should be within the project’s repository</em>)</p>
+<p>Select the <strong>New</strong> button in the top right corner, and then select the language you would like to program in (<em>this assumes that you have downloaded an appropriate kernel if you would like to use a language other than Python</em>)</p>
 </div>
-<div id="other-subdirectories" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Other subdirectories</h3>
-<ul>
-<li><code>docs/</code>: this contains the output documents. For example, if you are using R Markdown to create a pdf via LaTeX, you could place them here.</li>
-<li><code>funs/</code>: this contains the functions you write and might want to reference. The idea is to create functions so that can give code a meaningful name. It also helps if you need to repeat a code chunk multiple times, especially if you need to edit it at some point, as you can just call the function rather than typing it out each time.</li>
-<li><code>out/</code>: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.</li>
-<li><code>figs/</code>: this contains figures that may be generated from your scripts.</li>
-</ul>
-<p>Importantly, if you follow the principle that your <code>data/</code> files are read-only, all of the files in these directories (with the exception of <code>funs/</code>) <em>should</em> be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a <em>version control system</em> like Git comes in, which we will discuss at the end.</p>
+<div id="running-a-jupyter-notebook" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Running a Jupyter notebook</h3>
+<p>Now you have the notebook open in your chosen language, it’s time to start doing some data exploration and analysis. Here, we’ll cover some basic commands that will get you started, but to fully leverage the power of the notebook, you should read the <a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#code-cells">Jupyter documentation</a>, along with the documentation of your preferred kernel, particularly sections relating to <code>magic</code> commands (which are language-specific).</p>
+<p>When you are writing in a cell (‘Edit’ mode), you can use these commands:</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"><strong>Keyboard shortcut</strong></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Shift + Enter</code></td>
+<td align="left">Executes the current cell and enters you into the next one</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Ctrl/Cmd + Enter</code></td>
+<td align="left">Executes the current cell, but does not enter you into the next one</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Esc</code></td>
+<td align="left">This exits ‘Edit’ mode without executing the cells</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Tab</code></td>
+<td align="left">Code completion or indent</td>
+</tr>
+</tbody>
+</table>
+<p>If you are not in ‘Edit’ mode (‘Command’ mode), and therefore at least one cell is selected, you can use these commands:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><strong>Keyboard shortcut</strong></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Ctrl/Cmd + a</code></td>
+<td align="left">Add an empty cell above your current cell</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Ctrl/Cmd + b</code></td>
+<td align="left">Add an empty cell below your current cell</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>dd</code></td>
+<td align="left">Delete the selected cell</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Ctrl/Cmd + m</code></td>
+<td align="left">Change the cell type to ‘Markdown’ so you can add text</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Ctrl/Cmd + y</code></td>
+<td align="left">Change the cell type to ‘Code’ so you can add code</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Enter</code></td>
+<td align="left">Enter ‘Edit’ mode</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="customizing-jupyter-notebooks-ui" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Customizing Jupyter notebook’s UI</h3>
+<p><strong>The following section is not essential and can be ignored if you want to keep things as simple as possible.</strong></p>
+<p>Because I do not like the <code>In[]</code> <code>Out[]</code> text showing in documents, along with centering plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, this section should help you. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX). If you do this, it is essential that you <strong>routinely restart the kernel to run everything again in a fresh environment</strong> as it is incredibly easy to run code blocks out of order and forget how this changes the output and introduces <em>hidden</em> packages.</p>
+<p>If you would like to customize the look of the notebook, <a href="https://github.com/dunovank/jupyter-themes">jupyterthemes</a> is a great package that can be installed. I have also edited the <code>custom.css</code> file (<code>C:\Users\owner\.jupyter\custom\</code>), adding <code>display: None;</code> under the section</p>
+<pre><code>div.prompt,
+ .prompt {</code></pre>
+<p>so that it now reads</p>
+<pre><code>div.prompt,
+ .prompt {
+ font-family: monospace, monospace;
+ font-size: 9pt !important;
+ font-weight: normal;
+ display: None;
+ .
+ .
+ .
+}</code></pre>
+<p>This removes the <code>In[]</code> <code>Out[]</code> text. To centre the output of tables/figures, add</p>
+<pre><code>.output_png {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}</code></pre>
+<p>to the <code>custom.css</code> file, right after the <code>.prompt {..}</code> section.</p>
+<p>To enable soft wrapping in the notebook, you need to edit the <code>notebook.json</code> file (<code>C:\Users\owner\.jupyter\nbconfig\</code>). If it does not exist, you need to create it. Once open, add</p>
+<pre><code>{
+  &quot;MarkdownCell&quot;: {
+    &quot;cm_config&quot;: {
+      &quot;lineWrapping&quot;: true
+    }
+  },
+  &quot;CodeCell&quot;: {
+    &quot;cm_config&quot;: {
+      &quot;lineWrapping&quot;: true
+    }
+  }
+}</code></pre>
+<p>before restarting Jupyter.</p>
 </div>
 </div>
             </section>
@@ -175,8 +259,8 @@
           </div>
         </div>
       </div>
-<a href="2-1-reproducible-work-an-introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2-3-how-to-name-files-and-directories.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="3-1-jupyter-notebooks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3-3-output-documents.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

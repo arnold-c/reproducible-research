@@ -1,6 +1,6 @@
 # The basics for all
 
-This chapter focusses on what everyone can and should be doing. The guidelines here do not require anything to be downloaded, so can be implemented immediately and easily. If you follow the principles laid out here, you are well on your way to making reproducible research.
+This chapter focuses on what everyone can and should be doing. The guidelines here do not require anything to be downloaded, so can be implemented immediately and easily. If you follow the principles laid out here, you are well on your way to making reproducible research.
 
 
 ## Reproducible work - an introduction
@@ -9,6 +9,10 @@ Before we can discuss how we should structure our projects and manage our data, 
 
 ### What is reproducible work?
 
+At its core, reproducible research is about being transparent in how to produce the results you report. In doing so, this allows anyone with your data and code to reproduce the work you have produced. This includes you, as there will be many times you need to check results, and a reproducible workflow will allow you to spot mistakes easily, and give you confidence that the code and data you use give the reported outcome every time they are run.
+
+Reproducible research:
+
 - Contains relevant code, including which packages were used, and which programming language was used
 - Contains enough text, either via markdown or comments, to be able to understand the purpose of the code chunks and code document
     - Ideally integrates code and results, along with text, into a single document (**literate programming!**)
@@ -16,30 +20,35 @@ Before we can discuss how we should structure our projects and manage our data, 
 
 ### Why is it important?
 
-Simply put, mistakes happen. Projects also move between PHO employees. If your project is structured properly, you will have a code document that contains all of the relevant information, and it is easy to recreate the outcomes. Importantly, you will also have the necessary input files (and tracking of **all** their changes) stored within the project folder. That way, if you move computers, delete a document by accident, or hand over the project to another person, everything is neatly contained and can be reproduced without hassle.
+Simply put, mistakes happen.  If your project is structured properly, you will have a code document that contains all of the relevant information, and it is easy to recreate the outcomes. Importantly, you will also have the necessary input files (and tracking of **all** their changes) stored within the project folder. That way, if you move computers, delete a document by accident, or hand over the project to another person, everything is neatly contained and can be reproduced without hassle.
 
 ### How do I make reproducible work?
 
-There are many different ways to make reproducible work. The information listed here should give you the foundations upon which you can build your own systems. However, the principles are the same and largely revolve around project structures and a version control system, such as Git.
+There are many different ways to make reproducible work. The information listed here should give you the foundations upon which you can build your own systems. However, the principles are the same and largely revolve around project structures, and dynamic documents that contain both the code and the results embedded in them. This way, updates to the code will automatically update results (including tables and figures), and you don’t need to worry about incorrectly copying the wrong version, or even retyping numbers in a table
+
+In addition, a version control system like Git can prove to be an invaluable tool in making reproducible research. It is essential tracked changes for everything you do in a project: all the changes in your code, which files you produce, where you move files, the results your create … and the list goes on. We will talk through the basics of Git towards the end of this book, but if you would like a more in depth tutorial, you should read [this fantastic resource](https://happygitwithr.com/) by Jenny Bryan and co. It is aimed at R users, but much of it is generalizable. More resources are available at the end of the document.
 
 ## Structuring a project
 
-The first step in creating reproducible research is creating self-contained projects. Everything that goes in to, and comes out of, the project, should be contained within a single folder (directory). At PHO, it is best that you create these directories within your personal drive (`H:\`). I would recommend that you create a folder called `repos/` that your project folders live in, e.g. `H:/repos/proj/`. This way, if you like to store other files on your `H:\` drive, your project folders are neatly separated. Whilst we will discuss version control with Git [later](#git), I would suggest that you also routinely back up your project folder to either the shared team drives (`I:\` or SharePoint, depending on whether the data is [sensitive](#sensitive-data)).
+The first step in creating reproducible research is creating self-contained projects. Everything that goes in to, and comes out of, the project, should be contained within a single folder (directory). I would recommend that you create a folder called `repos/` that your project folders live in, e.g. `C:/User/owner/Documents/repos/proj/`. This way your project folders are neatly separated from other files. Whilst we will discuss version control with Git [later](#git), I would suggest that you also routinely back up your project folder to separate drives (cloud and/or external hard drives), using a [3-2-1 system](https://www.nakivo.com/blog/3-2-1-backup-rule-efficient-data-protection-strategy/).
 
-Now you have set up your `repos/` folder in your `H:\` drive, it is time to create the project folder. This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.
+Now you have set up your `repos/` folder, it is time to create the project folder. This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.
 
 ```
-H:/
-└── repos/
-    └── proj/
-        ├── data/
-        ├── docs/
-        ├── figs/
-        ├── funs/
-        ├── out/
-        ├── cleaning.R
-        └── analysis.R
+C:/
+└── Documents/
+    └── repos/
+        └── proj/
+            ├── data/
+            ├── docs/
+            ├── figs/
+            ├── funs/
+            ├── out/
+            ├── cleaning.R
+            └── analysis.R
 ```
+
+
 
 As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. `read_csv(here('data', 'data_file.csv'))` rather than `read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')`. The reason why relative paths are preferable is that they allow projects to be used by multiple people without the need to re-write code. If you use explicit paths and change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.
 
@@ -49,7 +58,7 @@ As you can see, the project repository contains separate directories that you ca
 
 An important idea is that you should **treat your data as read-only**. You and your team have likely worked hard to collect the data and it's easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, **once the data is collected it should not be edited**; all the work should happen in your code, allowing it to be easily checked.
 
-If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. `proj-cleaning.R`). However, if you do need to edit the files manually (**and I strongly recommend against it** as it makes it harder to reproduce as there isn't a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file [naming conventions](#how-to-name-files)) in your project directory (e.g. `H:/repos/proj/2019-01-24_data-file.csv`). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on [Git](#git), you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don't have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time. 
+If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. `proj-cleaning.R`). However, if you do need to edit the files manually (**and I strongly recommend against it** as it makes it harder to reproduce as there isn't a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file [naming conventions](#how-to-name-files)) in your project directory (e.g. `H:/repos/proj/2019-01-24_data-file.csv`). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on [Git](#git), you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don't have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time.
 
 ### Other subdirectories
 
@@ -58,9 +67,9 @@ If you are following good data practices and treating your data as read-only, al
 - `out/`: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.
 - `figs/`: this contains figures that may be generated from your scripts.
 
-Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like Git comes in, which we will discuss in the next section.
+Importantly, if you follow the principle that your `data/` files are read-only, all of the files in these directories (with the exception of `funs/`) *should* be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a *version control system* like Git comes in, which we will discuss at the end.
 
-### How to name files
+## How to name files and directories
 
 How you name files and directories may not seem like an important point, but it can cause quite a headache if you try and use code to automate processes, and at best, it just slows things down. To quote Aaron Quinlan, a bioinformatician, ["a space in a filename is a space in one's soul"](https://twitter.com/aaronquinlan/status/711593127551733761).
 
@@ -78,36 +87,11 @@ Instead try and use something like [this](https://speakerdeck.com/jennybc/how-to
     - i.e. `01_my-data.csv` vs `1_my-data.csv`
     - If you don't, file orders get messed up when you get to double-digits
 
-### What is sensitive data?
-
-Some of the data you will be working with is sensitive. As such, we need to know the most appropriate places to store it, along with how it can be shared.
-
-Sensitive data refer to:
-
-- Data which contain identifiable information
-- Personal data (e.g. name, health card number, post code, etc.)
-
-These data contain information which can identify individual persons. Therefore, they must be carefully protected and only shared with those who have special permission. They are also not the norm and are typically used only when absolutely necessary.
-
-Non-sensitive data refer to:
-
-- Data which have been de-identified (e.g. unique identifier)
-- Aggregated data (e.g. post code region)
-
-Because these data are designed not to be traceable to the individual level, less care and protection is required. However, safeguards are still often used for reassurance.
-
-As alluded to earlier, if you have sensitive data, you should not store your backups on the `I:\` drive/SharePoint \**delete as appropriate*\*, instead opting to use the `I:\` drive/SharePoint \**delete as appropriate*\*.
-
-### Project structure summary
-
-If you've followed the steps up until here, you will have a project folder in your `H:\` drive and the shared team drives, complete with all data and output files, and images and tables etc. generated. Most importantly, your project folder will contain a final copy of your code so your results could be replicated if necessary. Ideally, this code will contain your final results in one easy-to-distribute package. This can be done in either a Microsoft Excel or Word file with all code typed and results copy and pasted, or by using a [Jupyter notebook](#jupyter-notebooks) as we advocate for here.
-
-
-### Key Points
+## Key Points
 - Use a version control system such as Git to track changes in your code.
 - Data isn't touched one collected:
     - Do all *data munging* within your program i.e. no editing the excel spreadsheets!!!
-    - You should have an untouched copy of your data on your `H:\` drive **and** the shared team drives
+    - You should have multiple backups on at least two different sets of servers/drives
 - Your outputs should be reproducible from the code you have:
     - Make sure this is the case by routinely clearing your programming environment and re-running the code in a clean environment to ensure your results aren't contingent on *'hidden'* packages/modules that were [loaded erroneously](https://onunicornsandgenes.blog/2017/04/02/using-r-dont-save-your-workspace/)
 - Never set explicit file paths (e.g. `setwd()`) if you can avoid it

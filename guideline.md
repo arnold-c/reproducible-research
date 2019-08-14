@@ -1,8 +1,7 @@
 ---
-title: "PHO Data Management Guidelines"
+title: "A Guide to Reproducible Research"
 author:
 - "Callum Arnold"
-- "Steph L. Hughes"
 date: \today
 output:
   pdf_document:
@@ -21,6 +20,8 @@ Whilst there are many tools that we can use to ensure our projects and code are 
 We start by explaining what reproducible research is, why we need it, and how the data we receive can be integrated into a reproducible research workflow. Next, we suggest ways in which you can structure projects to assist this workflow. We end by discussing how to create a Jupyter Notebook and produce the output documents, allowing you to integrate your code and results in a dynamic document.
 
 We hope that you enjoy the content and feel like you come away having learnt something useful, and that this book can serve as a reference document for your future research. If you have any questions that cannot be answered within the book, or you would like to contribute and improve this document, please contact us.
+
+This document would not be possible without the contributions of Stephanie Hughes from Public Health Ontario, so thank you Steph!
 
 # Reproducible work - an introduction
 
@@ -357,7 +358,7 @@ If you followed the instructions above, Git should be ready to go. However, some
 
 ## Git client
 
-Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the [GitKraken](https://www.gitkraken.com/) client, and they're associated GloBoards for project To-Do's, but you can use others.[SourceTree](https://www.sourcetreeapp.com/) is another good alternative, but I have had some issues connecting to some GitHub accounts, so I have since moved away from it.
+Now you have Git installed, there are a number of ways to use it. The easiest way is to use a client, which allows you to use buttons instead of typing code. They also provide a visual for more complicated ideas, such as branching, greatly simplifying the process. I prefer to use the [GitKraken](https://www.gitkraken.com/) client, and they're associated GloBoards for project To-Do's, but you can use others. [SourceTree](https://www.sourcetreeapp.com/) is another good alternative, but I have had some issues connecting to some GitHub accounts, so I have since moved away from it.
 
 ## Remote repositories
 

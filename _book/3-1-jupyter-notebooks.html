@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.2 Structuring a project | A Guide to Reproducible Research</title>
+  <title>3.1 Jupyter notebooks | A Guide to Reproducible Research</title>
   <meta name="description" content="This is an introduction to reproducible research, data management, and project organisation" />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.2 Structuring a project | A Guide to Reproducible Research" />
+  <meta property="og:title" content="3.1 Jupyter notebooks | A Guide to Reproducible Research" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="arnold-c/repro-research" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.2 Structuring a project | A Guide to Reproducible Research" />
+  <meta name="twitter:title" content="3.1 Jupyter notebooks | A Guide to Reproducible Research" />
   
   <meta name="twitter:description" content="This is an introduction to reproducible research, data management, and project organisation" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="2-1-reproducible-work-an-introduction.html">
-<link rel="next" href="2-3-how-to-name-files-and-directories.html">
+<link rel="prev" href="3-notebooks.html">
+<link rel="next" href="3-2-using-jupyter-notebooks.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -135,39 +135,84 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="structuring-a-project" class="section level2">
-<h2><span class="header-section-number">2.2</span> Structuring a project</h2>
-<p>The first step in creating reproducible research is creating self-contained projects. Everything that goes in to, and comes out of, the project, should be contained within a single folder (directory). I would recommend that you create a folder called <code>repos/</code> that your project folders live in, e.g. <code>C:/User/owner/Documents/repos/proj/</code>. This way your project folders are neatly separated from other files. Whilst we will discuss version control with Git <a href="4-git.html#git">later</a>, I would suggest that you also routinely back up your project folder to separate drives (cloud and/or external hard drives), using a <a href="https://www.nakivo.com/blog/3-2-1-backup-rule-efficient-data-protection-strategy/">3-2-1 system</a>.</p>
-<p>Now you have set up your <code>repos/</code> folder, it is time to create the project folder. This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.</p>
-<pre><code>C:/
-└── Documents/
-    └── repos/
-        └── proj/
-            ├── data/
-            ├── docs/
-            ├── figs/
-            ├── funs/
-            ├── out/
-            ├── cleaning.R
-            └── analysis.R</code></pre>
-<p>As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. <code>read_csv(here('data', 'data_file.csv'))</code> rather than <code>read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')</code>. The reason why relative paths are preferable is that they allow projects to be used by multiple people without the need to re-write code. If you use explicit paths and change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.</p>
+<div id="jupyter-notebooks" class="section level2">
+<h2><span class="header-section-number">3.1</span> Jupyter notebooks</h2>
+<p>This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official <a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html">documentation</a>. Jupyter Labs has now been released as a newer version of notebooks, giving you a full IDE (integrated development environment) and more control over the notebooks and working environment. This guide will not explore these features, as we are more interested in how to use the notebook.</p>
 <blockquote>
-<p><strong>Note:</strong> the example above used an R package called <code>here_here</code>, calling the function <code>here()</code>. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.</p>
+<p><strong>Note:</strong> throughout this section you can substitute the phrase <em>“Jupyter notebooks”</em> with <em>“Jupyter Labs”</em> if you would prefer to have a full IDE allowing you more control over the system.</p>
 </blockquote>
-<div id="data" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> <code>data/</code></h3>
-<p>An important idea is that you should <strong>treat your data as read-only</strong>. You and your team have likely worked hard to collect the data and it’s easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, <strong>once the data is collected it should not be edited</strong>; all the work should happen in your code, allowing it to be easily checked.</p>
-<p>If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. <code>proj-cleaning.R</code>). However, if you do need to edit the files manually (<strong>and I strongly recommend against it</strong> as it makes it harder to reproduce as there isn’t a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file <a href="#how-to-name-files">naming conventions</a>) in your project directory (e.g. <code>H:/repos/proj/2019-01-24_data-file.csv</code>). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on <a href="4-git.html#git">Git</a>, you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don’t have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time.</p>
-</div>
-<div id="other-subdirectories" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Other subdirectories</h3>
+<p>Jupyter notebooks are run on Python, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click <a href="https://nbviewer.jupyter.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb">here</a>, and <a href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science">here</a> for a collection of neat and applied notebooks.</p>
+<div id="installing-jupyter-notebooks" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Installing Jupyter notebooks</h3>
+<p>Mac’s come shipped with a version of Python, but it is most likely outdated, and it doesn’t contain everything we want. In order to get running, I strongly recommend downloading the Anaconda distribution over other distributions, or even just directly from Python’s website. The instructions below will be enough to get you up and running with Jupyter notebooks in your language of choice.</p>
 <ul>
-<li><code>docs/</code>: this contains the output documents. For example, if you are using R Markdown to create a pdf via LaTeX, you could place them here.</li>
-<li><code>funs/</code>: this contains the functions you write and might want to reference. The idea is to create functions so that can give code a meaningful name. It also helps if you need to repeat a code chunk multiple times, especially if you need to edit it at some point, as you can just call the function rather than typing it out each time.</li>
-<li><code>out/</code>: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.</li>
-<li><code>figs/</code>: this contains figures that may be generated from your scripts.</li>
+<li>Download the full <a href="https://www.anaconda.com/download/">Anaconda</a> distribution i.e. not miniconda
+<ul>
+<li>Be sure to choose <code>Python 3.x</code>, not <code>Python 2.x</code>, as it’s the newer version and is forwards-compatible.</li>
+<li>Be sure to only install for one user, not the whole system</li>
+<li>Be sure to select <code>Add Anaconda to my PATH environment variable</code> under Advanced Options</li>
+<li>Be sure to install Anaconda to the drive where your data lives. To do this you will need to manually edit the installation path within the Anaconda installer wizard, otherwise it will automatically end up in the <code>C:\</code> drive</li>
+</ul></li>
+<li>Use <code>kernels</code> to connect your programming language of choice with python and the notebook
+<ul>
+<li>To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
+<ul>
+<li><a href="3-1-jupyter-notebooks.html#installing-the-stata-kernel">Stata</a></li>
+<li><a href="3-1-jupyter-notebooks.html#installing-the-sas-kernel">SAS</a></li>
+<li><a href="3-1-jupyter-notebooks.html#connecting-r-with-jupyter">R</a></li>
+</ul></li>
+</ul></li>
 </ul>
-<p>Importantly, if you follow the principle that your <code>data/</code> files are read-only, all of the files in these directories (with the exception of <code>funs/</code>) <em>should</em> be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a <em>version control system</em> like Git comes in, which we will discuss at the end.</p>
+</div>
+<div id="kernels" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Kernels</h3>
+<p>A kernel is program that allows the notebook to connect with, and run, your code. Jupyter comes with the Python code pre-installed, but if you want to use a different language, you will need to download a specific kernel.</p>
+<p>Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow <a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">this link</a>.</p>
+<div id="installing-the-stata-kernel" class="section level4">
+<h4><span class="header-section-number">3.1.2.1</span> Installing the Stata kernel</h4>
+<p>The instructions for installing the <code>stata_kernel</code> are based from the original documentation <a href="https://kylebarron.github.io/stata_kernel/getting_started/">here</a>. It should work with <code>Stata 12</code> (I have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.</p>
+<p>Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line</p>
+<ul>
+<li><code>pip install stata_kernel</code></li>
+<li><code>python -m stata_kernel.install</code></li>
+</ul>
+<p><strong>Windows-specific steps</strong></p>
+<p>In order to let <code>stata_kernel</code> talk to Stata, you need to link the Stata Automation library:</p>
+<ol style="list-style-type: decimal">
+<li>In the installation directory (most likely <code>C:\Program Files (x86)\Stata12</code> or similar), right-click on the Stata executable, for example, <code>StataSE.exe</code> (this will just show as <code>StataSE</code>, but is listed as an application). Choose <code>Create Shortcut</code>. Placing it on the Desktop is fine.</li>
+<li>Right-click on the newly created <code>Shortcut to StataSE.exe</code>, choose <code>Properties</code>, and append<code>/Register</code> to the end of the Target field. So if the target is currently <code>"C:\Program Files\Stata12\StataSE.exe"</code>, change it to <code>"C:\Program Files\Stata12\StataSE.exe" /Register</code> (note the space before <code>/</code>). Click OK.</li>
+<li>Right-click on the updated <code>Shortcut to StataSE.exe</code>; choose Run as administrator.</li>
+</ol>
+</div>
+<div id="installing-the-sas-kernel" class="section level4">
+<h4><span class="header-section-number">3.1.2.2</span> Installing the SAS kernel</h4>
+<p>*<em>This has not yet been tested here. The instructions for installing the <code>sas_kernel</code> are based from the original documentation <a href="https://github.com/sassoftware/sas_kernel">here</a></em>*</p>
+<p>Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line. First we need to install a dependency called <code>saspy</code> that helps the kernel connect <code>SAS</code> to <code>python</code></p>
+<ul>
+<li><code>pip install saspy</code></li>
+<li><code>pip install sas_kernel</code></li>
+</ul>
+<p>You should now see something like this.</p>
+<pre><code>Available kernels:
+python3    /home/sas/anaconda3/lib/python3.5/site-packages/ipykernel/resources
+sas        /home/sas/.local/share/jupyter/kernels/sas</code></pre>
+<p>Now verify that the SAS Executable is correct</p>
+<ul>
+<li>find the <code>sascfg.py</code> file – it is currently located in the install location (see above) <code>[install location]/site-packages/saspy/sascfg.py</code>. To query <code>pip</code> for the location of the file, type <code>pip show saspy</code>. Failing that, this command will search the OS for the file location: <code>find / -name sascfg.py</code></li>
+<li>edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this <a href="https://github.com/sassoftware/saspy/blob/master/saspy/sascfg.py">file</a></li>
+</ul>
+</div>
+<div id="connecting-r-with-jupyter" class="section level4">
+<h4><span class="header-section-number">3.1.2.3</span> Connecting R with Jupyter</h4>
+<p>If you are hoping to make nice documents and reproducible work using R, I would highly recommend that you use the R Markdown or R Notebook through <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> application instead. However, if you would prefer Jupyter, then please read on.</p>
+<p>It is possible to download an R kernel, much like for Stata and SAS, but it can be a bit fickle, so a different approach is described below. It is important to note that with this method you are installing a fresh version of R, so you will not have access to the packages you have previously installed - you will need to reinstall them in this R environment, which could be done within a Jupyter notebook.</p>
+<p>Open a command prompt (Windows) / terminal (Linux/Mac) and enter the following commands:</p>
+<ul>
+<li><code>conda install r-essentials r-igraph</code></li>
+<li><code>Rscript -e 'install.packages("languageserver")'</code></li>
+</ul>
+<p>If you would rather install an R kernel than a fresh install of R within the Anaconda distribution, you can follow the instructions <a href="https://richpauloo.github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/">here</a>. The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of R.</p>
+</div>
 </div>
 </div>
             </section>
@@ -175,8 +220,8 @@
           </div>
         </div>
       </div>
-<a href="2-1-reproducible-work-an-introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2-3-how-to-name-files-and-directories.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="3-notebooks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3-2-using-jupyter-notebooks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

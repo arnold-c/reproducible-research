@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.2 Structuring a project | A Guide to Reproducible Research</title>
+  <title>Chapter 4 Git | A Guide to Reproducible Research</title>
   <meta name="description" content="This is an introduction to reproducible research, data management, and project organisation" />
   <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.2 Structuring a project | A Guide to Reproducible Research" />
+  <meta property="og:title" content="Chapter 4 Git | A Guide to Reproducible Research" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="arnold-c/repro-research" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.2 Structuring a project | A Guide to Reproducible Research" />
+  <meta name="twitter:title" content="Chapter 4 Git | A Guide to Reproducible Research" />
   
   <meta name="twitter:description" content="This is an introduction to reproducible research, data management, and project organisation" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="2-1-reproducible-work-an-introduction.html">
-<link rel="next" href="2-3-how-to-name-files-and-directories.html">
+<link rel="prev" href="3-3-output-documents.html">
+<link rel="next" href="4-1-set-up.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -135,48 +135,17 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="structuring-a-project" class="section level2">
-<h2><span class="header-section-number">2.2</span> Structuring a project</h2>
-<p>The first step in creating reproducible research is creating self-contained projects. Everything that goes in to, and comes out of, the project, should be contained within a single folder (directory). I would recommend that you create a folder called <code>repos/</code> that your project folders live in, e.g. <code>C:/User/owner/Documents/repos/proj/</code>. This way your project folders are neatly separated from other files. Whilst we will discuss version control with Git <a href="4-git.html#git">later</a>, I would suggest that you also routinely back up your project folder to separate drives (cloud and/or external hard drives), using a <a href="https://www.nakivo.com/blog/3-2-1-backup-rule-efficient-data-protection-strategy/">3-2-1 system</a>.</p>
-<p>Now you have set up your <code>repos/</code> folder, it is time to create the project folder. This is the structure that I find works for me. You may want to find a variation on it that works for you, but the basic premise of keeping repositories self-contained should remain.</p>
-<pre><code>C:/
-└── Documents/
-    └── repos/
-        └── proj/
-            ├── data/
-            ├── docs/
-            ├── figs/
-            ├── funs/
-            ├── out/
-            ├── cleaning.R
-            └── analysis.R</code></pre>
-<p>As you can see, the project repository contains separate directories that you can use to store different file types. Importantly, the analysis and cleaning files are stored in the project root, allowing easy use of relative paths over explicit paths e.g. <code>read_csv(here('data', 'data_file.csv'))</code> rather than <code>read_csv('C:/Users/owner/Documents/Repos/my_project/data/data_file.csv')</code>. The reason why relative paths are preferable is that they allow projects to be used by multiple people without the need to re-write code. If you use explicit paths and change computer, or the project is opened by another person, the code will break as they will not have the same directory structure as the computer that the code was created on.</p>
-<blockquote>
-<p><strong>Note:</strong> the example above used an R package called <code>here_here</code>, calling the function <code>here()</code>. Similar solutions may exist for other languages, and you should try and find them for the language of your choice.</p>
-</blockquote>
-<div id="data" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> <code>data/</code></h3>
-<p>An important idea is that you should <strong>treat your data as read-only</strong>. You and your team have likely worked hard to collect the data and it’s easy to make a changes along the way that you either forget about, or need to reverse. As most projects span a long time between the data collection and analysis stages, if that happens to you it will take a lot of work to figure out exactly which changes you are interested in reversing etc. To save yourself this hassle, and help make your work reproducible, <strong>once the data is collected it should not be edited</strong>; all the work should happen in your code, allowing it to be easily checked.</p>
-<p>If you are following good data practices and treating your data as read-only, all your cleaning will happen within your code (create a cleaning file in your project e.g. <code>proj-cleaning.R</code>). However, if you do need to edit the files manually (<strong>and I strongly recommend against it</strong> as it makes it harder to reproduce as there isn’t a good way to track exactly what changes were made), you should create a save a new (separate) copy of the dataset (using file <a href="#how-to-name-files">naming conventions</a>) in your project directory (e.g. <code>H:/repos/proj/2019-01-24_data-file.csv</code>). Additionally, you should create a word document where you can list the changes you made with each new file. When we get to the section on <a href="4-git.html#git">Git</a>, you will see how we can set it up to track all the changes within a project folder (including the create/deletion/movement of files!) so we don’t have to remember what changes we make. This means we can just have one copy of each document, and track the changes through time.</p>
-</div>
-<div id="other-subdirectories" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Other subdirectories</h3>
-<ul>
-<li><code>docs/</code>: this contains the output documents. For example, if you are using R Markdown to create a pdf via LaTeX, you could place them here.</li>
-<li><code>funs/</code>: this contains the functions you write and might want to reference. The idea is to create functions so that can give code a meaningful name. It also helps if you need to repeat a code chunk multiple times, especially if you need to edit it at some point, as you can just call the function rather than typing it out each time.</li>
-<li><code>out/</code>: this contains files that are produced from the original data e.g. cleaned data files. You can then call them in your analysis scripts.</li>
-<li><code>figs/</code>: this contains figures that may be generated from your scripts.</li>
-</ul>
-<p>Importantly, if you follow the principle that your <code>data/</code> files are read-only, all of the files in these directories (with the exception of <code>funs/</code>) <em>should</em> be reproducible and could be deleted at any time without concern of generating them again. In order to revert to previous figures and output versions, you will need to be able to track changes in your code. This is where a <em>version control system</em> like Git comes in, which we will discuss at the end.</p>
-</div>
+<div id="git" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Git</h1>
+<p>As mentioned, a version control system is an integral part of any reproducible research project. Think of it as tracked changes for your code. When working on a project, even if you’re the only one coding, it’s important to be able to go back to previous versions if you make a mistake and can’t remember all the steps you went through since your last stable version. Git isn’t the only VCS available, but it’s the most prevalent, and has a good support community, so is what will be the focus in this book.</p> 
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="2-1-reproducible-work-an-introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2-3-how-to-name-files-and-directories.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="3-3-output-documents.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="4-1-set-up.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

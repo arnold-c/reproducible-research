@@ -3,10 +3,9 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">PHO Data Management Guidelines</a></li>
-      after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+        <li><a href="./">A Guide to Reproducible Research</a></li>
+      after:
+    edit:
     download: ["pdf", "epub"]
     sharing:
       facebook: no

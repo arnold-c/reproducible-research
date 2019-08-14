@@ -1,6 +1,6 @@
 Package: placeholder
 Type: Book
-Title: PHO Data Management Guidelines
+Title: A Guide to Reproducible Research
 Version: 0.0.1
 Imports: bookdown
 Remotes: rstudio/bookdown

@@ -1,7 +1,0 @@
-# If you cannot download anything
-
-As the title says, this section is aimed at those who are not able to download any software to help in their quest for reproducible research. If you can download software, you should try and use the techniques laid out in the next few chapters.
-
-## Word Documents
-
-Details about copy-pasting ... blah blah ... 

@@ -1,0 +1,196 @@
+# Notebooks
+
+There are many different types of notebooks, but we will only explore Jupyter notebooks. The reason why we won't look at other options is because Jupyter notebooks are very well established and have numerous kernels available that allow for the use of many different statistical and programming languages.
+
+> **Note:** if you are using R, you should be using RStudio in combination with R Notebooks or Rmd files (or using `#'` in your `.R` scripts to insert markdown comments), which are far more suited to R than Jupyter is.
+
+But first, what is a notebook, and why should we use them?
+
+A notebook is a way of producing documents that mix plain text and code, which was one of the key goals at the beginning of this guide! Whilst [they are not perfect](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/edit#slide=id.g3a428e2eb8_0_305) (though read [this](https://yihui.name/en/2018/09/notebook-war/) to see some rebuttals), and should not be used for doing heavy coding and scripting, they are excellent for data exploration and producing output documents. You just need to be careful to run all the code in a fresh environment often enough to ensure you don't have any *hidden* packages/modules loaded in the background that aren't part of your code.
+
+## Jupyter notebooks
+
+This section will give you a brief overview of what a Jupyter notebook is and how to use them, but if you would like a more detailed understanding, please read the official [documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html). Jupyter Labs has now been released as a newer version of notebooks, giving you a full IDE (integrated development environment) and more control over the notebooks and working environment. This guide will not explore these features, as we are more interested in how to use the notebook.
+
+> **Note:** throughout this section you can substitute the phrase *"Jupyter notebooks"* with *"Jupyter Labs"* if you would prefer to have a full IDE allowing you more control over the system.
+
+Jupyter notebooks are run on Python, though additional things can be downloaded to allow you to use your programming language of choice. For an example of what you can do with Jupyter notebooks, click [here](https://nbviewer.jupyter.org/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_PyMC3.ipynb), and [here](https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks#programming-and-computer-science) for a collection of neat and applied notebooks.
+
+### Installing Jupyter notebooks
+
+Mac's come shipped with a version of Python, but it is most likely outdated, and it doesn't contain everything we want. In order to get running, I strongly recommend downloading the Anaconda distribution over other distributions, or even just directly from Python's website. The instructions below will be enough to get you up and running with Jupyter notebooks in your language of choice.
+
+- Download the full [Anaconda](https://www.anaconda.com/download/) distribution i.e. not miniconda
+    - Be sure to choose `Python 3.x`, not `Python 2.x`, as it's the newer version and is forwards-compatible.
+    - Be sure to only install for one user, not the whole system
+    - Be sure to select `Add Anaconda to my PATH environment variable` under Advanced Options
+    - Be sure to install Anaconda to the drive where your data lives. To do this you will need to manually edit the installation path within the Anaconda installer wizard, otherwise it will automatically end up in the `C:\` drive
+- Use `kernels` to connect your programming language of choice with python and the notebook
+    - To see how to get a particular language to work in Jupyter Notebooks, please click on the appropriate language:
+        - [Stata](#installing-the-stata-kernel)
+        - [SAS](#installing-the-sas-kernel)
+        - [R](#connecting-r-with-jupyter)
+
+### Kernels
+
+A kernel is program that allows the notebook to connect with, and run, your code. Jupyter comes with the Python code pre-installed, but if you want to use a different language, you will need to download a specific kernel.
+
+Below, the installation instructions are described for common languages used in epidemiology. To see a full list of kernels available for Jupyter, along with the appropriate documentation and installation instructions, follow [this link](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
+
+#### Installing the Stata kernel
+
+The instructions for installing the `stata_kernel` are based from the original documentation [here](https://kylebarron.github.io/stata_kernel/getting_started/). It should work with `Stata 12` (I have tested it). If these instructions do not work for you, it may be that there has been an update to the kernel, at which point, please refer to the original documentation linked above.
+
+Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line
+
+- `pip install stata_kernel`
+- `python -m stata_kernel.install`
+
+**Windows-specific steps**
+
+In order to let `stata_kernel` talk to Stata, you need to link the Stata Automation library:
+
+1. In the installation directory (most likely `C:\Program Files (x86)\Stata12` or similar), right-click on the Stata executable, for example, `StataSE.exe` (this will just show as `StataSE`, but is listed as an application). Choose `Create Shortcut`. Placing it on the Desktop is fine.
+2. Right-click on the newly created `Shortcut to StataSE.exe`, choose `Properties`, and append` /Register` to the end of the Target field. So if the target is currently `"C:\Program Files\Stata12\StataSE.exe"`, change it to `"C:\Program Files\Stata12\StataSE.exe" /Register` (note the space before `/`). Click OK.
+3. Right-click on the updated `Shortcut to StataSE.exe`; choose Run as administrator.
+
+#### Installing the SAS kernel
+
+\**This has not yet been tested here. The instructions for installing the `sas_kernel` are based from the original documentation [here](https://github.com/sassoftware/sas_kernel)*\*
+
+Open a command prompt (Windows) / terminal (linux/mac) and type/copy-paste the following commands, pressing enter after each line. First we need to install a dependency called `saspy` that helps the kernel connect `SAS` to `python`
+
+- `pip install saspy`
+- `pip install sas_kernel`
+
+You should now see something like this.
+
+```
+Available kernels:
+python3    /home/sas/anaconda3/lib/python3.5/site-packages/ipykernel/resources
+sas        /home/sas/.local/share/jupyter/kernels/sas
+```
+
+Now verify that the SAS Executable is correct
+
+- find the `sascfg.py` file -- it is currently located in the install location (see above) `[install location]/site-packages/saspy/sascfg.py`. To query `pip` for the location of the file, type `pip show saspy`. Failing that, this command will search the OS for the file location: `find / -name sascfg.py`
+- edit the file with the correct path the SAS executable and include any options you wish it include in the SAS invocation. See examples in this [file](https://github.com/sassoftware/saspy/blob/master/saspy/sascfg.py)
+
+#### Connecting R with Jupyter
+
+If you are hoping to make nice documents and reproducible work using R, I would highly recommend that you use the R Markdown or R Notebook through [RStudio](https://www.rstudio.com/products/rstudio/download/) application instead. However, if you would prefer Jupyter, then please read on.
+
+It is possible to download an R kernel, much like for Stata and SAS, but it can be a bit fickle, so a different approach is described below. It is important to note that with this method you are installing a fresh version of R, so you will not have access to the packages you have previously installed - you will need to reinstall them in this R environment, which could be done within a Jupyter notebook.
+
+Open a command prompt (Windows) / terminal (Linux/Mac) and enter the following commands:
+
+- `conda install r-essentials r-igraph`
+- `Rscript -e 'install.packages("languageserver")'`
+
+If you would rather install an R kernel than a fresh install of R within the Anaconda distribution, you can follow the instructions [here](https://richpauloo.github.io/2018-05-16-Installing-the-R-kernel-in-Jupyter-Lab/). The advantage of this is that it allows the notebook to access previously installed packages as they are not running off a fresh version of R.
+
+## Using Jupyter notebooks
+
+Now you have set up Jupyter to run with the programming language of your choice, we should start using it. How you do that is detailed in this section.
+
+### Creating a notebook
+
+You can either open up the Anaconda navigator and then Jupyter notebooks, or open Jupyter notebooks directly. Once open, navigate to the directory you would like to create the notebook in (*If you are using a version control system like Git, then you should be within the project's repository*)
+
+Select the **New** button in the top right corner, and then select the language you would like to program in (*this assumes that you have downloaded an appropriate kernel if you would like to use a language other than Python*)
+
+### Running a Jupyter notebook
+
+Now you have the notebook open in your chosen language, it's time to start doing some data exploration and analysis. Here, we'll cover some basic commands that will get you started, but to fully leverage the power of the notebook, you should read the [Jupyter documentation](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#code-cells), along with the documentation of your preferred kernel, particularly sections relating to `magic` commands (which are language-specific).
+
+When you are writing in a cell (‘Edit’ mode), you can use these commands:
+
+| **Keyboard shortcut** |                                                                     |
+|:----------------------|:--------------------------------------------------------------------|
+| `Shift + Enter`       | Executes the current cell and enters you into the next one          |
+| `Ctrl/Cmd + Enter`    | Executes the current cell, but does not enter you into the next one |
+| `Esc`                 | This exits 'Edit' mode without executing the cells                  |
+| `Tab`                 | Code completion or indent                                           |
+
+If you are not in 'Edit' mode ('Command' mode), and therefore at least one cell is selected, you can use these commands:
+
+| **Keyboard shortcut** |                                                        |
+|:----------------------|:-------------------------------------------------------|
+| `Ctrl/Cmd + a`        | Add an empty cell above your current cell              |
+| `Ctrl/Cmd + b`        | Add an empty cell below your current cell              |
+| `dd`                  | Delete the selected cell                               |
+| `Ctrl/Cmd + m`        | Change the cell type to 'Markdown' so you can add text |
+| `Ctrl/Cmd + y`        | Change the cell type to 'Code' so you can add code     |
+| `Enter`               | Enter 'Edit' mode                                      |
+
+### Customizing Jupyter notebook's UI
+
+**The following section is not essential and can be ignored if you want to keep things as simple as possible.**
+
+Because I do not like the `In[]` `Out[]` text showing in documents, along with centering plots/figures, I have customized the Jupyter notebook settings. If you would like to do the same, this section should help you. It is not necessary, but I feel that it gives cleaner documents (including pdf documents via LaTeX). If you do this, it is essential that you **routinely restart the kernel to run everything again in a fresh environment** as it is incredibly easy to run code blocks out of order and forget how this changes the output and introduces *hidden* packages.
+
+If you would like to customize the look of the notebook, [jupyterthemes](https://github.com/dunovank/jupyter-themes) is a great package that can be installed. I have also edited the `custom.css` file (`C:\Users\owner\.jupyter\custom\`), adding `display: None;` under the section
+
+```
+div.prompt,
+ .prompt {
+```
+
+so that it now reads
+
+```
+div.prompt,
+ .prompt {
+ font-family: monospace, monospace;
+ font-size: 9pt !important;
+ font-weight: normal;
+ display: None;
+ .
+ .
+ .
+}
+```
+
+This removes the `In[]` `Out[]` text. To centre the output of tables/figures, add
+
+```
+.output_png {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+```
+to the `custom.css` file, right after the `.prompt {..}` section.
+
+To enable soft wrapping in the notebook, you need to edit the `notebook.json` file (`C:\Users\owner\.jupyter\nbconfig\`). If it does not exist, you need to create it. Once open, add
+
+```
+{
+  "MarkdownCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  },
+  "CodeCell": {
+    "cm_config": {
+      "lineWrapping": true
+    }
+  }
+}
+```
+
+before restarting Jupyter.
+
+## Output documents
+
+We've covered a lot of information up until now about setting up your projects and your code, but a big part of reproducible research is the creation of nice-looking and transparent documents. The reason we've gone to such effort to install Jupyter notebooks and connect them with our language of choice is that not only do they allow for excellent data exploration, but they also make documents that look professional.
+
+In scientific articles, whilst it's not essential, LaTeX is a nice touch, and Jupyter can give you a LaTeX formatted pdf documents. To do this, you will first need to install LaTeX. If you are on Windows, I would recommend the [MiKTeX](https://miktex.org/download) distribution, and if you use a Mac, then I would recommend the [MacTeX](http://www.tug.org/mactex/mactex-download.html) distribution. You will also need the "swiss-army knife" of file conversion, [pandoc](https://pandoc.org/installing.html). Pandoc is not *needed* for creating LaTeX-formatted pdfs, but if you have documents with unsupported characters and you need to use a different `pdf-engine` you'll need to use pandoc.
+
+During the installation process, LaTeX should have been added automatically to the PATH. To test this, enter `pdflatex` into a command line/terminal. If you get the output `This is pdfTeX ...` then you are good to go. If not, please add the executable to the PATH<a id = "env-variables"></a>. In Windows you do this by navigating to `Environment Variables` from the Windows key and editing the PATH in `User Variables`. In Mac, you should open the terminal and enter `touch ~/.bash_profile; open ~/.bash_profile`, which opens (or creates if missing) the file that stores your PATH. From here, type `export PATH="path-to-latex-executable:$PATH"` to add the executable to the path. Now save and exit the text editor, run `source ~/.bash_profile` in your terminal, and you're good to go. The executable location can be found by opening the MiKTeX/MacTeX console and looking at the bin directory under settings. For me, on a Windows computer where I don't have administrator privileges it reads  `C:\Users\owner\AppData\Local\Programs\MiKTeX 2.9\miktex/bin/x64`. If you are still having issues, please consult [this document](http://sachaepskamp.com/wp-content/uploads/2011/10/Install.pdf).
+
+Now you're ready to create a LaTeX-formatted pdf document. All you need to do is click *File -> Download as -> PDF via LaTeX (.pdf)*.
+
+Unfortunately, when creating pdf documents, code is not hard wrapped. This means that if you have a very long line of code (> 80 characters), it will run out of the formatted area, and at worst, off the page. At present, I do not know a way to force Jupyter notebooks to wrap the output automatically, so instead you have to write clean code and start new lines using `,` and `\n` if it's too long.
+
+If you would rather not produce a pdf via LaTeX, instead wanting an arguably more readable output, you could create an html file. This is done in the same manner as pdf documents.
